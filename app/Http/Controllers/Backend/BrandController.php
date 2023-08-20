@@ -49,7 +49,7 @@ class BrandController extends Controller
         $input['updated_by'] = $request->user()->id;
         if($request->file('image')):
             $img = Image::make($request->file('image'))->resize(300,300)->stream();
-            $path = Storage::disk('s3')->put('store/brand', $img);
+            $path = Storage::disk('s3')->put('store/brand/', $img);
             $path = Storage::disk('s3')->url($path);           
             $input['image'] = $path;
         endif;
@@ -94,7 +94,7 @@ class BrandController extends Controller
                 Storage::disk('s3')->delete('store/brand/'.substr($brand->image, strrpos($brand->image, '/')+1));
             endif;
             //$img = Image::make($request->file('image'))->resize(300,300)->stream();
-            $path = Storage::disk('s3')->put('store/brand', $request->file('image'));
+            $path = Storage::disk('s3')->put('store/brand/', $request->file('image'));
             $path = Storage::disk('s3')->url($path);           
             $input['image'] = $path;
         endif;

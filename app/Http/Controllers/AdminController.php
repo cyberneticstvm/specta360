@@ -51,7 +51,7 @@ class AdminController extends Controller
             if(Storage::disk('s3')->exists('admin/profile_images/'.substr($user->photo, strrpos($user->photo, '/')+1))):
                 Storage::disk('s3')->delete('admin/profile_images/'.substr($user->photo, strrpos($user->photo, '/')+1));
             endif;
-            $path = Storage::disk('s3')->put('admin/profile_images', $request->photo);
+            $path = Storage::disk('s3')->put('admin/profile_images/', $request->photo);
             $path = Storage::disk('s3')->url($path);           
             User::whereId($user->id)->update(['photo' => $path]);
         endif;
