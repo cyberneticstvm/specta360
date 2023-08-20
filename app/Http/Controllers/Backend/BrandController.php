@@ -48,7 +48,7 @@ class BrandController extends Controller
         $input['created_by'] = $request->user()->id;
         $input['updated_by'] = $request->user()->id;
         if($request->file('image')):
-            $input['image'] = uploadImage($request->file('image'), 300, NULL, NULL, $path = 'store/brand/');
+            $input['image'] = uploadImage($new_image = $request->file('image'), $width = 300, $height = NULL, $old_image = NULL, $path = 'store/brand/');
         endif;
         Brand::create($input);
         $notification = array(
@@ -87,7 +87,7 @@ class BrandController extends Controller
         $input['slug'] = strtolower(str_replace(' ', '-', $request->name));
         $input['updated_by'] = $request->user()->id;
         if($request->file('image')):
-            $input['image'] = uploadImage($request->file('image'), 300, NULL, $brand->image, $path = 'store/brand/');
+            $input['image'] = uploadImage($new_image = $request->file('image'), $width = 300, $height = NULL, $old_image = $brand->image, $path = 'store/brand/');
         endif;
         $brand->update($input);
         $notification = array(
