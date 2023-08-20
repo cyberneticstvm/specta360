@@ -52,7 +52,7 @@ class BrandController extends Controller
             $image = Image::make($request->file('image')->getRealPath())->resize(300, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
-            $path = Storage::disk('s3')->put('store/brand/'.$filename, $image->stream()->__toString());
+            $path = Storage::disk('s3')->put('store/brand/'.$filename, $image->stream()->__toString(), 'public');
             $path = Storage::disk('s3')->url($filename);       
             $input['image'] = $path;
         endif;
@@ -100,7 +100,7 @@ class BrandController extends Controller
             $image = Image::make($request->file('image')->getRealPath())->resize(300, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
-            $path = Storage::disk('s3')->put('store/brand/'.$filename, $image->stream()->__toString());
+            $path = Storage::disk('s3')->put('store/brand/'.$filename, $image->stream()->__toString(), 'public');
             $path = Storage::disk('s3')->url($filename);       
             $input['image'] = $path;
         endif;
