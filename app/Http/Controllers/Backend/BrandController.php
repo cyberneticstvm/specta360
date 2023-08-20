@@ -48,10 +48,12 @@ class BrandController extends Controller
         $input['created_by'] = $request->user()->id;
         $input['updated_by'] = $request->user()->id;
         if($request->file('image')):
-            $imgname = $request->file('image')->getClientOriginalName().'.'.$request->file('image')->getClientOriginalExtension();
-            $img = Image::make($request->file('image'))->resize(300,300)->save($imgname, 90);
-            $path = Storage::disk('s3')->put('store/brand', $img);
-            $path = Storage::disk('s3')->url($path);           
+            $filename = $request->file('image')->hashName();
+            $image = Image::make($request->file('image')->getRealPath())->resize(300, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $path = Storage::disk('s3')->put('store/brand/'.$filename, $image->stream()->__toString());
+            $path = Storage::disk('s3')->url($filename);       
             $input['image'] = $path;
         endif;
         Brand::create($input);
@@ -91,13 +93,15 @@ class BrandController extends Controller
         $input['slug'] = strtolower(str_replace(' ', '-', $request->name));
         $input['updated_by'] = $request->user()->id;
         if($request->file('image')):
-            $imgname = $request->file('image')->getClientOriginalName().'.'.$request->file('image')->getClientOriginalExtension();
             if(Storage::disk('s3')->exists('store/brand/'.substr($brand->image, strrpos($brand->image, '/')+1))):
                 Storage::disk('s3')->delete('store/brand/'.substr($brand->image, strrpos($brand->image, '/')+1));
             endif;
-            $img = Image::make($request->file('image'))->resize(300,300)->save($imgname, 90);
-            $path = Storage::disk('s3')->put('store/brand', $request->file('image'));
-            $path = Storage::disk('s3')->url($path);           
+            $filename = $request->file('image')->hashName();
+            $image = Image::make($request->file('image')->getRealPath())->resize(300, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $path = Storage::disk('s3')->put('store/brand/'.$filename, $image->stream()->__toString());
+            $path = Storage::disk('s3')->url($filename);       
             $input['image'] = $path;
         endif;
         $brand->update($input);
