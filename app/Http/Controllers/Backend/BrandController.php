@@ -48,13 +48,7 @@ class BrandController extends Controller
         $input['created_by'] = $request->user()->id;
         $input['updated_by'] = $request->user()->id;
         if($request->file('image')):
-            $filename = 'store/brand/'.$request->file('image')->hashName();
-            $image = Image::make($request->file('image')->getRealPath())->resize(300, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $path = Storage::disk('s3')->put($filename, $image->stream()->__toString(), 'public');
-            $path = Storage::disk('s3')->url($filename);       
-            $input['image'] = $path;
+            $input['image'] = uploadImage($request->file('image'), 300, NULL, NULL, $path = 'store/brand/');
         endif;
         Brand::create($input);
         $notification = array(
@@ -93,16 +87,7 @@ class BrandController extends Controller
         $input['slug'] = strtolower(str_replace(' ', '-', $request->name));
         $input['updated_by'] = $request->user()->id;
         if($request->file('image')):
-            if(Storage::disk('s3')->exists('store/brand/'.substr($brand->image, strrpos($brand->image, '/')+1))):
-                Storage::disk('s3')->delete('store/brand/'.substr($brand->image, strrpos($brand->image, '/')+1));
-            endif;
-            $filename = 'store/brand/'.$request->file('image')->hashName();
-            $image = Image::make($request->file('image')->getRealPath())->resize(300, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $path = Storage::disk('s3')->put($filename, $image->stream()->__toString(), 'public');
-            $path = Storage::disk('s3')->url($filename);       
-            $input['image'] = $path;
+            $input['image'] = uploadImage($request->file('image'), 300, NULL, $brand->image, $path = 'store/brand/');
         endif;
         $brand->update($input);
         $notification = array(
