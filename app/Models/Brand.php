@@ -17,4 +17,8 @@ class Brand extends Model
         'created_by',
         'updated_by',
     ];
+
+    public function getStatus(){
+        return ($this->status == 1) ? "<span class='text-primary'>Active</span>" : "<span class='text-danger'>Cancelled</span>";
+    }
 }

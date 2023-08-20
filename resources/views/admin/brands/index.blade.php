@@ -20,7 +20,7 @@
                             <td>{{ $key+1 }}</td>
                             <td>{{ $item->name }}</td>
                             <td><img src="{{ $item->image }}" width="25%"></td>
-                            <td>{!! ($item->status == 1) ? "<span class='text-primary'>Active</span>" : "<span class='text-danger'>Cancelled</span>" !!}</td>
+                            <td>{!! $item->getStatus() !!}</td>
                             <td class="text-center"><a href="{{ route('admin.brands.edit', encrypt($item->id)) }}" class="btn btn-outline-warning btn-sm">Edit</a></td>
                             <td class="text-center"><a href="{{ route('admin.brands.cancel', encrypt($item->id)) }}" class="btn btn-outline-danger btn-sm dlt">Cancel</a></td>
                         </tr>
