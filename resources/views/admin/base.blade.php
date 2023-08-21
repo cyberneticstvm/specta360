@@ -52,8 +52,6 @@
                     </a>
                     <div class="submenu">
                         <a href="{{ route('admin.category') }}">All Category</a>
-                    </div>
-                    <div class="submenu">
                         <a href="{{ route('admin.subcategory') }}">All Subcategory</a>
                     </div>
                 </li>

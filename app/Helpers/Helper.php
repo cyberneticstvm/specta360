@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Subcategory;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -19,7 +21,15 @@ function uploadImage($new_image, $width, $height, $old_image, $path){
 }
 
 function getActiveCategories(){
-    return Category::where('status', 1)->get();
+    return Category::where('status', 1)->orderBy('name', 'ASC')->get();
+}
+
+function getActiveSubcategories(){
+    return Subcategory::where('status', 1)->orderBy('name', 'ASC')->get();
+}
+
+function getActiveBrands(){
+    return Brand::where('status', 1)->orderBy('name', 'ASC')->get();
 }
 
 ?>
