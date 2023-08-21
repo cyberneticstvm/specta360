@@ -48,8 +48,11 @@
                                         <div class="login_footer form-group">
                                             <div class="chek-form">
                                                 <div class="custome-checkbox">
-                                                    <input class="form-check-input" type="checkbox" name="remember" id="remember_me" value="">
+                                                    <input class="form-check-input" type="checkbox" name="terms" id="terms" value="">
                                                     <label class="form-check-label" for="exampleCheckbox1"><span>I agree to terms & Policy.</span></label>
+                                                    @error('terms')
+                                                    <small class="text-danger">{{ $errors->first('terms') }}</small>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>

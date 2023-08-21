@@ -40,6 +40,8 @@ require __DIR__.'/auth.php';
 
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
 Route::get('/vendor/login', [VendorController::class, 'vendorLogin'])->name('vendor.login');
+Route::get('/vendor/registration', [VendorController::class, 'vendorRegistration'])->name('vendor.register');
+Route::post('/vendor/registration', [VendorController::class, 'registerVendor'])->name('vendor.register.save');
 
 Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(AdminController::class)->group(function(){
     Route::get('dashboard', 'adminDashboard')->name('admin.dashboard');
@@ -89,7 +91,7 @@ Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(Ca
     Route::get('category/cancel/{id}', 'destroy')->name('admin.category.cancel');
 });
 
-//Category
+//Subcategory
 Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(SubcategoryController::class)->group(function(){
     Route::get('subcategory', 'index')->name('admin.subcategory');
     Route::get('subcategory/create', 'create')->name('admin.subcategory.create');

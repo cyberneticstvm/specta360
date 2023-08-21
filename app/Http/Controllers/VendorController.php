@@ -14,6 +14,24 @@ class VendorController extends Controller
         return view('vendor.login');
     }
 
+    public function vendorRegistration(){
+        return view('vendor.register');
+    }
+
+    public function registerVendor(Request $request){
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email:rfc,dns,filter|unique:users,email',
+            'phone' => 'required|numeric|digits:10',
+            'password' => 'required|confirmed|min:6',
+            'terms' => 'accepted',
+        ]);
+        $input = $request->except(array('password_confirmation', 'terms'));
+        $input['role'] = 'vendor';
+        User::create($input);
+        return redirect()->back()->with("success", "Vendor profile has been created successfully!");
+    }
+
     public function vendorDashboard(){
         return view('vendor.dash');
     }

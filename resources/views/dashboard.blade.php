@@ -177,7 +177,7 @@
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label>Username</label>
-                                                        {{ html()->text($name='username', $value=Auth::user()->username)->class('form-control')->placeholder('Username')->if(Auth::user()->username, function($q){
+                                                        {{ html()->text($name='username', $value=Auth::user()->username)->class('form-control')->placeholder('Username')->if((Auth::user()->username != ''), function($q){
                                                             return $q->disabled();
                                                         }) }}
                                                     </div>

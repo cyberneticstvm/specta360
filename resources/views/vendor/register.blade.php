@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Specta360 Vendor Login</title>
+    <title>Specta360 Vendor Registration</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,34 +21,59 @@
         <section class="content-main mt-80">
             <div class="card mx-auto card-login">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">Vendor Sign in</h4>
-                    <form method="POST" action="{{ route('login') }}">
+                    <h4 class="card-title mb-4">Vendor Registration</h4>
+                    <form method="POST" action="{{ route('vendor.register.save') }}">
                         @csrf
                         <div class="mb-3">
+                            <label class="mb-1">Shop Name</label>
+                            <input class="form-control" id="name" name="name" placeholder="Shop Name" type="text" value="{{ old('name') }}">
+                            @error('name')
+                            <small class="text-danger">{{ $errors->first('name') }}</small>
+                            @enderror
+                        </div> <!-- form-group// -->
+                        <div class="mb-3">
+                            <label class="mb-1">Phone Number</label>
+                            <input class="form-control" id="phone" name="phone" placeholder="Phone Number" type="text" value="{{ old('phone') }}" maxlength="10">
+                            @error('phone')
+                            <small class="text-danger">{{ $errors->first('phone') }}</small>
+                            @enderror
+                        </div> <!-- form-group// -->
+                        <div class="mb-3">
+                            <label class="mb-1">Email</label>
                             <input class="form-control" id="email" name="email" placeholder="Email" type="email" value="{{ old('email') }}">
                             @error('email')
                             <small class="text-danger">{{ $errors->first('email') }}</small>
                             @enderror
                         </div> <!-- form-group// -->
                         <div class="mb-3">
-                            <input class="form-control" name="password" placeholder="Password" type="password">
+                            <label class="mb-1">Password</label>
+                            <input class="form-control" name="password" placeholder="******" type="password">
                             @error('password')
                             <small class="text-danger">{{ $errors->first('password') }}</small>
                             @enderror
                         </div> <!-- form-group// -->
                         <div class="mb-3">
-                            <a href="#" class="float-end font-sm text-muted">Forgot password?</a>
+                            <label class="mb-1">Confirm Password</label>
+                            <input class="form-control" name="password_confirmation" placeholder="******" type="password">
+                            @error('password_confirmation')
+                            <small class="text-danger">{{ $errors->first('password_confirmation') }}</small>
+                            @enderror
+                        </div> <!-- form-group// -->
+                        <div class="mb-3">
                             <label class="form-check">
-                                <input type="checkbox" id="remember_me" name="remember" class="form-check-input">
-                                <span class="form-check-label">Remember</span>
+                                <input type="checkbox" id="terms" name="terms" value="1" class="form-check-input">
+                                <span class="form-check-label">Agree terms & conditions</span>
                             </label>
+                            @error('terms')
+                            <small class="text-danger">{{ $errors->first('terms') }}</small>
+                            @enderror
                         </div> <!-- form-group form-check .// -->
                         <div class="mb-4">
-                            <button type="submit" class="btn btn-submit btn-primary w-100"> Login </button>
+                            <button type="submit" class="btn btn-submit btn-primary w-100"> Register </button>
                         </div> <!-- form-group// -->
                     </form>
                     <p class="text-center small text-muted">or sign up with</p>
-                    <p class="text-center mb-4">Don't have account? <a href="{{ route('vendor.register') }}">Sign up</a></p>
+                    <p class="text-center mb-4">Already have an account? <a href="{{ route('vendor.login') }}">Login</a></p>
                     @include("message1")
                 </div>
             </div>
