@@ -6,6 +6,8 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\SubcategoryController;
 use App\Models\Brand;
 use Illuminate\Support\Facades\Route;
 
@@ -75,4 +77,24 @@ Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(Br
     Route::get('brands/edit/{id}', 'edit')->name('admin.brands.edit');
     Route::put('brands/edit/{id}', 'update')->name('admin.brands.update');
     Route::get('brands/cancel/{id}', 'destroy')->name('admin.brands.cancel');
+});
+
+//Category
+Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(CategoryController::class)->group(function(){
+    Route::get('category', 'index')->name('admin.category');
+    Route::get('category/create', 'create')->name('admin.category.create');
+    Route::post('category/create', 'store')->name('admin.category.save');
+    Route::get('category/edit/{id}', 'edit')->name('admin.category.edit');
+    Route::put('category/edit/{id}', 'update')->name('admin.category.update');
+    Route::get('category/cancel/{id}', 'destroy')->name('admin.category.cancel');
+});
+
+//Category
+Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(SubcategoryController::class)->group(function(){
+    Route::get('subcategory', 'index')->name('admin.subcategory');
+    Route::get('subcategory/create', 'create')->name('admin.subcategory.create');
+    Route::post('subcategory/create', 'store')->name('admin.subcategory.save');
+    Route::get('subcategory/edit/{id}', 'edit')->name('admin.subcategory.edit');
+    Route::put('subcategory/edit/{id}', 'update')->name('admin.subcategory.update');
+    Route::get('subcategory/cancel/{id}', 'destroy')->name('admin.subcategory.cancel');
 });

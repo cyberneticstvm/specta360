@@ -3,26 +3,26 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Brand;
-use Carbon\Carbon;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
-class BrandController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    private $brands;
+    private $categories;
 
     public function __construct(){
-        $this->brands = Brand::all();
+        $this->categories = Category::all();
     }
 
     public function index()
     {
-        $brands = $this->brands;
-        return view('admin.brands.index', compact('brands'));
+        $categories = $this->categories;
+        return view('admin.category.index', compact('categories'));
     }
 
     /**
@@ -30,7 +30,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('admin.brands.create');
+        return view('admin.category.create');
     }
 
     /**
@@ -39,21 +39,21 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|unique:brands,name',
+            'name' => 'required|unique:categories,name',
         ]);
         $input = $request->all();
         $input['slug'] = strtolower(str_replace(' ', '-', $request->name));
         $input['created_by'] = $request->user()->id;
         $input['updated_by'] = $request->user()->id;
         if($request->file('image')):
-            $input['image'] = uploadImage($new_image = $request->file('image'), $width = 300, $height = NULL, $old_image = NULL, $path = 'store/brand/');
+            $input['image'] = uploadImage($new_image = $request->file('image'), $width = 120, $height = NULL, $old_image = NULL, $path = 'store/category/');
         endif;
-        Brand::create($input);
+        Category::create($input);
         $notification = array(
-            'message' => 'Brand has been created successfully!',
+            'message' => 'Category has been created successfully!',
             'alert-type' => 'success',
         );
-        return redirect()->route('admin.brands')->with($notification);
+        return redirect()->route('admin.category')->with($notification);
     }
 
     /**
@@ -69,8 +69,8 @@ class BrandController extends Controller
      */
     public function edit(string $id)
     {
-        $brand = Brand::findOrFail(decrypt($id));
-        return view('admin.brands.edit', compact('brand'));
+        $category = Category::findOrFail(decrypt($id));
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
@@ -79,20 +79,20 @@ class BrandController extends Controller
     public function update(Request $request, string $id)
     {
         $this->validate($request, [
-            'name' => 'required|unique:brands,name,'.$id,
+            'name' => 'required|unique:categories,name,'.$id,
         ]);
-        $input = $request->all(); $brand = Brand::findOrFail($id);
+        $input = $request->all(); $category = Category::findOrFail($id);
         $input['slug'] = strtolower(str_replace(' ', '-', $request->name));
         $input['updated_by'] = $request->user()->id;
         if($request->file('image')):
-            $input['image'] = uploadImage($new_image = $request->file('image'), $width = 300, $height = NULL, $old_image = $brand->image, $path = 'store/brand/');
+            $input['image'] = uploadImage($new_image = $request->file('image'), $width = 120, $height = NULL, $old_image = $category->image, $path = 'store/category/');
         endif;
-        $brand->update($input);
+        $category->update($input);
         $notification = array(
-            'message' => 'Brand has been updated successfully!',
+            'message' => 'Category has been updated successfully!',
             'alert-type' => 'success',
         );
-        return redirect()->route('admin.brands')->with($notification);
+        return redirect()->route('admin.category')->with($notification);
     }
 
     /**
@@ -100,11 +100,11 @@ class BrandController extends Controller
      */
     public function destroy(string $id)
     {
-        Brand::findOrFail(decrypt($id))->update(['status' => 0, 'updated_at' => Carbon::now(), 'updated_by' => Auth::user()->id]);
+        Category::findOrFail(decrypt($id))->update(['status' => 0, 'updated_at' => Carbon::now(), 'updated_by' => Auth::user()->id]);
         $notification = array(
-            'message' => 'Brand has been cancelled successfully!',
+            'message' => 'Category has been cancelled successfully!',
             'alert-type' => 'success',
         );
-        return redirect()->route('admin.brands')->with($notification);
+        return redirect()->route('admin.category')->with($notification);
     }
 }

@@ -46,6 +46,17 @@
                         <a href="{{ route('admin.brands') }}">All Brands</a>
                     </div>
                 </li>
+                <li class="menu-item has-submenu {{ (in_array(request()->segment(2), ['category', 'subcategory'])) ? 'active' : '' }}">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-shopping_bag"></i>
+                        <span class="text">Category & Subcategory</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="{{ route('admin.category') }}">All Category</a>
+                    </div>
+                    <div class="submenu">
+                        <a href="{{ route('admin.subcategory') }}">All Subcategory</a>
+                    </div>
+                </li>
                 <li class="menu-item has-submenu">
                     <a class="menu-link" href="page-products-list.html"> <i class="icon material-icons md-shopping_bag"></i>
                         <span class="text">Products</span>

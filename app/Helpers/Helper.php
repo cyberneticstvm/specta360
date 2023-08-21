@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -15,6 +16,10 @@ function uploadImage($new_image, $width, $height, $old_image, $path){
     $path = Storage::disk('s3')->put($filename, $image->stream()->__toString(), 'public');
     $path = Storage::disk('s3')->url($filename);       
     return $path;
+}
+
+function getActiveCategories(){
+    return Category::where('status', 1)->get();
 }
 
 ?>
