@@ -40,6 +40,7 @@ class BrandController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:brands,name',
+            'image' => 'max:512',
         ]);
         $input = $request->all();
         $input['slug'] = strtolower(str_replace(' ', '-', $request->name));
@@ -80,6 +81,7 @@ class BrandController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:brands,name,'.$id,
+            'image' => 'max:512',
         ]);
         $input = $request->all(); $brand = Brand::findOrFail($id);
         $input['slug'] = strtolower(str_replace(' ', '-', $request->name));

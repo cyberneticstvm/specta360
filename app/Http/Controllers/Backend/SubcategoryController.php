@@ -41,6 +41,7 @@ class SubcategoryController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'category_id' => 'required',
+            'image' => 'max:512',
         ]);
         $input = $request->all();
         $input['slug'] = strtolower(str_replace(' ', '-', $request->name));
@@ -82,6 +83,7 @@ class SubcategoryController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'category_id' => 'required',
+            'image' => 'max:512',
         ]);
         $input = $request->all(); $subcategory = Subcategory::findOrFail($id);
         $input['slug'] = strtolower(str_replace(' ', '-', $request->name));

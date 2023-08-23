@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -80,6 +81,44 @@ class AdminController extends Controller
             'alert-type' => 'success',
         );
         return redirect()->back()->with($notification);
+    }
+
+    public function vendors(){
+        return view('admin.vendor.index');
+    }
+
+    public function editVendor($id){
+        $vendor = User::findOrFail(decrypt($id));
+        return view('admin.vendor.edit', compact('vendor'));
+    }
+
+    public function updateVendor(Request $request, $id){
+        $this->validate($request, [
+            'name' => 'required',
+            'phone' => 'required|numeric|digits:10',
+            'email' => 'required|email:rfc,dns,filter|unique:users,email,'.$id,
+            'status' => 'required',
+            'photo' => 'max:512'
+        ]);
+        $input = $request->all(); $vendor = User::findOrFail($id);
+        if($request->file('photo')):
+            $input['photo'] = uploadImage($new_image = $request->file('photo'), $width = 150, $height = NULL, $old_image = $vendor->photo, $path = 'vendor/profile_images/');     
+        endif;
+        $vendor->update($input);
+        $notification = array(
+            'message' => "Vendor details has been updated successfully!",
+            'alert-type' => 'success',
+        );
+        return redirect()->back()->with($notification);
+    }
+
+    public function destroyVendor($id){
+        User::findOrFail(decrypt($id))->update(['status' => 'inactive', 'updated_at' => Carbon::now()]);
+        $notification = array(
+            'message' => 'Vendor has been cancelled successfully!',
+            'alert-type' => 'success',
+        );
+        return redirect()->route('admin.vendors')->with($notification);
     }
 
     public function adminLogout(Request $request){

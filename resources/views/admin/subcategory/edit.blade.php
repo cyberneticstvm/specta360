@@ -17,12 +17,21 @@
                             @csrf
                             @method("PUT")
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-9">
                                     <div class="mb-3">
                                         <label class="form-label">Subcategory Name</label>
                                         {{ html()->text($name = 'name', $value = $subcategory->name)->class('form-control')->placeholder('Subcategory Name') }}
                                         @error('name')
                                         <small class="text-danger">{{ $errors->first('name') }}</small>
+                                        @enderror
+                                    </div> <!-- form-group// -->
+                                </div>
+                                <div class="col-3">
+                                    <div class="mb-3">
+                                        <label class="form-label">Status</label>
+                                        {{ html()->select($name = 'status', [0=>"Cancelled", 1=>"Active"], $value = $subcategory->status)->class('form-control select2')->placeholder('Select') }}
+                                        @error('status')
+                                        <small class="text-danger">{{ $errors->first('status') }}</small>
                                         @enderror
                                     </div> <!-- form-group// -->
                                 </div>

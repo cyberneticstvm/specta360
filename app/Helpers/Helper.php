@@ -3,6 +3,7 @@
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Subcategory;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -16,7 +17,7 @@ function uploadImage($new_image, $width, $height, $old_image, $path){
         $constraint->aspectRatio();
     });
     $path = Storage::disk('s3')->put($filename, $image->stream()->__toString(), 'public');
-    $path = Storage::disk('s3')->url($filename);       
+    $path = Storage::disk('s3')->url($filename);   
     return $path;
 }
 
@@ -30,6 +31,10 @@ function getActiveSubcategories(){
 
 function getActiveBrands(){
     return Brand::where('status', 1)->orderBy('name', 'ASC')->get();
+}
+
+function getAllvendors(){
+    return User::where('role', 'vendor')->orderByDesc('status')->get();
 }
 
 ?>

@@ -51,6 +51,11 @@ Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(Ad
     Route::get('profile/settings', 'profileSettings')->name('admin.profile.settings');
     Route::put('profile/settings', 'profileSettingsUpdate')->name('admin.profile.settings.update');
     Route::get('logout', 'adminLogout')->name('admin.logout');
+
+    Route::get('vendors', 'vendors')->name('admin.vendors');
+    Route::get('vendor/edit/{id}', 'editVendor')->name('admin.vendor.edit');
+    Route::put('vendor/edit/{id}', 'updateVendor')->name('admin.vendor.update');
+    Route::get('vendor/cancel/{id}', 'destroyVendor')->name('admin.vendor.cancel');
 });
 
 Route::middleware(['web', 'auth', 'role:vendor'])->prefix('vendor')->controller(VendorController::class)->group(function(){

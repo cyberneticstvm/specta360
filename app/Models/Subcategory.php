@@ -20,7 +20,7 @@ class Subcategory extends Model
     ];
 
     public function getStatus(){
-        return ($this->status == 1) ? "<span class='text-primary'>Active</span>" : "<span class='text-danger'>Cancelled</span>";
+        return ($this->status == 1) ? "<span class='badge bg-success'>Active</span>" : "<span class='badge bg-danger'>Cancelled</span>";
     }
 
     public function category(){

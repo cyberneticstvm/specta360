@@ -40,6 +40,7 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:categories,name',
+            'image' => 'max:512',
         ]);
         $input = $request->all();
         $input['slug'] = strtolower(str_replace(' ', '-', $request->name));
@@ -80,6 +81,7 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:categories,name,'.$id,
+            'image' => 'max:512',
         ]);
         $input = $request->all(); $category = Category::findOrFail($id);
         $input['slug'] = strtolower(str_replace(' ', '-', $request->name));

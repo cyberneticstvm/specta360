@@ -35,7 +35,7 @@ class UserController extends Controller
 
     public function profilePhotoUpdate(Request $request){
         $this->validate($request, [
-            'photo' => 'required|mimes:jpg,jpeg,png,web',
+            'photo' => 'required|mimes:jpg,jpeg,png,web|max:512',
         ]);
         $user = User::findOrFail(Auth::user()->id);
         if($request->file('photo')):

@@ -4,7 +4,7 @@
     <div class="content-header">
         <div>
             <h2 class="content-title card-title">Dashboard </h2>
-            <p>Specta360 Interactive Dashboard</p>
+            {!! (Auth::user()->status == 'active') ? "<p>Specta360 Interactive Dashboard</p>" : "<h5 class='text-danger'>Vendor account is Inactive</h5>" !!}
         </div>
         <div>
             <a href="#" class="btn btn-primary"><i class="text-muted material-icons md-post_add"></i>Create report</a>
