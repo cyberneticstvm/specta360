@@ -73,6 +73,23 @@ $(function(){
         selector: '#txtArea'
     });
 
+    $(document).on("change", ".prodCat", function(){
+        var catid = $(this).val();
+        $.ajax({
+            url: "/admin/ajax/category/"+catid,
+            type: 'GET',
+            dataType: 'json',
+        }).then(function(res){
+            var xdata = $.map(res, function(obj){
+                obj.text = obj.name || obj.id;  
+                return obj;
+            });
+            $('.prodSubcat').empty();            
+            $('.prodSubcat').select2({data:xdata});
+            //$('.prodSubcat').append("<option value='0'>Other</option>");            
+        });
+    });
+
 });
 setTimeout(function () {
     $(".alert").hide('slow');

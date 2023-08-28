@@ -5,12 +5,14 @@
         <div class="col-10">
             <h2 class="content-title card-title">Create New Product</h2>
             <p>Hello {{ Auth::user()->name }}, You can create your product here!</p>
+            @include('message1')
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="card card-body mb-4">
-                <form>
+                <form method="post" action="{{ route('admin.product.save') }}" enctype="multipart/form-data">
+                    @csrf
                     <div class="row">
                         <div class="col-md-8">
                             <div class="row">
@@ -44,7 +46,7 @@
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label class="form-label">Category Name</label>
-                                        {{ html()->select($name = 'category_id', $value = getActiveCategories()->pluck('name', 'id'))->class('form-control select2')->placeholder('Select') }}
+                                        {{ html()->select($name = 'category_id', $value = getActiveCategories()->pluck('name', 'id'))->class('form-control select2 prodCat')->placeholder('Select') }}
                                         @error('category_id')
                                         <small class="text-danger">{{ $errors->first('category_id') }}</small>
                                         @enderror
@@ -53,7 +55,7 @@
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label class="form-label">Subcategory Name</label>
-                                        {{ html()->select($name = 'subcategory_id', $value = getActiveSubcategories()->pluck('name', 'id'))->class('form-control select2')->placeholder('Select') }}
+                                        {{ html()->select($name = 'subcategory_id', $value = NULL)->class('form-control select2 prodSubcat')->placeholder('Select') }}
                                         @error('subcategory_id')
                                         <small class="text-danger">{{ $errors->first('subcategory_id') }}</small>
                                         @enderror
@@ -62,7 +64,7 @@
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label class="form-label">Tags</label>
-                                        {{ html()->text($name = 'tags[]', $value = old('tags'))->attribute('data-role', 'tagsinput')->class('form-control')->placeholder('Tags') }}
+                                        {{ html()->text($name = 'tags', $value = old('tags'))->attribute('data-role', 'tagsinput')->class('form-control')->placeholder('Tags') }}
                                         @error('tags')
                                         <small class="text-danger">{{ $errors->first('tags') }}</small>
                                         @enderror
@@ -71,7 +73,7 @@
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label class="form-label">Size</label>
-                                        {{ html()->text($name = 'sizes[]', $value = old('sizes'))->attribute('data-role', 'tagsinput')->class('form-control')->placeholder('Size') }}
+                                        {{ html()->text($name = 'sizes', $value = old('sizes'))->attribute('data-role', 'tagsinput')->class('form-control')->placeholder('Size') }}
                                         @error('sizes')
                                         <small class="text-danger">{{ $errors->first('sizes') }}</small>
                                         @enderror
@@ -80,7 +82,7 @@
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label class="form-label">Color</label>
-                                        {{ html()->text($name = 'colors[]', $value = old('colors'))->attribute('data-role', 'tagsinput')->class('form-control')->placeholder('Color') }}
+                                        {{ html()->text($name = 'colors', $value = old('colors'))->attribute('data-role', 'tagsinput')->class('form-control')->placeholder('Color') }}
                                         @error('colors')
                                         <small class="text-danger">{{ $errors->first('colors') }}</small>
                                         @enderror
@@ -101,8 +103,8 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Product Code</label>
-                                        {{ html()->text($name = 'pcode', $value = old('pcode'))->class('form-control')->maxlength(15)->placeholder('Product Code') }}
+                                        <label class="form-label">Product Code / SKU</label>
+                                        {{ html()->text($name = 'pcode', $value = strtoupper(Str::random(14)))->class('form-control')->maxlength(15)->placeholder('Product Code') }}
                                         @error('qty')
                                         <small class="text-danger">{{ $errors->first('qty') }}</small>
                                         @enderror
@@ -120,7 +122,7 @@
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label class="form-label">MRP</label>
-                                        {{ html()->number($name = 'mrp', $value = old('qty'), $min='1', $max=NULL, $step='any')->class('form-control')->placeholder('0.00') }}
+                                        {{ html()->number($name = 'mrp', $value = old('mrp'), $min='1', $max=NULL, $step='any')->class('form-control')->placeholder('0.00') }}
                                         @error('mrp')
                                         <small class="text-danger">{{ $errors->first('mrp') }}</small>
                                         @enderror
@@ -129,9 +131,9 @@
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label class="form-label">Selling Price</label>
-                                        {{ html()->number($name = 'seling_price', $value = old('qty'), $min='0', $max=NULL, $step='any')->class('form-control')->placeholder('0.00') }}
-                                        @error('seling_price')
-                                        <small class="text-danger">{{ $errors->first('seling_price') }}</small>
+                                        {{ html()->number($name = 'selling_price', $value = old('selling_price'), $min='0', $max=NULL, $step='any')->class('form-control')->placeholder('0.00') }}
+                                        @error('selling_price')
+                                        <small class="text-danger">{{ $errors->first('selling_price') }}</small>
                                         @enderror
                                     </div> <!-- form-group// -->
                                 </div>
@@ -179,16 +181,20 @@
                                     </div> <!-- form-group// -->
                                     <div id="multi_img" class="text-center"></div>
                                 </div>
-                            </div>
+                            </div>                            
                         </div>
-                        <div class="col-md-12">
+                        <div class="mb-4 text-center">                                
+                            <button type="button" onclick="history.back()" class="btn btn-warning">Cancel</button>
+                            <button type="submit" onClick="javascript: return confirm('Are you sure want to Add this Product?')" class="btn btn-submit btn-primary">Save</button>
+                        </div> <!-- form-group// -->
+                        <!--<div class="col-md-12">
                             <div class="mb-3">
                                 <label class="form-label">Long Description</label>
                                 {{ html()->textarea($name = 'long_description', $value = old('short_description'))->class('form-control')->attribute('id', 'txtArea')->placeholder('Long Description') }}
                                 @error('long_description')
                                 <small class="text-danger">{{ $errors->first('long_description') }}</small>
                                 @enderror
-                            </div> <!-- form-group// -->
+                            </div>--> <!-- form-group// -->
                         </div>
                     </div>
                 </form>

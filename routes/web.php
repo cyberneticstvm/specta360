@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\AjaxController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\UserController;
@@ -115,4 +116,10 @@ Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(Pr
     Route::get('product/edit/{id}', 'edit')->name('admin.product.edit');
     Route::put('product/edit/{id}', 'update')->name('admin.product.update');
     Route::get('product/cancel/{id}', 'destroy')->name('admin.product.cancel');
+});
+
+
+//Ajax
+Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(AjaxController::class)->group(function(){
+    Route::get('ajax/category/{id}', 'getSubcategory')->name('admin.category.subcategory');
 });

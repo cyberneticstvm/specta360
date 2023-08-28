@@ -30,7 +30,7 @@ return new class extends Migration
             $table->boolean('featured_product')->comment('1-yes, 0-no')->default(0);
             $table->boolean('special_deal')->comment('1-yes, 0-no')->default(0);
             $table->string('image')->nullable();
-            $table->boolean('status')->comment('1-active, 0-inactive')->default(0);
+            $table->boolean('status')->comment('1-active, 0-inactive')->default(1);
             $table->unsignedBigInteger('created_by')->references('id')->on('users');
             $table->unsignedBigInteger('updated_by')->references('id')->on('users');
             $table->timestamps();
