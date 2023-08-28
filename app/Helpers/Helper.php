@@ -2,6 +2,7 @@
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\Subcategory;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
@@ -31,6 +32,14 @@ function getActiveSubcategories(){
 
 function getActiveBrands(){
     return Brand::where('status', 1)->orderBy('name', 'ASC')->get();
+}
+
+function getActivevendors(){
+    return User::where('role', 'vendor')->where('status', 'active')->get();
+}
+
+function getActiveProducts(){
+    return Product::where('status', 1)->get();
 }
 
 function getAllvendors(){

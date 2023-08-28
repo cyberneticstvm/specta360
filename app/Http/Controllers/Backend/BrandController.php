@@ -22,7 +22,7 @@ class BrandController extends Controller
     public function index()
     {
         $brands = $this->brands;
-        return view('admin.brands.index', compact('brands'));
+        return view('admin.brand.index', compact('brands'));
     }
 
     /**
@@ -71,7 +71,7 @@ class BrandController extends Controller
     public function edit(string $id)
     {
         $brand = Brand::findOrFail(decrypt($id));
-        return view('admin.brands.edit', compact('brand'));
+        return view('admin.brand.edit', compact('brand'));
     }
 
     /**

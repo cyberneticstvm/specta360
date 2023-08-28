@@ -17,6 +17,7 @@
     <link href="{{ asset('/backend/assets/css/main.css') }}" rel="stylesheet" type="text/css" />
     <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet" type="text/css" />  
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.6.0/bootstrap-tagsinput.min.css" rel="stylesheet" type="text/css" />  
     <link href="{{ asset('/backend/assets/css/style.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
@@ -53,6 +54,14 @@
                     <div class="submenu">
                         <a href="{{ route('admin.category') }}">All Category</a>
                         <a href="{{ route('admin.subcategory') }}">All Subcategory</a>
+                    </div>
+                </li>
+                <li class="menu-item has-submenu {{ (in_array(request()->segment(2), ['product'])) ? 'active' : '' }}">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-shopping_bag"></i>
+                        <span class="text">Product</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="{{ route('admin.product') }}">All Products</a>
                     </div>
                 </li>
                 <li class="menu-item has-submenu {{ (in_array(request()->segment(2), ['vendors'])) ? 'active' : '' }}">
@@ -158,6 +167,8 @@
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js" type="text/javascript"></script>    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" type="text/javascript"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.6.0/bootstrap-tagsinput.min.js" type="text/javascript"></script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="{{ asset('/backend/assets/js/script.js') }}" type="text/javascript"></script>
 
     @include("message")
