@@ -76,7 +76,7 @@ $(function(){
     $(document).on("change", ".prodCat", function(){
         var catid = $(this).val();
         $.ajax({
-            url: "/admin/ajax/category/"+catid,
+            url: "/ajax/category/"+catid,
             type: 'GET',
             dataType: 'json',
         }).then(function(res){

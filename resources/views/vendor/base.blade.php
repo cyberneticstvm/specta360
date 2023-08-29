@@ -15,7 +15,10 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/backend/assets/imgs/theme/favicon.svg') }}">    
     <!-- Template CSS -->
     <link href="{{ asset('/backend/assets/css/main.css') }}" rel="stylesheet" type="text/css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet" type="text/css" />    
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.6.0/bootstrap-tagsinput.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/backend/assets/css/style.css') }}" rel="stylesheet" type="text/css" />      
 </head>
 
 <body>
@@ -37,15 +40,12 @@
                     </a>
                 </li>
                 @if(Auth::user()->status == 'active')
-                <li class="menu-item has-submenu {{ (in_array(request()->segment(2), ['df'])) ? 'active' : '' }}">
+                <li class="menu-item has-submenu {{ (in_array(request()->segment(2), ['product'])) ? 'active' : '' }}">
                     <a class="menu-link" href="page-products-list.html"> <i class="icon material-icons md-shopping_bag"></i>
                         <span class="text">Products</span>
                     </a>
                     <div class="submenu">
-                        <a href="page-products-list.html">Product List</a>
-                        <a href="page-products-grid.html">Product grid</a>
-                        <a href="page-products-grid-2.html">Product grid 2</a>
-                        <a href="page-categories.html">Categories</a>
+                        <a href="{{ route('vendor.product') }}">All Products</a>
                     </div>
                 </li>
                 @endif
@@ -122,7 +122,12 @@
     <!-- Main Script -->
     <script src="{{ asset('/backend/assets/js/main.js') }}" type="text/javascript"></script>
     <script src="{{ asset('/backend/assets/js/custom-chart.js') }}" type="text/javascript"></script>    
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js" type="text/javascript"></script>    
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js" type="text/javascript"></script>    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.6.0/bootstrap-tagsinput.min.js" type="text/javascript"></script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="{{ asset('/backend/assets/js/script.js') }}" type="text/javascript"></script>
     @include("message")
 </body>

@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SubcategoryController;
+use App\Http\Controllers\Backend\VendorProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
@@ -107,7 +108,7 @@ Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(Su
     Route::get('subcategory/cancel/{id}', 'destroy')->name('admin.subcategory.cancel');
 });
 
-//Product
+//Admin Product
 Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(ProductController::class)->group(function(){
     Route::get('product', 'index')->name('admin.product');
     Route::get('product/create', 'create')->name('admin.product.create');
@@ -118,8 +119,19 @@ Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(Pr
     Route::get('product/image/remove/{id}', 'removeImage')->name('admin.product.image.remove');
 });
 
+//Vendor Product
+Route::middleware(['web', 'auth', 'role:vendor'])->prefix('vendor')->controller(VendorProductController::class)->group(function(){
+    Route::get('product', 'index')->name('vendor.product');
+    Route::get('product/create', 'create')->name('vendor.product.create');
+    Route::post('product/create', 'store')->name('vendor.product.save');
+    Route::get('product/edit/{id}', 'edit')->name('vendor.product.edit');
+    Route::put('product/edit/{id}', 'update')->name('vendor.product.update');
+    Route::get('product/cancel/{id}', 'destroy')->name('vendor.product.cancel');
+    Route::get('product/image/remove/{id}', 'removeImage')->name('vendor.product.image.remove');
+});
+
 
 //Ajax
-Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(AjaxController::class)->group(function(){
-    Route::get('ajax/category/{id}', 'getSubcategory')->name('admin.category.subcategory');
+Route::middleware(['web', 'auth'])->controller(AjaxController::class)->group(function(){
+    Route::get('ajax/category/{id}', 'getSubcategory')->name('category.subcategory');
 });
