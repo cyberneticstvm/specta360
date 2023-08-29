@@ -3,15 +3,14 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AjaxController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\StoreController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SubcategoryController;
-use App\Models\Brand;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,8 +39,8 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
-Route::get('/vendor/login', [VendorController::class, 'vendorLogin'])->name('vendor.login');
+Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
+Route::get('/vendor/login', [VendorController::class, 'vendorLogin'])->name('vendor.login')->middleware(RedirectIfAuthenticated::class);
 Route::get('/vendor/registration', [VendorController::class, 'vendorRegistration'])->name('vendor.register');
 Route::post('/vendor/registration', [VendorController::class, 'registerVendor'])->name('vendor.register.save');
 
