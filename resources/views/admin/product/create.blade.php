@@ -88,6 +88,24 @@
                                         @enderror
                                     </div> <!-- form-group// -->
                                 </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Material</label>
+                                        {{ html()->text($name = 'materials', $value = old('materials'))->attribute('data-role', 'tagsinput')->class('form-control')->placeholder('Material') }}
+                                        @error('materials')
+                                        <small class="text-danger">{{ $errors->first('materials') }}</small>
+                                        @enderror
+                                    </div> <!-- form-group// -->
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Style</label>
+                                        {{ html()->text($name = 'styles', $value = old('styles'))->attribute('data-role', 'tagsinput')->class('form-control')->placeholder('Style') }}
+                                        @error('styles')
+                                        <small class="text-danger">{{ $errors->first('styles') }}</small>
+                                        @enderror
+                                    </div> <!-- form-group// -->
+                                </div>
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label class="form-label">Short Description</label>
@@ -163,7 +181,7 @@
                                 </div>
                                 <div class="col-12 mt-3">
                                     <div class="mb-3">
-                                        <label class="form-label">Product Main Image</label>
+                                        <label class="form-label">Product Main Image </label>&nbsp;<small class="text-muted">(Max file size should be 500KB)</small>
                                         {{ html()->file($name = 'image', $value = NULL)->class('form-control main_img') }}
                                         @error('image')
                                         <small class="text-danger">{{ $errors->first('image') }}</small>
@@ -173,7 +191,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-3">
-                                        <label class="form-label">Product Images</label>
+                                        <label class="form-label">Product Images</label>&nbsp;<small class="text-muted">(Max file size should be 500KB each)
                                         {{ html()->file($name = 'images[]', $value = NULL)->class('form-control multi_img')->multiple() }}
                                         @error('images')
                                         <small class="text-danger">{{ $errors->first('images') }}</small>

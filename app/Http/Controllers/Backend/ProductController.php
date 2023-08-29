@@ -6,12 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\ProductImage;
+use App\Models\ProductMaterial;
 use App\Models\ProductSize;
+use App\Models\ProductStyle;
 use App\Models\ProductTag;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -22,7 +25,7 @@ class ProductController extends Controller
     private $products;
 
     public function __construct(){
-        $this->products = Product::all();
+        $this->products = Product::orderByDesc('id')->get();
     }
 
     public function index()
@@ -53,6 +56,8 @@ class ProductController extends Controller
             'tags' => 'required',
             'sizes' => 'required',
             'colors' => 'required',
+            'materials' => 'required',
+            'styles' => 'required',
             'short_description' => 'required',
             'pcode' => 'required|unique:products,pcode',
             'qty' => 'required',
@@ -61,7 +66,7 @@ class ProductController extends Controller
             'image' => 'required|mimes:jpg,jpeg,png,webp|max:512',
             'images' => 'required',
         ]);
-        $input = $request->except(array('tags', 'sizes', 'colors', 'images'));
+        $input = $request->except(array('tags', 'sizes', 'colors', 'materials', 'styles', 'images'));
         try{
             $input['slug'] = strtolower(str_replace(' ', '-', $request->name));
             $input['created_by'] = $request->user()->id;
@@ -84,6 +89,8 @@ class ProductController extends Controller
             $tag = explode (",", $request->tags);
             $size = explode (",", $request->sizes);
             $color = explode (",", $request->colors);
+            $material = explode (",", $request->materials);
+            $style = explode (",", $request->styles);
 
             foreach($tag as $key => $item):
                 $tags [] = [
@@ -103,9 +110,23 @@ class ProductController extends Controller
                     'name' => $item,
                 ];
             endforeach;
+            foreach($material as $key => $item):
+                $materials [] = [
+                    'product_id' => $product->id,
+                    'name' => $item,
+                ];
+            endforeach;
+            foreach($style as $key => $item):
+                $styles [] = [
+                    'product_id' => $product->id,
+                    'name' => $item,
+                ];
+            endforeach;
             ProductTag::insert($tags);
             ProductSize::insert($sizes);
             ProductColor::insert($colors);
+            ProductMaterial::insert($materials);
+            ProductStyle::insert($styles);
             
         }catch(Exception $e){
             $notification = array(
@@ -152,13 +173,15 @@ class ProductController extends Controller
             'tags' => 'required',
             'sizes' => 'required',
             'colors' => 'required',
+            'materials' => 'required',
+            'styles' => 'required',
             'short_description' => 'required',
             'qty' => 'required',
             'mrp' => 'required',
             'selling_price' => 'required',
             'image' => 'mimes:jpg,jpeg,png,webp|max:512',
         ]);
-        $input = $request->except(array('tags', 'sizes', 'colors', 'images', 'pcode'));
+        $input = $request->except(array('tags', 'sizes', 'colors', 'materials', 'styles', 'images', 'pcode'));
         try{
             $input['slug'] = strtolower(str_replace(' ', '-', $request->name));
             $input['updated_by'] = $request->user()->id;
@@ -166,7 +189,7 @@ class ProductController extends Controller
             $product = Product::findOrFail($id);
             if($request->file('image')):
                 $main_img = uploadImage($new_image = $request->file('image'), $width = 800, $height = 800, $old_image = $product->image, $path = 'store/product/'.$product->id.'/');
-                Product::whereId($product->id)->update(['image' => $main_img]);
+                $input['image'] = $main_img;
             endif;
             if($request->file('images')):
                 $images = $request->file('images');
@@ -181,6 +204,8 @@ class ProductController extends Controller
             $tag = explode (",", $request->tags);
             $size = explode (",", $request->sizes);
             $color = explode (",", $request->colors);
+            $material = explode (",", $request->materials);
+            $style = explode (",", $request->styles);
             foreach($tag as $key => $item):
                 $tags [] = [
                     'product_id' => $product->id,
@@ -199,13 +224,29 @@ class ProductController extends Controller
                     'name' => $item,
                 ];
             endforeach;
+            foreach($material as $key => $item):
+                $materials [] = [
+                    'product_id' => $product->id,
+                    'name' => $item,
+                ];
+            endforeach;
+            foreach($style as $key => $item):
+                $styles [] = [
+                    'product_id' => $product->id,
+                    'name' => $item,
+                ];
+            endforeach;
             $product->update($input);
             ProductTag::where('product_id', $id)->delete();
             ProductSize::where('product_id', $id)->delete();
             ProductColor::where('product_id', $id)->delete();
+            ProductMaterial::where('product_id', $id)->delete();
+            ProductStyle::where('product_id', $id)->delete();
             ProductTag::insert($tags);
             ProductSize::insert($sizes);
             ProductColor::insert($colors);
+            ProductMaterial::insert($materials);
+            ProductStyle::insert($styles);
             
         }catch(Exception $e){
             $notification = array(
@@ -232,5 +273,19 @@ class ProductController extends Controller
             'alert-type' => 'success',
         );
         return redirect()->route('admin.product')->with($notification);
+    }
+
+    public function removeImage($id){
+        $image = ProductImage::findOrFail(decrypt($id));
+        $path = 'store/product/'.$image->product_id.'/';
+        if(Storage::disk('s3')->exists($path.substr($image->name, strrpos($image->name, '/')+1))):
+            Storage::disk('s3')->delete($path.substr($image->name, strrpos($image->name, '/')+1));
+        endif;
+        ProductImage::findOrFail(decrypt($id))->delete();
+        $notification = array(
+            'message' => 'Product image has been removed successfully!',
+            'alert-type' => 'success',
+        );
+        return redirect()->route('admin.product.edit', encrypt($image->product_id))->with($notification);
     }
 }

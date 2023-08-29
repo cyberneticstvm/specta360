@@ -116,6 +116,7 @@ Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(Pr
     Route::get('product/edit/{id}', 'edit')->name('admin.product.edit');
     Route::put('product/edit/{id}', 'update')->name('admin.product.update');
     Route::get('product/cancel/{id}', 'destroy')->name('admin.product.cancel');
+    Route::get('product/image/remove/{id}', 'removeImage')->name('admin.product.image.remove');
 });
 
 

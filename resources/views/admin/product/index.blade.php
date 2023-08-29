@@ -11,6 +11,9 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-12">
+            <p class="text-primary">Products Count: {{ count($products) }}</p>
+        </div> 
         <div class="col-lg-12">
             <div class="card card-body mb-4 table-responsive">
                 <table id="dataTable" class="table table-responsive table-sm table-striped">
@@ -23,7 +26,7 @@
                             <td>{{ $item->subcategory->name }}</td>
                             <td>{{ $item->brand->name }}</td>
                             <td><img src="{{ $item->image }}" width="25%"></td>
-                            <td>{{ $item->selling_price }}</td>
+                            <td class="text-end">{{ $item->selling_price }}</td>
                             <td>{!! $item->getStatus() !!}</td>
                             <td class="text-center"><a href="{{ route('admin.product.edit', encrypt($item->id)) }}" class="btn btn-outline-warning btn-sm">Edit</a></td>
                             <td class="text-center"><a href="{{ route('admin.product.cancel', encrypt($item->id)) }}" class="btn btn-outline-danger btn-sm dlt">Cancel</a></td>
