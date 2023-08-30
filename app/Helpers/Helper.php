@@ -3,6 +3,7 @@
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Slider;
 use App\Models\Subcategory;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
@@ -44,6 +45,10 @@ function getActiveProducts(){
 
 function getAllvendors(){
     return User::where('role', 'vendor')->orderByDesc('status')->get();
+}
+
+function getActiveSliders(){
+    return Slider::where('status', 1)->orderBy('order', 'ASC')->get();
 }
 
 ?>

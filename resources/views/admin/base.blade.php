@@ -72,6 +72,14 @@
                         <a href="{{ route('admin.vendors') }}">All Vendors</a>
                     </div>
                 </li>
+                <li class="menu-item has-submenu {{ (in_array(request()->segment(2), ['slider'])) ? 'active' : '' }}">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-add_box"></i>
+                        <span class="text">Sliders</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="{{ route('admin.sliders') }}">All Sliders</a>
+                    </div>
+                </li>
             </ul>
             <hr>
             <ul class="menu-aside">

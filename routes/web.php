@@ -8,6 +8,7 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\VendorProductController;
 use Illuminate\Support\Facades\Route;
@@ -128,6 +129,16 @@ Route::middleware(['web', 'auth', 'role:vendor'])->prefix('vendor')->controller(
     Route::put('product/edit/{id}', 'update')->name('vendor.product.update');
     Route::get('product/cancel/{id}', 'destroy')->name('vendor.product.cancel');
     Route::get('product/image/remove/{id}', 'removeImage')->name('vendor.product.image.remove');
+});
+
+//Slider
+Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(SliderController::class)->group(function(){
+    Route::get('slider', 'index')->name('admin.sliders');
+    Route::get('slider/create', 'create')->name('admin.slider.create');
+    Route::post('slider/create', 'store')->name('admin.slider.save');
+    Route::get('slider/edit/{id}', 'edit')->name('admin.slider.edit');
+    Route::put('slider/edit/{id}', 'update')->name('admin.slider.update');
+    Route::get('slider/cancel/{id}', 'destroy')->name('admin.slider.cancel');
 });
 
 
