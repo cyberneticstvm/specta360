@@ -3,7 +3,7 @@
 <section class="content-main">
     <div class="content-header">
         <div class="col-10">
-            <h2 class="content-title card-title">Create New slider</h2>
+            <h2 class="content-title card-title">Create New Slider</h2>
             <p>Hello {{ Auth::user()->name }}, You can create your slider here!</p>
             @include('message1')
         </div>

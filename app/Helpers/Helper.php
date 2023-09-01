@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
@@ -49,6 +50,10 @@ function getAllvendors(){
 
 function getActiveSliders(){
     return Slider::where('status', 1)->orderBy('order', 'ASC')->get();
+}
+
+function getActiveBanners(){
+    return Banner::where('status', 1)->orderBy('order', 'ASC')->get();
 }
 
 ?>

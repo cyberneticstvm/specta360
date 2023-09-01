@@ -3,7 +3,7 @@
 <section class="content-main">
     <div class="content-header">
         <div class="col-10">
-            <h2 class="content-title card-title">Update slider</h2>
+            <h2 class="content-title card-title">Update Slider</h2>
             <p>Hello {{ Auth::user()->name }}, You can update your slider here!</p>
             @include('message1')
         </div>
@@ -83,7 +83,7 @@
                                         <small class="text-danger">{{ $errors->first('image') }}</small>
                                         @enderror
                                     </div> <!-- form-group// -->
-                                    <div id="main_img" class="text-center"><img src="" /></div>
+                                    <div id="main_img" class="text-center"><img src="{{ ($slider->image) ? $slider->image : '' }}" width="20%" /></div>
                                 </div>
                             </div>                            
                         </div>

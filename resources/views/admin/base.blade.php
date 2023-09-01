@@ -77,7 +77,15 @@
                         <span class="text">Sliders</span>
                     </a>
                     <div class="submenu">
-                        <a href="{{ route('admin.sliders') }}">All Sliders</a>
+                        <a href="{{ route('admin.slider') }}">All Sliders</a>
+                    </div>
+                </li>
+                <li class="menu-item has-submenu {{ (in_array(request()->segment(2), ['banner'])) ? 'active' : '' }}">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-add_box"></i>
+                        <span class="text">Banners</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="{{ route('admin.banner') }}">All Banners</a>
                     </div>
                 </li>
             </ul>

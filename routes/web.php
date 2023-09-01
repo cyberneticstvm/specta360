@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AjaxController;
+use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
@@ -133,12 +134,22 @@ Route::middleware(['web', 'auth', 'role:vendor'])->prefix('vendor')->controller(
 
 //Slider
 Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(SliderController::class)->group(function(){
-    Route::get('slider', 'index')->name('admin.sliders');
+    Route::get('slider', 'index')->name('admin.slider');
     Route::get('slider/create', 'create')->name('admin.slider.create');
     Route::post('slider/create', 'store')->name('admin.slider.save');
     Route::get('slider/edit/{id}', 'edit')->name('admin.slider.edit');
     Route::put('slider/edit/{id}', 'update')->name('admin.slider.update');
     Route::get('slider/cancel/{id}', 'destroy')->name('admin.slider.cancel');
+});
+
+//Banner
+Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(BannerController::class)->group(function(){
+    Route::get('banner', 'index')->name('admin.banner');
+    Route::get('banner/create', 'create')->name('admin.banner.create');
+    Route::post('banner/create', 'store')->name('admin.banner.save');
+    Route::get('banner/edit/{id}', 'edit')->name('admin.banner.edit');
+    Route::put('banner/edit/{id}', 'update')->name('admin.banner.update');
+    Route::get('banner/cancel/{id}', 'destroy')->name('admin.banner.cancel');
 });
 
 

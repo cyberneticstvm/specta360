@@ -57,7 +57,7 @@ class SliderController extends Controller
             'message' => 'Slider has been created successfully!',
             'alert-type' => 'success',
         );
-        return redirect()->route('admin.sliders')->with($notification);
+        return redirect()->route('admin.slider')->with($notification);
     }
 
     /**
@@ -102,7 +102,7 @@ class SliderController extends Controller
             'message' => 'Slider has been updated successfully!',
             'alert-type' => 'success',
         );
-        return redirect()->route('admin.sliders')->with($notification);
+        return redirect()->route('admin.slider')->with($notification);
     }
 
     /**
@@ -115,6 +115,6 @@ class SliderController extends Controller
             'message' => 'Slider has been cancelled successfully!',
             'alert-type' => 'success',
         );
-        return redirect()->route('admin.sliders')->with($notification);
+        return redirect()->route('admin.slider')->with($notification);
     }
 }
