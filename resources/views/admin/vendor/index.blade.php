@@ -20,7 +20,7 @@
                             <td>{{ $item->phone }}</td>
                             <td>{{ $item->address }}</td>
                             <td>{!! $item->getStatus() !!}</td>
-                            <td>{{ $item->created_at->format('d/M/Y') }}</td>
+                            <td>{{ $item->createdAt() }}</td>
                             <td class="text-center"><a href="{{ route('admin.vendor.edit', encrypt($item->id)) }}" class="btn btn-outline-warning btn-sm">Edit</a></td>
                             <td class="text-center"><a href="{{ route('admin.vendor.cancel', encrypt($item->id)) }}" class="btn btn-outline-danger btn-sm dlt">Cancel</a></td>
                         </tr>
