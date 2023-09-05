@@ -47,7 +47,7 @@ class CategoryController extends Controller
         $input['created_by'] = $request->user()->id;
         $input['updated_by'] = $request->user()->id;
         if($request->file('image')):
-            $input['image'] = uploadImage($new_image = $request->file('image'), $width = 120, $height = NULL, $old_image = NULL, $path = 'store/category/');
+            $input['image'] = uploadImage($new_image = $request->file('image'), $width = 1100, $height = 1100, $old_image = NULL, $path = 'store/category/');
         endif;
         Category::create($input);
         $notification = array(
@@ -87,7 +87,7 @@ class CategoryController extends Controller
         $input['slug'] = strtolower(str_replace(' ', '-', $request->name));
         $input['updated_by'] = $request->user()->id;
         if($request->file('image')):
-            $input['image'] = uploadImage($new_image = $request->file('image'), $width = 120, $height = NULL, $old_image = $category->image, $path = 'store/category/');
+            $input['image'] = uploadImage($new_image = $request->file('image'), $width = 1100, $height = 1100, $old_image = $category->image, $path = 'store/category/');
         endif;
         $category->update($input);
         $notification = array(

@@ -181,7 +181,7 @@
                                 </div>
                                 <div class="col-12 mt-3">
                                     <div class="mb-3">
-                                        <label class="form-label">Product Main Image </label>&nbsp;<small class="text-muted">(Max file size should be 500KB)</small>
+                                        <label class="form-label">Product Main Image </label>&nbsp;<small class="text-muted">(Max file size should be 500KB and 1100w x 1100h)</small>
                                         {{ html()->file($name = 'image', $value = NULL)->class('form-control main_img') }}
                                         @error('image')
                                         <small class="text-danger">{{ $errors->first('image') }}</small>
@@ -191,7 +191,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-3">
-                                        <label class="form-label">Product Images</label>&nbsp;<small class="text-muted">(Max file size should be 500KB each)
+                                        <label class="form-label">Product Images</label>&nbsp;<small class="text-muted">(Max file size should be 500KB each and 1100w x 1100h)
                                         {{ html()->file($name = 'images[]', $value = NULL)->class('form-control multi_img')->multiple() }}
                                         @error('images')
                                         <small class="text-danger">{{ $errors->first('images') }}</small>

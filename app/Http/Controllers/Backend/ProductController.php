@@ -73,7 +73,7 @@ class ProductController extends Controller
             $input['updated_by'] = $request->user()->id;
             $product = Product::create($input);
             if($request->file('image')):
-                $main_img = uploadImage($new_image = $request->file('image'), $width = 800, $height = 800, $old_image = NULL, $path = 'store/product/'.$product->id.'/');
+                $main_img = uploadImage($new_image = $request->file('image'), $width = 1100, $height = 1100, $old_image = NULL, $path = 'store/product/'.$product->id.'/');
                 Product::whereId($product->id)->update(['image' => $main_img]);
             endif;
 
@@ -188,7 +188,7 @@ class ProductController extends Controller
             $input['status'] = ($request->status && $request->status == 1) ? 1 : 0;
             $product = Product::findOrFail($id);
             if($request->file('image')):
-                $main_img = uploadImage($new_image = $request->file('image'), $width = 800, $height = 800, $old_image = $product->image, $path = 'store/product/'.$product->id.'/');
+                $main_img = uploadImage($new_image = $request->file('image'), $width = 1100, $height = 100, $old_image = $product->image, $path = 'store/product/'.$product->id.'/');
                 $input['image'] = $main_img;
             endif;
             if($request->file('images')):

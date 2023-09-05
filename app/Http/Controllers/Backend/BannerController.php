@@ -48,7 +48,7 @@ class BannerController extends Controller
         $input['updated_by'] = $request->user()->id;
         $input['slug'] = strtolower(str_replace(' ', '-', $request->title));
         if($request->file('image')):
-            $input['image'] = uploadImage($new_image = $request->file('image'), $width = 768, $height = 450, $old_image = NULL, $path = 'store/banner/');
+            $input['image'] = uploadImage($new_image = $request->file('image'), $width = 600, $height = 255, $old_image = NULL, $path = 'store/banner/');
         endif;
         Banner::create($input);
         $notification = array(
@@ -89,7 +89,7 @@ class BannerController extends Controller
         $input['slug'] = strtolower(str_replace(' ', '-', $request->title));
         $banner = Banner::findOrFail($id);
         if($request->file('image')):
-            $input['image'] = uploadImage($new_image = $request->file('image'), $width = 768, $height = 450, $old_image = $banner->image, $path = 'store/banner/');
+            $input['image'] = uploadImage($new_image = $request->file('image'), $width = 600, $height = 255, $old_image = $banner->image, $path = 'store/banner/');
         endif;
         $banner->update($input);
         $notification = array(

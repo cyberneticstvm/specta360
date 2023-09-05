@@ -29,7 +29,7 @@
                                 <div class="col-3">
                                     <div class="mb-3">
                                         <label class="form-label">Username</label>
-                                        {{ html()->text($name = 'username', $value = Auth::user()->username)->class('form-control')->disabled()->placeholder('Username')->if((Auth::user()->username != ''), function($q){
+                                        {{ html()->text($name = 'username', $value = $vendor->username)->class('form-control')->placeholder('Username')->if(($vendor->username != ''), function($q){
                                             return $q->disabled();
                                         }) }}
                                     </div> <!-- form-group// -->

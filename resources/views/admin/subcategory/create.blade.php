@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-3">
-                                        <label class="form-label">Category Image</label>
+                                        <label class="form-label">Category Image</label>&nbsp;<small class="text-muted">(Max file size should be 500KB and 1100w and 1100h)</small>
                                         {{ html()->file($name = 'image', $value = NULL)->class('form-control img') }}
                                     </div> <!-- form-group// -->
                                 </div>

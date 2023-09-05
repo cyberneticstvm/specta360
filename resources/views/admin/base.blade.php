@@ -64,7 +64,7 @@
                         <a href="{{ route('admin.product') }}">All Products</a>
                     </div>
                 </li>
-                <li class="menu-item has-submenu {{ (in_array(request()->segment(2), ['vendors'])) ? 'active' : '' }}">
+                <li class="menu-item has-submenu {{ (in_array(request()->segment(2), ['vendor'])) ? 'active' : '' }}">
                     <a class="menu-link" href="#"> <i class="icon material-icons md-add_box"></i>
                         <span class="text">Vendors</span>
                     </a>

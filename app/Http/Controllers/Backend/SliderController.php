@@ -50,7 +50,7 @@ class SliderController extends Controller
         $input['created_by'] = $request->user()->id;
         $input['updated_by'] = $request->user()->id;
         if($request->file('image')):
-            $input['image'] = uploadImage($new_image = $request->file('image'), $width = 700, $height = 620, $old_image = NULL, $path = 'store/slider/');
+            $input['image'] = uploadImage($new_image = $request->file('image'), $width = 965, $height = 545, $old_image = NULL, $path = 'store/slider/');
         endif;
         Slider::create($input);
         $notification = array(
@@ -95,7 +95,7 @@ class SliderController extends Controller
         $input['updated_by'] = $request->user()->id;
         $slider = Slider::findOrFail($id);
         if($request->file('image')):
-            $input['image'] = uploadImage($new_image = $request->file('image'), $width = 700, $height = 620, $old_image = $slider->image, $path = 'store/slider/');
+            $input['image'] = uploadImage($new_image = $request->file('image'), $width = 965, $height = 545, $old_image = $slider->image, $path = 'store/slider/');
         endif;
         $slider->update($input);
         $notification = array(

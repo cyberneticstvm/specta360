@@ -58,7 +58,7 @@
                             <div class="row">
                                 <div class="col-12 mt-3">
                                     <div class="mb-3">
-                                        <label class="form-label">Slider Image </label>&nbsp;<small class="text-muted">(Max file size should be 500KB)</small>
+                                        <label class="form-label">Slider Image </label>&nbsp;<small class="text-muted">(Max file size should be 500KB and 965w x 545h)</small>
                                         {{ html()->file($name = 'image', $value = NULL)->class('form-control main_img') }}
                                         @error('image')
                                         <small class="text-danger">{{ $errors->first('image') }}</small>
