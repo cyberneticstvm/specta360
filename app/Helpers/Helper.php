@@ -4,6 +4,7 @@ use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductTag;
 use App\Models\Slider;
 use App\Models\Subcategory;
 use App\Models\User;
@@ -56,4 +57,7 @@ function getActiveBanners(){
     return Banner::where('status', 1)->orderBy('order', 'ASC')->get();
 }
 
+function getActiveProductsByTag($tags){
+    return ProductTag::whereIn('name', $tags)->get();
+}
 ?>

@@ -20,7 +20,7 @@
     @include("store.sections.deals")
     @include("store.sections.new-arrivals")
     @include("store.sections.featured")
-    @include("store.sections.best-selling")
+    @include("store.sections.shop-by-gender")
     @include("store.sections.blog")    
     <section class="mb-50">
         <div class="container">

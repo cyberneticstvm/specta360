@@ -16,7 +16,7 @@ class Product extends Model
     }
 
     public function vendor(){
-        return $this->belongsTo(vendor::class, 'vendor_id', 'id');
+        return $this->belongsTo(User::class, 'vendor_id', 'id');
     }
 
     public function category(){

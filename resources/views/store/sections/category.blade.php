@@ -67,7 +67,7 @@
                                 </div>
                             </div>
                             @empty
-                            <h5 class="text-danger">No products found in featured category</h5>
+                            <h5 class="text-danger">No products found in Featured Category</h5>
                             @endforelse
                         </div>
                         <!--End product-grid-4-->
@@ -115,7 +115,7 @@
                                 </div>
                             </div>
                             @empty
-                            <h5 class="text-danger">No products found in featured category</h5>
+                            <h5 class="text-danger">No products found in Popular Category</h5>
                             @endforelse
                         </div>
                         <!--End product-grid-4-->
@@ -163,7 +163,7 @@
                                 </div>
                             </div>
                             @empty
-                            <h5 class="text-danger">No products found in featured category</h5>
+                            <h5 class="text-danger">No products found in Newly Added</h5>
                             @endforelse
                         </div>
                         <!--End product-grid-4-->
@@ -211,7 +211,7 @@
                                 </div>
                             </div>
                             @empty
-                            <h5 class="text-danger">No products found in featured category</h5>
+                            <h5 class="text-danger">No products found in Hot Deal</h5>
                             @endforelse
                         </div>
                         <!--End product-grid-4-->
@@ -259,7 +259,7 @@
                                 </div>
                             </div>
                             @empty
-                            <h5 class="text-danger">No products found in featured category</h5>
+                            <h5 class="text-danger">No products found in Special Deal</h5>
                             @endforelse
                         </div>
                         <!--End product-grid-4-->
