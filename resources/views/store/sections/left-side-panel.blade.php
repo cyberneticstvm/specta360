@@ -28,19 +28,17 @@
     </div>
     <div class="widget-category mb-30">
         <h5 class="section-title style-1 mb-30 wow fadeIn animated">Price Range</h5>
-        <div class="price-content">
-            <div>
-                <label>Min</label>
-                <p id="min-value"><span class='rupee'>₹</span>{{ number_format(getActiveProducts()->min('selling_price'), 0) }}</p>
+        <div class="price_range range">
+            <div class="price-filter">
+                <div class="price-filter-inner">
+                    <div id="slider-range"></div>
+                    <div class="price_slider_amount">
+                        <div class="label-input">
+                            <span>Range:</span><input type="text" id="amount" name="price" data-min="{{ getActiveProducts()->min('selling_price') }}" data-max="{{ getActiveProducts()->max('selling_price') }}" placeholder="Add Your Price" />
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <label>Max</label>
-                <p id="max-value"><span class='rupee'>₹</span>{{ number_format(getActiveProducts()->max('selling_price'), 0) }}</p>
-            </div>
-        </div>
-        <div class="range-slider">
-            <input type="range" class="min-price" id="min-price" value="{{ getActiveProducts()->min('selling_price') }}" min="{{ getActiveProducts()->min('selling_price') }}" max="{{ getActiveProducts()->max('selling_price') }}" step="10">
-            <input type="range" class="max-price" id="max-price" value="{{ getActiveProducts()->max('selling_price') }}" min="{{ getActiveProducts()->min('selling_price') }}" max="{{ getActiveProducts()->max('selling_price') }}" step="10">
         </div>
     </div>
     <div class="banner-img wow fadeIn mb-45mb-lg-0 animated d-lg-block d-none">

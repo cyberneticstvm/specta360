@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\VendorProductController;
+use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
@@ -26,8 +27,9 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 |
 */
 
-Route::get('/', function () {
-    return view('store.index');
+Route::middleware(['web'])->controller(StoreController::class)->group(function(){
+    Route::get('/', 'index')->name('store.index');
+    Route::get('/product/{slug}/{id}', 'productDetails')->name('product.details');
 });
 
 /*Route::get('/store/dashboard', function () {

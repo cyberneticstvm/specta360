@@ -347,15 +347,15 @@
     $(function() {
         sliderrange.slider({
             range: true,
-            min: 16,
-            max: 400,
-            values: [0, 300],
+            min: parseInt(amountprice.data('min')),
+            max: parseInt(amountprice.data('max')),
+            values: [0, parseInt(amountprice.data('max'))],
             slide: function(event, ui) {
-                amountprice.val("$" + ui.values[0] + " - $" + ui.values[1]);
+                amountprice.val("₹" + ui.values[0] + " - ₹" + ui.values[1]);
             }
         });
-        amountprice.val("$" + sliderrange.slider("values", 0) +
-            " - $" + sliderrange.slider("values", 1));
+        amountprice.val("₹" + sliderrange.slider("values", 0) +
+            " - ₹" + sliderrange.slider("values", 1));
     });
 
     /*-------------------------------

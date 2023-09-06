@@ -79,7 +79,7 @@ class ProductController extends Controller
 
             $images = $request->file('images');
             foreach($images as $key => $item):
-                $img = uploadImage($new_image = $item, $width = 800, $height = 800, $old_image = NULL, $path = 'store/product/'.$product->id.'/');
+                $img = uploadImage($new_image = $item, $width = 1100, $height = 1100, $old_image = NULL, $path = 'store/product/'.$product->id.'/');
                 ProductImage::insert([
                     'product_id' => $product->id,
                     'name' => $img,
@@ -188,13 +188,13 @@ class ProductController extends Controller
             $input['status'] = ($request->status && $request->status == 1) ? 1 : 0;
             $product = Product::findOrFail($id);
             if($request->file('image')):
-                $main_img = uploadImage($new_image = $request->file('image'), $width = 1100, $height = 100, $old_image = $product->image, $path = 'store/product/'.$product->id.'/');
+                $main_img = uploadImage($new_image = $request->file('image'), $width = 1100, $height = 1100, $old_image = $product->image, $path = 'store/product/'.$product->id.'/');
                 $input['image'] = $main_img;
             endif;
             if($request->file('images')):
                 $images = $request->file('images');
                 foreach($images as $key => $item):
-                    $img = uploadImage($new_image = $item, $width = 800, $height = 800, $old_image = NULL, $path = 'store/product/'.$product->id.'/');
+                    $img = uploadImage($new_image = $item, $width = 1100, $height = 1100, $old_image = NULL, $path = 'store/product/'.$product->id.'/');
                     ProductImage::insert([
                         'product_id' => $product->id,
                         'name' => $img,

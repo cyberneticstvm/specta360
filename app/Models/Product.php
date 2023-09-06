@@ -54,4 +54,8 @@ class Product extends Model
     public function images(){
         return $this->hasMany(ProductImage::class, 'product_id', 'id');
     }
+
+    public function getDiscount(){
+        return (($this->mrp - $this->selling_price)/$this->mrp)*100;
+    }
 }
