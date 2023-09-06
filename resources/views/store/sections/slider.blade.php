@@ -39,8 +39,8 @@
                 <div class="banner-img banner-2 wow fadeIn  animated mb-0">
                     <img class="border-radius-10" src="{{ url(getActiveBanners()->skip(3)->take(1)->first()->image) }}" alt="">
                     <div class="banner-text">
-                        <span>Smart Offer</span>
-                        <h4>Save 20% on <br>Contact Lenses</h4>
+                        <span>{{ getActiveBanners()->skip(3)->take(1)->first()->label }}</span>
+                        <h4>{!! getActiveBanners()->skip(3)->take(1)->first()->title !!}</h4>
                         <a href="/">Shop Now <i class="fi-rs-arrow-right"></i></a>
                     </div>
                 </div>

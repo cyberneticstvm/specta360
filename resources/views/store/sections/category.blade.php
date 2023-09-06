@@ -49,7 +49,13 @@
                             <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Popular</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">New added</button>
+                            <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">Newly Added</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="nav-tab-four" data-bs-toggle="tab" data-bs-target="#tab-four" type="button" role="tab" aria-controls="tab-four" aria-selected="false">Hot Deal</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="nav-tab-five" data-bs-toggle="tab" data-bs-target="#tab-five" type="button" role="tab" aria-controls="tab-five" aria-selected="false">Special Offer</button>
                         </li>
                     </ul>
                     <a href="#" class="view-more d-none d-md-flex">View More<i class="fi-rs-angle-double-small-right"></i></a>
@@ -58,13 +64,14 @@
                 <div class="tab-content wow fadeIn animated" id="myTabContent">
                     <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                         <div class="row product-grid-4">
+                            @forelse(getActiveProducts()->where('featured_product', 1) as $key => $item)
                             <div class="col-lg-4 col-md-4 col-12 col-sm-6">
                                 <div class="product-cart-wrap mb-30">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
                                             <a href="shop-product-right.html">
-                                                <img class="default-img" src="{{ asset('/frontend/assets/imgs/shop/product-1-1.jpg') }}" alt="">
-                                                <img class="hover-img" src="{{ asset('/frontend/assets/imgs/shop/product-1-2.jpg') }}" alt="">
+                                                <img class="default-img" src="{{ url($item->image) }}" alt="{{ $item->name }}">
+                                                <img class="hover-img" src="{{ ($item->images) ? url($item->images->first()->name) : asset('/frontend/assets/imgs/shop/product-9-1.jpg') }}" alt="">
                                             </a>
                                         </div>
                                         <div class="product-action-1">
@@ -73,22 +80,22 @@
                                             <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="hot">Hot</span>
+                                            <span class="hot">Featured</span>
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">Clothing</a>
+                                            <a href="/">{{ $item->category->name }}</a>
                                         </div>
-                                        <h2><a href="shop-product-right.html">Colorful Pattern Shirts</a></h2>
+                                        <h2><a href="/">{{ $item->name }}</a></h2>
                                         <div class="rating-result" title="90%">
                                             <span>
                                                 <span>90%</span>
                                             </span>
                                         </div>
                                         <div class="product-price">
-                                            <span>$238.85 </span>
-                                            <span class="old-price">$245.8</span>
+                                            <span>₹{{ $item->selling_price }} </span>
+                                            <span class="old-price">₹{{ $item->mrp }}</span>
                                         </div>
                                         <div class="product-action-1 show">
                                             <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
@@ -96,6 +103,9 @@
                                     </div>
                                 </div>
                             </div>
+                            @empty
+                            <h5 class="text-danger">No products found in featured category</h5>
+                            @endforelse
                         </div>
                         <!--End product-grid-4-->
                     </div>

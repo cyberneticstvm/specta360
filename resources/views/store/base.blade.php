@@ -159,17 +159,17 @@
                             </a>
                             <div class="categori-dropdown-wrap categori-dropdown-active-large">
                                 <ul>
-                                    @forelse(getActiveCategories()->take(1) as $key => $cat)
+                                    @forelse(getActiveCategories() as $key => $cat)
                                     <li class="has-children">
-                                        <a href="shop-grid-right.html"><i class="evara-font-desktop"></i>{{ $cat->name }}</a>
+                                        <a href="shop-grid-right.html"><img class="rounded img-fluid me-3" src="{{ $cat->image }}" width="15%" alt="{{ $cat->name }}" />{{ $cat->name }}</a>
                                         <div class="dropdown-menu">
                                             <ul class="mega-menu d-lg-flex">
                                                 <li class="mega-menu-col col-lg-7">
                                                     <ul class="d-lg-flex">
                                                         <li class="mega-menu-col col-lg-6">
                                                             <ul>
-                                                                <li><span class="submenu-title">Hot & Trending</span></li>
-                                                                @forelse($cat->subCategory as $key1 => $sub)
+                                                                <li><span class="submenu-title">{{ $cat->name }}</span></li>
+                                                                @forelse($cat->subCategory->take(10) as $key1 => $sub)
                                                                 <li><a class="dropdown-item nav-link nav_item" href="#">{{ $sub->name }}</a></li>
                                                                 @empty
                                                                 @endforelse
@@ -177,26 +177,28 @@
                                                         </li>
                                                         <li class="mega-menu-col col-lg-6">
                                                             <ul>
-                                                                <li><span class="submenu-title">Bottoms</span></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Leggings</a></li>
+                                                                @forelse($cat->subCategory->skip(10) as $key1 => $sub)
+                                                                <li><a class="dropdown-item nav-link nav_item" href="#">{{ $sub->name }}</a></li>
+                                                                @empty
+                                                                @endforelse
                                                             </ul>
                                                         </li>
                                                     </ul>
                                                 </li>
                                                 <li class="mega-menu-col col-lg-5">
                                                     <div class="header-banner2">
-                                                        <img src="{{ asset('/frontend/assets/imgs/banner/menu-banner-2.jpg') }}" alt="menu_banner1">
+                                                        <img src="{{ url(getActiveBanners()->skip(4)->take(1)->first()->image) }}" alt="menu_banner1">
                                                         <div class="banne_info">
-                                                            <h6>10% Off</h6>
-                                                            <h4>New Arrival</h4>
+                                                            <h6>{{ getActiveBanners()->skip(4)->take(1)->first()->label }}</h6>
+                                                            <h4>{{ getActiveBanners()->skip(4)->take(1)->first()->title }}</h4>
                                                             <a href="#">Shop now</a>
                                                         </div>
                                                     </div>
                                                     <div class="header-banner2">
-                                                        <img src="{{ asset('/frontend/assets/imgs/banner/menu-banner-3.jpg') }}" alt="menu_banner2">
+                                                        <img src="{{ url(getActiveBanners()->skip(5)->take(1)->first()->image) }}" alt="menu_banner2">
                                                         <div class="banne_info">
-                                                            <h6>15% Off</h6>
-                                                            <h4>Hot Deals</h4>
+                                                            <h6>{{ getActiveBanners()->skip(5)->take(1)->first()->label }}</h6>
+                                                            <h4>{{ getActiveBanners()->skip(5)->take(1)->first()->title }}</h4>
                                                             <a href="#">Shop now</a>
                                                         </div>
                                                     </div>
@@ -206,16 +208,13 @@
                                     </li>
                                     @empty
                                     @endforelse
-                                    @forelse(getActiveCategories()->skip(1)->take(1) as $key => $cat)
+                                    <!--@forelse(getActiveCategories()->skip(1)->take(1) as $key => $cat)
                                         <li><a href="shop-grid-right.html"><i class="evara-font-desktop"></i>{{ $cat->name }}</a></li>
                                     @empty
-                                    @endforelse
+                                    @endforelse-->
                                     <li>
                                         <ul class="more_slide_open" style="display: none;">
-                                            @forelse(getActiveCategories()->skip(2) as $key => $cat)
-                                                <li><a href="shop-grid-right.html"><i class="evara-font-desktop"></i>{{ $cat->name }}</a></li>
-                                            @empty
-                                             @endforelse
+                                            <li><a href="javascript:void(0)"><img class="rounded img-fluid me-3" src="{{ asset('/backend/assets/imgs/people/avatar1.jpg') }}" width="15%" alt="No Items" />No more items to display.</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -225,72 +224,23 @@
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                             <nav>
                                 <ul>
-                                    <li><a class="active" href="index.html">Home <i class="fi-rs-angle-down"></i></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="index.html">Home 1</a></li>
-                                            <li><a href="index-2.html">Home 2</a></li>
-                                            <li><a href="index-3.html">Home 3</a></li>
-                                            <li><a href="index-4.html">Home 4</a></li>
-                                        </ul>
-                                    </li>
                                     <li>
-                                        <a href="page-about.html">About</a>
+                                        <a href="/">Home</a>
                                     </li>
-                                    <li><a href="shop-grid-right.html">Shop <i class="fi-rs-angle-down"></i></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="shop-grid-right.html">Shop Grid – Right Sidebar</a></li>
-                                            <li><a href="shop-grid-left.html">Shop Grid – Left Sidebar</a></li>
-                                            <li><a href="shop-list-right.html">Shop List – Right Sidebar</a></li>
-                                            <li><a href="shop-list-left.html">Shop List – Left Sidebar</a></li>
-                                            <li><a href="shop-fullwidth.html">Shop - Wide</a></li>
-                                            <li><a href="#">Single Product <i class="fi-rs-angle-right"></i></a>
-                                                <ul class="level-menu">
-                                                    <li><a href="shop-product-right.html">Product – Right Sidebar</a></li>
-                                                    <li><a href="shop-product-left.html">Product – Left Sidebar</a></li>
-                                                    <li><a href="shop-product-full.html">Product – No sidebar</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="shop-filter.html">Shop – Filter</a></li>
-                                            <li><a href="shop-wishlist.html">Shop – Wishlist</a></li>
-                                            <li><a href="shop-cart.html">Shop – Cart</a></li>
-                                            <li><a href="shop-checkout.html">Shop – Checkout</a></li>
-                                            <li><a href="shop-compare.html">Shop – Compare</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="position-static"><a href="#">Mega menu <i class="fi-rs-angle-down"></i></a>
+                                    <li class="position-static"><a href="javascript:void(0)">Popular Categories <i class="fi-rs-angle-down"></i></a>
                                         <ul class="mega-menu">
+                                            @forelse(getActiveCategories()->take(3) as $key => $cat)
                                             <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                <a class="menu-title" href="#">Women's Fashion</a>
+                                                <a class="menu-title" href="#">{{ $cat->name }}</a>
                                                 <ul>
-                                                    <li><a href="shop-product-right.html">Dresses</a></li>
-                                                    <li><a href="shop-product-right.html">Blouses & Shirts</a></li>
-                                                    <li><a href="shop-product-right.html">Hoodies & Sweatshirts</a></li>
-                                                    <li><a href="shop-product-right.html">Wedding Dresses</a></li>
-                                                    <li><a href="shop-product-right.html">Prom Dresses</a></li>
-                                                    <li><a href="shop-product-right.html">Cosplay Costumes</a></li>
+                                                    @forelse($cat->subCategory as $key1 => $sub)
+                                                    <li><a href="/">{{ $sub->name }}</a></li>
+                                                    @empty
+                                                    @endforelse
                                                 </ul>
                                             </li>
-                                            <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                <a class="menu-title" href="#">Men's Fashion</a>
-                                                <ul>
-                                                    <li><a href="shop-product-right.html">Jackets</a></li>
-                                                    <li><a href="shop-product-right.html">Casual Faux Leather</a></li>
-                                                    <li><a href="shop-product-right.html">Genuine Leather</a></li>
-                                                    <li><a href="shop-product-right.html">Casual Pants</a></li>
-                                                    <li><a href="shop-product-right.html">Sweatpants</a></li>
-                                                    <li><a href="shop-product-right.html">Harem Pants</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                <a class="menu-title" href="#">Technology</a>
-                                                <ul>
-                                                    <li><a href="shop-product-right.html">Gaming Laptops</a></li>
-                                                    <li><a href="shop-product-right.html">Ultraslim Laptops</a></li>
-                                                    <li><a href="shop-product-right.html">Tablets</a></li>
-                                                    <li><a href="shop-product-right.html">Laptop Accessories</a></li>
-                                                    <li><a href="shop-product-right.html">Tablet Accessories</a></li>
-                                                </ul>
-                                            </li>
+                                            @empty
+                                            @endforelse
                                             <li class="sub-mega-menu sub-mega-menu-width-34">
                                                 <div class="menu-banner-wrap">
                                                     <a href="shop-product-right.html"><img src="{{ asset('frontend/assets/imgs/banner/menu-banner.jpg') }}" alt="Evara"></a>
@@ -314,35 +264,20 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a href="blog-category-grid.html">Blog <i class="fi-rs-angle-down"></i></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="blog-category-grid.html">Blog Category Grid</a></li>
-                                            <li><a href="blog-category-list.html">Blog Category List</a></li>
-                                            <li><a href="blog-category-big.html">Blog Category Big</a></li>
-                                            <li><a href="blog-category-fullwidth.html">Blog Category Wide</a></li>
-                                            <li><a href="#">Single Post <i class="fi-rs-angle-right"></i></a>
-                                                <ul class="level-menu level-menu-modify">
-                                                    <li><a href="blog-post-left.html">Left Sidebar</a></li>
-                                                    <li><a href="blog-post-right.html">Right Sidebar</a></li>
-                                                    <li><a href="blog-post-fullwidth.html">No Sidebar</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Pages <i class="fi-rs-angle-down"></i></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="page-about.html">About Us</a></li>
-                                            <li><a href="page-contact.html">Contact</a></li>
-                                            <li><a href="page-account.html">My Account</a></li>
-                                            <li><a href="page-login-register.html">login/register</a></li>
-                                            <li><a href="page-purchase-guide.html">Purchase Guide</a></li>
-                                            <li><a href="page-privacy-policy.html">Privacy Policy</a></li>
-                                            <li><a href="page-terms.html">Terms of Service</a></li>
-                                            <li><a href="page-404.html">404 Page</a></li>
-                                        </ul>
+                                    <li>
+                                        <a href="/">New Arrivals</a>
                                     </li>
                                     <li>
-                                        <a href="page-contact.html">Contact</a>
+                                        <a href="/">Women</a>
+                                    </li>
+                                    <li>
+                                        <a href="/">Men</a>
+                                    </li>
+                                    <li>
+                                        <a href="/">Kids</a>
+                                    </li>
+                                    <li>
+                                        <a href="/">Contact</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -444,7 +379,7 @@
                         <div class="categori-dropdown-wrap categori-dropdown-active-small">
                             <ul>
                                 @forelse(getActiveCategories() as $key => $cat)
-                                    <li><a href=""><i class="evara-font-dress"></i>{{ $cat->name }}</a></li>
+                                    <li><a href="/"><img class="rounded img-fluid me-1" src="{{ $cat->image }}" width="15%" alt="{{ $cat->name }}" />{{ $cat->name }}</a></li>
                                 @empty
                                 @endforelse
                             </ul>
@@ -461,90 +396,26 @@
                                     <li><a href="index-4.html">Home 4</a></li>
                                 </ul>
                             </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="shop-grid-right.html">shop</a>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Popular Categories</a>
                                 <ul class="dropdown">
-                                    <li><a href="shop-grid-right.html">Shop Grid – Right Sidebar</a></li>
-                                    <li><a href="shop-grid-left.html">Shop Grid – Left Sidebar</a></li>
-                                    <li><a href="shop-list-right.html">Shop List – Right Sidebar</a></li>
-                                    <li><a href="shop-list-left.html">Shop List – Left Sidebar</a></li>
-                                    <li><a href="shop-fullwidth.html">Shop - Wide</a></li>
-                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Single Product</a>
+                                    @forelse(getActiveCategories() as $key => $cat)
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">{{ $cat->name }}</a>
                                         <ul class="dropdown">
-                                            <li><a href="shop-product-right.html">Product – Right Sidebar</a></li>
-                                            <li><a href="shop-product-left.html">Product – Left Sidebar</a></li>
-                                            <li><a href="shop-product-full.html">Product – No sidebar</a></li>
+                                            @forelse($cat->subCategory as $key1 => $sub)
+                                            <li><a href="/">{{ $sub->name }}</a></li>
+                                            @empty
+                                            @endforelse
                                         </ul>
                                     </li>
-                                    <li><a href="shop-filter.html">Shop – Filter</a></li>
-                                    <li><a href="shop-wishlist.html">Shop – Wishlist</a></li>
-                                    <li><a href="shop-cart.html">Shop – Cart</a></li>
-                                    <li><a href="shop-checkout.html">Shop – Checkout</a></li>
-                                    <li><a href="shop-compare.html">Shop – Compare</a></li>
+                                    @empty
+                                    @endforelse
                                 </ul>
                             </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Mega menu</a>
-                                <ul class="dropdown">
-                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Women's Fashion</a>
-                                        <ul class="dropdown">
-                                            <li><a href="shop-product-right.html">Dresses</a></li>
-                                            <li><a href="shop-product-right.html">Blouses & Shirts</a></li>
-                                            <li><a href="shop-product-right.html">Hoodies & Sweatshirts</a></li>
-                                            <li><a href="shop-product-right.html">Women's Sets</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Men's Fashion</a>
-                                        <ul class="dropdown">
-                                            <li><a href="shop-product-right.html">Jackets</a></li>
-                                            <li><a href="shop-product-right.html">Casual Faux Leather</a></li>
-                                            <li><a href="shop-product-right.html">Genuine Leather</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Technology</a>
-                                        <ul class="dropdown">
-                                            <li><a href="shop-product-right.html">Gaming Laptops</a></li>
-                                            <li><a href="shop-product-right.html">Ultraslim Laptops</a></li>
-                                            <li><a href="shop-product-right.html">Tablets</a></li>
-                                            <li><a href="shop-product-right.html">Laptop Accessories</a></li>
-                                            <li><a href="shop-product-right.html">Tablet Accessories</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="blog-category-fullwidth.html">Blog</a>
-                                <ul class="dropdown">
-                                    <li><a href="blog-category-grid.html">Blog Category Grid</a></li>
-                                    <li><a href="blog-category-list.html">Blog Category List</a></li>
-                                    <li><a href="blog-category-big.html">Blog Category Big</a></li>
-                                    <li><a href="blog-category-fullwidth.html">Blog Category Wide</a></li>
-                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Single Product Layout</a>
-                                        <ul class="dropdown">
-                                            <li><a href="blog-post-left.html">Left Sidebar</a></li>
-                                            <li><a href="blog-post-right.html">Right Sidebar</a></li>
-                                            <li><a href="blog-post-fullwidth.html">No Sidebar</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="page-about.html">About Us</a></li>
-                                    <li><a href="page-contact.html">Contact</a></li>
-                                    <li><a href="page-account.html">My Account</a></li>
-                                    <li><a href="page-login-register.html">login/register</a></li>
-                                    <li><a href="page-purchase-guide.html">Purchase Guide</a></li>
-                                    <li><a href="page-privacy-policy.html">Privacy Policy</a></li>
-                                    <li><a href="page-terms.html">Terms of Service</a></li>
-                                    <li><a href="page-404.html">404 Page</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Language</a>
-                                <ul class="dropdown">
-                                    <li><a href="#">English</a></li>
-                                    <li><a href="#">French</a></li>
-                                    <li><a href="#">German</a></li>
-                                    <li><a href="#">Spanish</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="/">New Arrivals</a></li>
+                            <li><a href="/">Women</a></li>
+                            <li><a href="/">Men</a></li>
+                            <li><a href="/">Kids</a></li>
+                            <li><a href="/">Contact</a></li>
                         </ul>
                     </nav>
                     <!-- mobile menu end -->
