@@ -189,16 +189,16 @@
                                                     <div class="header-banner2">
                                                         <img src="{{ url(getActiveBanners()->skip(4)->take(1)->first()->image) }}" alt="menu_banner1">
                                                         <div class="banne_info">
-                                                            <h6>{{ getActiveBanners()->skip(4)->take(1)->first()->label }}</h6>
-                                                            <h4>{{ getActiveBanners()->skip(4)->take(1)->first()->title }}</h4>
+                                                            <h6>{{ count(getActiveBanners()->skip(4)->take(1)) > 0 ? getActiveBanners()->skip(4)->take(1)->first()->label : '' }}</h6>
+                                                            <h4>{{ count(getActiveBanners()->skip(4)->take(1)) > 0 ? getActiveBanners()->skip(4)->take(1)->first()->title : '' }}</h4>
                                                             <a href="#">Shop now</a>
                                                         </div>
                                                     </div>
                                                     <div class="header-banner2">
                                                         <img src="{{ url(getActiveBanners()->skip(5)->take(1)->first()->image) }}" alt="menu_banner2">
                                                         <div class="banne_info">
-                                                            <h6>{{ getActiveBanners()->skip(5)->take(1)->first()->label }}</h6>
-                                                            <h4>{{ getActiveBanners()->skip(5)->take(1)->first()->title }}</h4>
+                                                            <h6>{{ count(getActiveBanners()->skip(5)->take(1)) > 0 ? getActiveBanners()->skip(5)->take(1)->first()->label : '' }}</h6>
+                                                            <h4>{{ count(getActiveBanners()->skip(5)->take(1)) > 0 ? getActiveBanners()->skip(5)->take(1)->first()->title : '' }}</h4>
                                                             <a href="#">Shop now</a>
                                                         </div>
                                                     </div>
