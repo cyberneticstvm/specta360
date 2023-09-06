@@ -39,8 +39,8 @@
                 <div class="banner-img banner-2 wow fadeIn  animated mb-0">
                     <img class="border-radius-10" src="{{ count(getActiveBanners()) > 0 ? url(getActiveBanners()->skip(3)->take(1)->first()->image) : '#' }}" alt="">
                     <div class="banner-text">
-                        <span>{{ count(getActiveBanners()->skip(3)->take(1)->first()) > 0 ? getActiveBanners()->skip(3)->take(1)->first()->label : '' }}</span>
-                        <h4>{!! count(getActiveBanners()->skip(3)->take(1)->first()) > 0 ? getActiveBanners()->skip(3)->take(1)->first()->title : '' !!}</h4>
+                        <span>{{ count(getActiveBanners()->skip(3)->take(1)) > 0 ? getActiveBanners()->skip(3)->take(1)->first()->label : '' }}</span>
+                        <h4>{!! count(getActiveBanners()->skip(3)->take(1)) > 0 ? getActiveBanners()->skip(3)->take(1)->first()->title : '' !!}</h4>
                         <a href="/">Shop Now <i class="fi-rs-arrow-right"></i></a>
                     </div>
                 </div>
