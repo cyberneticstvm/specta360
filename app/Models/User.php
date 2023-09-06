@@ -43,4 +43,8 @@ class User extends Authenticatable
     public function getStatus(){
         return ($this->status == 'active') ? "<span class='badge bg-success'>Active</span>" : "<span class='badge bg-danger'>Inactive</span>";
     }
+
+    public function createdAt(){
+        return ($this->created_at) ? $this->created_at->format('d/M/Y') : '';
+    }
 }

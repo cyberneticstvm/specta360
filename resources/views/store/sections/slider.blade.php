@@ -29,7 +29,7 @@
             </div>
             <div class="col-lg-3 d-md-none d-lg-block">
                 <div class="banner-img banner-1 wow fadeIn  animated home-3">
-                    <img class="border-radius-10" src="{{ url(getActiveCategories()->first()->image) }}" alt="">
+                    <img class="border-radius-10" src="{{ count(getActiveCategories()) > 0 ? url(getActiveCategories()->first()->image) : '#' }}" alt="">
                     <div class="banner-text">
                         <span>Accessories</span>
                         <h4>Save 17% on <br>Frame Accessories</h4>
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="banner-img banner-2 wow fadeIn  animated mb-0">
-                    <img class="border-radius-10" src="{{ url(getActiveBanners()->skip(3)->take(1)->first()->image) }}" alt="">
+                    <img class="border-radius-10" src="{{ count(getActiveBanners()) > 0 ? url(getActiveBanners()->skip(3)->take(1)->first()->image) : '#' }}" alt="">
                     <div class="banner-text">
                         <span>{{ getActiveBanners()->skip(3)->take(1)->first()->label }}</span>
                         <h4>{!! getActiveBanners()->skip(3)->take(1)->first()->title !!}</h4>
