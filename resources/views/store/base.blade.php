@@ -187,7 +187,7 @@
                                                 </li>
                                                 <li class="mega-menu-col col-lg-5">
                                                     <div class="header-banner2">
-                                                        <img src="{{ url(getActiveBanners()->skip(4)->take(1)->first()->image) }}" alt="menu_banner1">
+                                                        <img src="{{ count(getActiveBanners()->skip(4)->take(1)) > 0 ? url(getActiveBanners()->skip(4)->take(1)->first()->image) : '' }}" alt="menu_banner1">
                                                         <div class="banne_info">
                                                             <h6>{{ count(getActiveBanners()->skip(4)->take(1)) > 0 ? getActiveBanners()->skip(4)->take(1)->first()->label : '' }}</h6>
                                                             <h4>{{ count(getActiveBanners()->skip(4)->take(1)) > 0 ? getActiveBanners()->skip(4)->take(1)->first()->title : '' }}</h4>
