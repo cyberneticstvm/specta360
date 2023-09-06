@@ -178,7 +178,7 @@
                                         <div class="product-img product-img-zoom">
                                             <a href="shop-product-right.html">
                                                 <img class="default-img" src="{{ url($item->image) }}" alt="{{ $item->name }}">
-                                                <img class="hover-img" src="{{ ($item->images) ? url($item->images->first()->name) : asset('/frontend/assets/imgs/shop/product-9-1.jpg') }}" alt="">
+                                                <img class="hover-img" src="{{ ($item->images->first()) ? url($item->images->first()->name) : asset('/frontend/assets/imgs/shop/product-9-1.jpg') }}" alt="">
                                             </a>
                                         </div>
                                         <div class="product-action-1">
