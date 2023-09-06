@@ -64,7 +64,7 @@
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label class="form-label">Tags</label>
-                                        {{ html()->text($name = 'tags', $value = old('tags'))->attribute('data-role', 'tagsinput')->class('form-control')->placeholder('Tags') }}
+                                        {{ html()->text($name = 'tags', $value = 'Men, Women, Kids, Unisex')->attribute('data-role', 'tagsinput')->class('form-control')->placeholder('Tags') }}
                                         @error('tags')
                                         <small class="text-danger">{{ $errors->first('tags') }}</small>
                                         @enderror

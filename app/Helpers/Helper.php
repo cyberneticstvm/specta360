@@ -41,7 +41,7 @@ function getActivevendors(){
 }
 
 function getActiveProducts(){
-    return Product::where('status', 1)->get();
+    return Product::where('status', 1)->latest()->get();
 }
 
 function getAllvendors(){
