@@ -35,6 +35,7 @@ Route::middleware(['web'])->controller(StoreController::class)->group(function()
     Route::get('/brand/{slug}/{id}', 'productsByBrand')->name('product.brand');
     Route::get('/vendor/{slug}/{id}', 'productsByVendor')->name('product.vendor');
     Route::get('/vendor/all', 'allVendors')->name('vendor.all');
+    Route::get('/productqv/details/{id}', 'productDetailsForQuickview')->name('product.details.quick.view');
 });
 
 /*Route::get('/store/dashboard', function () {
