@@ -47,4 +47,8 @@ class User extends Authenticatable
     public function createdAt(){
         return ($this->created_at) ? $this->created_at->format('d/M/Y') : '';
     }
+
+    public function products(){
+        return $this->hasMany(Product::class, 'id', 'vendor_id');
+    }
 }

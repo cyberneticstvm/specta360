@@ -30,6 +30,11 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 Route::middleware(['web'])->controller(StoreController::class)->group(function(){
     Route::get('/', 'index')->name('store.index');
     Route::get('/product/{slug}/{id}', 'productDetails')->name('product.details');
+    Route::get('/category/{slug}/{id}', 'productsByCategory')->name('product.category');
+    Route::get('/subcategory/{slug}/{id}', 'productsBySubcategory')->name('product.subcategory');
+    Route::get('/brand/{slug}/{id}', 'productsByBrand')->name('product.brand');
+    Route::get('/vendor/{slug}/{id}', 'productsByVendor')->name('product.vendor');
+    Route::get('/vendor/all', 'allVendors')->name('vendor.all');
 });
 
 /*Route::get('/store/dashboard', function () {

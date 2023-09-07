@@ -58,4 +58,8 @@ class Product extends Model
     public function getDiscount(){
         return (($this->mrp - $this->selling_price)/$this->mrp)*100;
     }
+
+    public function label(){
+        return $this->hot_deal == 1 ? 'Hot' : 'Featured';
+    }
 }

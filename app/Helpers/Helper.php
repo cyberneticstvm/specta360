@@ -58,6 +58,6 @@ function getActiveBanners(){
 }
 
 function getActiveProductsByTag($tags){
-    return ProductTag::whereIn('name', $tags)->get();
+    return ProductTag::whereIn('name', $tags)->orderByDesc('id')->get();
 }
 ?>

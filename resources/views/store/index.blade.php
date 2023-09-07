@@ -193,6 +193,7 @@
             </div>
         </div>
     </section>
+    @include("store.sections.vendor")
     <section class="featured section-padding">
         <div class="container pb-25">
             <div class="row">

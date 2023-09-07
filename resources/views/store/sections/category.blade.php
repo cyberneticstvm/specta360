@@ -32,9 +32,9 @@
                                 <div class="product-cart-wrap mb-30">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
-                                            <a href="/product/{{ $item->slug.'/'.$item->id }}">
+                                            <a href="{{ route('product.details', [$item->slug, $item->id]) }}">
                                                 <img class="default-img" src="{{ url($item->image) }}" alt="{{ $item->name }}">
-                                                <img class="hover-img" src="{{ ($item->images->first()) ? url($item->images->first()->name) : asset('/frontend/assets/imgs/shop/product-9-1.jpg') }}" alt="">
+                                                <img class="hover-img" src="{{ ($item->images->first()) ? url($item->images->first()->name) : asset('/frontend/assets/imgs/shop/product-9-1.jpg') }}" alt="{{ $item->name }}">
                                             </a>
                                         </div>
                                         <div class="product-action-1">
@@ -50,7 +50,7 @@
                                         <div class="product-category">
                                             <a href="/">{{ $item->category->name }}</a>
                                         </div>
-                                        <h2><a href="/product/{{ $item->slug.'/'.$item->id }}">{{ $item->name }}</a></h2>
+                                        <h2><a href="{{ route('product.details', [$item->slug, $item->id]) }}">{{ $item->name }}</a></h2>
                                         <div class="rating-result" title="90%">
                                             <span>
                                                 <span>90%</span>
