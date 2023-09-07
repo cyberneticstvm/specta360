@@ -64,7 +64,7 @@
                                 <select class="select-active">
                                     <option>All Categories</option>
                                     @forelse(getActiveCategories() as $key => $cat)
-                                        <option>{{ $cat->name }}</option>
+                                        <option>{{ $cat->name }} - ({{ $cat->products->count() }})</option>
                                     @empty
                                     @endforelse
                                 </select>
@@ -170,7 +170,7 @@
                                                             <ul>
                                                                 <li><span class="submenu-title">{{ $cat->name }}</span></li>
                                                                 @forelse($cat->subCategory->take(10) as $key1 => $sub)
-                                                                    <li><a class="dropdown-item nav-link nav_item" href="{{ route('product.subcategory', [$sub->slug, $sub->id]) }}">{{ $sub->name }}</a></li>
+                                                                    <li><a class="dropdown-item nav-link nav_item" href="{{ route('product.subcategory', [$sub->slug, $sub->id]) }}">{{ $sub->name }} - ({{ $sub->products->count() }})</a></li>
                                                                 @empty
                                                                 @endforelse
                                                             </ul>
@@ -178,7 +178,7 @@
                                                         <li class="mega-menu-col col-lg-6">
                                                             <ul>
                                                                 @forelse($cat->subCategory->skip(10) as $key1 => $sub)
-                                                                <li><a class="dropdown-item nav-link nav_item" href="{{ route('product.subcategory', [$sub->slug, $sub->id]) }}">{{ $sub->name }}</a></li>
+                                                                <li><a class="dropdown-item nav-link nav_item" href="{{ route('product.subcategory', [$sub->slug, $sub->id]) }}">{{ $sub->name }} - ({{ $sub->products->count() }})</a></li>
                                                                 @empty
                                                                 @endforelse
                                                             </ul>
@@ -234,7 +234,7 @@
                                                 <a class="menu-title" href="#">{{ $cat->name }}</a>
                                                 <ul>
                                                     @forelse($cat->subCategory as $key1 => $sub)
-                                                    <li><a href="{{ route('product.subcategory', [$sub->slug, $sub->id]) }}">{{ $sub->name }}</a></li>
+                                                    <li><a href="{{ route('product.subcategory', [$sub->slug, $sub->id]) }}">{{ $sub->name }} - ({{ $sub->products->count() }})</a></li>
                                                     @empty
                                                     @endforelse
                                                 </ul>

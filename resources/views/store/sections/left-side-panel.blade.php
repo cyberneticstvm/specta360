@@ -3,7 +3,7 @@
         <h5 class="section-title style-1 mb-30 wow fadeIn animated">Category</h5>
         <ul class="categories">
             @forelse(getActiveCategories() as $key => $cat)
-                <li><a href="{{ route('product.category', [$cat->slug, $cat->id]) }}">{{ $cat->name }}</a></li>
+                <li><a href="{{ route('product.category', [$cat->slug, $cat->id]) }}">{{ $cat->name }}</a> - ({{ $cat->products->count() }})</li>
             @empty
             @endforelse
         </ul>
