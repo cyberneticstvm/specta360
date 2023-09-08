@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\VendorProductController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -36,6 +37,10 @@ Route::middleware(['web'])->controller(StoreController::class)->group(function()
     Route::get('/vendor/{slug}/{id}', 'productsByVendor')->name('product.vendor');
     Route::get('/vendor/all', 'allVendors')->name('vendor.all');
     Route::get('/productqv/details/{id}', 'productDetailsForQuickview')->name('product.details.quick.view');
+});
+
+Route::middleware(['web'])->controller(CartController::class)->group(function(){
+    Route::post('/cart/product/add/{id}', 'add')->name('cart.add');
 });
 
 /*Route::get('/store/dashboard', function () {

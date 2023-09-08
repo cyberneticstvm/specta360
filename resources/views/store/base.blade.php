@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Specta360 - An Ultimate Specs Store</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -594,6 +595,7 @@
     <script src="{{ asset('/frontend/assets/js/main.js?v=3.4') }}"></script>
     <script src="{{ asset('/frontend/assets/js/shop.js?v=3.4') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('/frontend/assets/js/script.js') }}"></script>
     @include("message")
 </body>

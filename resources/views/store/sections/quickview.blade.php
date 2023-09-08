@@ -5,6 +5,8 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>       
             <div class="modal-body">                
                 <form method="post" action="" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="product_id" id="product_id" value="" />
                     <div class="row">
                         <div class="col-md-6 col-sm-12 col-xs-12">
                             <div class="detail-gallery">
@@ -97,7 +99,7 @@
                                         <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                     </div>
                                     <div class="product-extra-link2">
-                                        <button type="submit" class="button button-add-to-cart">Add to cart</button>
+                                        <button type="button" onclick="addToCart()" class="button button-add-to-cart">Add to cart</button>
                                         <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                         <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                     </div>

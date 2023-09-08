@@ -18,6 +18,7 @@ $(function(){
             url:'/productqv/details/'+id,
             dataType:'JSON',
             success:function(data){
+                $("#product_id").val(id);
                 $(".mainImg").attr('src', data.product.image);
                 $(".thumbImg>img").attr('src', data.product.image);
                 $(".pdctUrl").attr('href', '/product/'+data.product.slug+'/'+data.product.id);
@@ -55,3 +56,39 @@ $(function(){
 setTimeout(function () {
     $(".alert").hide('slow');
 }, 5000);
+
+function addToCart(){
+    var pid = $("#product_id").val();
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: '/cart/product/add/'+pid,
+        data:{
+            'qty': 2
+        },
+        success: function(res){
+            $(".btn-close").click();
+            const toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            if($.isEmptyObject(res.error)){
+                toast.fire({
+                    icon: 'success',
+                    title: res.success
+                })
+            }else{
+                toast.fire({
+                    icon: 'error',
+                    title: res.error
+                })
+            }
+        },
+        error: function(err){
+            console.log(err);
+        }
+    });
+}
