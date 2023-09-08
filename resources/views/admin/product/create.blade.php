@@ -179,6 +179,12 @@
                                         <span class="form-check-label">Special Deal</span>
                                     </label>
                                 </div>
+                                <div class="col-4 mt-3">
+                                    <label class="form-check">
+                                        <input type="checkbox" class="form-check-input" name="prescription" value="1">
+                                        <span class="form-check-label">Prescription</span>
+                                    </label>
+                                </div>
                                 <div class="col-12 mt-3">
                                     <div class="mb-3">
                                         <label class="form-label">Product Main Image </label>&nbsp;<small class="text-muted">(Max file size should be 500KB and 1100w x 1100h)</small>

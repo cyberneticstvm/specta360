@@ -182,6 +182,12 @@
                                 </div>
                                 <div class="col-4 mt-3">
                                     <label class="form-check">
+                                        <input type="checkbox" class="form-check-input" name="prescription" value="1" {{ ($product->prescription == 1) ? 'checked' : '' }}>
+                                        <span class="form-check-label">Prescription</span>
+                                    </label>
+                                </div>
+                                <div class="col-4 mt-3">
+                                    <label class="form-check">
                                         <input type="checkbox" class="form-check-input" name="status" value="1" {{ ($product->status == 1) ? 'checked' : '' }}>
                                         <span class="form-check-label">Make Active</span>
                                     </label>
