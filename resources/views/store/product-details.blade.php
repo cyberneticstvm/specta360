@@ -14,116 +14,127 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9">
-                    <div class="product-detail accordion-detail">
-                        <div class="row mb-50">
-                            <div class="col-md-6 col-sm-12 col-xs-12">
-                                <div class="detail-gallery">
-                                    <span class="zoom-icon"><i class="fi-rs-search"></i></span>
-                                    <!-- MAIN SLIDES -->
-                                    <div class="product-image-slider">
-                                        <figure class="border-radius-10">
-                                            <img src="{{ url($product->image) }}" alt="{{ $product->name }}">
-                                        </figure>
-                                        @forelse($product->images as $key => $image)
-                                        <figure class="border-radius-10">
-                                            <img src="{{ url($image->name) }}" alt="{{ $product->name }}">
-                                        </figure>
-                                        @empty
-                                        @endforelse
-                                    </div>
-                                    <!-- THUMBNAILS -->
-                                    <div class="slider-nav-thumbnails pl-15 pr-15">
-                                        <div><img src="{{ url($product->image) }}" alt="{{ $product->name }}"></div>
-                                        @forelse($product->images as $key => $image)
-                                        <div><img src="{{ url($image->name) }}" alt="{{ $product->name }}"></div>
-                                        @empty
-                                        @endforelse
-                                    </div>
-                                </div>
-                                <!-- End Gallery -->
-                                <div class="social-icons single-share">
-                                    <ul class="text-grey-5 d-inline-block">
-                                        <li><strong class="mr-10">Share this:</strong></li>
-                                        <li class="social-facebook"><a href="#"><img src="{{ asset('/frontend/assets/imgs/theme/icons/icon-facebook.svg') }}" alt=""></a></li>
-                                        <li class="social-twitter"> <a href="#"><img src="{{ asset('/frontend/assets/imgs/theme/icons/icon-twitter.svg') }}" alt=""></a></li>
-                                        <li class="social-instagram"><a href="#"><img src="{{ asset('/frontend/assets/imgs/theme/icons/icon-instagram.svg') }}" alt=""></a></li>
-                                        <li class="social-linkedin"><a href="#"><img src="{{ asset('/frontend/assets/imgs/theme/icons/icon-pinterest.svg') }}" alt=""></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12 col-xs-12">
-                                <div class="detail-info">
-                                    <h2 class="title-detail">{{ $product->name }}</h2>
-                                    <div class="product-detail-rating">
-                                        <div class="pro-details-brand">
-                                            <span> Brands: <a href="/">{{ $product->brand->name }}</a></span>
+                    <div class="product-detail accordion-detail">                        
+                        <form method="post" action="" enctype="multipart/form-data">
+                            <div class="row mb-50">
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="detail-gallery">
+                                        <span class="zoom-icon"><i class="fi-rs-search"></i></span>
+                                        <!-- MAIN SLIDES -->
+                                        <div class="product-image-slider">
+                                            <figure class="border-radius-10">
+                                                <img src="{{ url($product->image) }}" alt="{{ $product->name }}">
+                                            </figure>
+                                            @forelse($product->images as $key => $image)
+                                            <figure class="border-radius-10">
+                                                <img src="{{ url($image->name) }}" alt="{{ $product->name }}">
+                                            </figure>
+                                            @empty
+                                            @endforelse
                                         </div>
-                                        <div class="product-rate-cover text-end">
-                                            <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width:90%">
-                                                </div>
-                                            </div>
-                                            <span class="font-small ml-5 text-muted"> (25 reviews)</span>
+                                        <!-- THUMBNAILS -->
+                                        <div class="slider-nav-thumbnails pl-15 pr-15">
+                                            <div><img src="{{ url($product->image) }}" alt="{{ $product->name }}"></div>
+                                            @forelse($product->images as $key => $image)
+                                            <div><img src="{{ url($image->name) }}" alt="{{ $product->name }}"></div>
+                                            @empty
+                                            @endforelse
                                         </div>
                                     </div>
-                                    <div class="clearfix product-price-cover">
-                                        <div class="product-price primary-color float-left">
-                                            <ins><span class="text-brand">₹{{ $product->selling_price }}</span></ins>
-                                            <ins><span class="old-price font-md ml-15">₹{{ $product->mrp }}</span></ins>
-                                            <span class="save-price  font-md color3 ml-15">{{ number_format($product->getDiscount(), 0) }}% Off</span>
-                                        </div>
-                                    </div>
-                                    <div class="bt-1 border-color-1 mt-15 mb-15"></div>
-                                    <div class="short-desc mb-30">
-                                        <p>{{ $product->short_description }}</p>
-                                    </div>
+                                    <!-- End Gallery -->
                                     <div class="product_sort_info font-xs mb-30">
                                         <ul>
-                                            <li class="mb-10"><i class="fi-rs-crown mr-5"></i> 1 Year AL Jazeera Brand Warranty</li>
-                                            <li class="mb-10"><i class="fi-rs-refresh mr-5"></i> 30 Day Return Policy</li>
-                                            <li><i class="fi-rs-credit-card mr-5"></i> Cash on Delivery available</li>
+                                            <li class=">SKU: <span class="fw-bold">{{ $product->pcode }}</span></li>
+                                            <li class="">Tags: <span class="fw-bold">{{ $product->tags->pluck('name')->implode(', ') }}</span></li>
+                                            <li class="">Availability: <span class="fw-bold">{{ $product->qty }} items in stock</span></li>
                                         </ul>
                                     </div>
-                                    <div class="attr-detail attr-color mb-15">
-                                        <strong class="mr-10">Color</strong>
-                                        <ul class="list-filter color-filter">
-                                            @forelse($product->colors as $key => $color)
-                                            <li><a href="#" data-color="{{ ucfirst($color->name) }}"><span class="product-color-{{ $color->name }}"></span></a></li>
-                                            @empty
-                                            @endforelse
-                                        </ul>
-                                    </div>
-                                    <div class="attr-detail attr-size">
-                                        <strong class="mr-10">Size</strong>
-                                        <ul class="list-filter size-filter font-small">
-                                            @forelse($product->sizes as $key => $size)
-                                                <li><a href="#">{{ $size->name }}</a></li>
-                                            @empty
-                                            @endforelse
-                                        </ul>
-                                    </div>
-                                    <div class="bt-1 border-color-1 mt-30 mb-30"></div>
-                                    <div class="detail-extralink">
-                                        <div class="detail-qty border radius">
-                                            <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                            <span class="qty-val">1</span>
-                                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                        </div>
-                                        <div class="product-extra-link2">
-                                            <button type="submit" class="button button-add-to-cart">Add to cart</button>
-                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                                        </div>
-                                    </div>
-                                    <ul class="product-meta font-xs color-grey mt-50">
-                                        <li class="mb-5">SKU: <a href="#">{{ $product->pcode }}</a></li>
-                                        <li class="mb-5">Tags: {{ $product->tags->pluck('name')->implode(', ') }} </li>
-                                        <li>Availability:<span class="in-stock text-success ml-5">{{ rand(1, 10) }} Items In Stock</span></li>
-                                    </ul>
                                 </div>
-                                <!-- Detail Info -->
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="detail-info">
+                                        <h2 class="title-detail">{{ $product->name }}</h2>
+                                        <div class="product-detail-rating">
+                                            <div class="pro-details-brand">
+                                                <span> Brands: <a href="/">{{ $product->brand->name }}</a></span>
+                                            </div>
+                                            <div class="product-rate-cover text-end">
+                                                <div class="product-rate d-inline-block">
+                                                    <div class="product-rating" style="width:90%">
+                                                    </div>
+                                                </div>
+                                                <span class="font-small ml-5 text-muted"> (25 reviews)</span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix product-price-cover">
+                                            <div class="product-price primary-color float-left">
+                                                <ins><span class="text-brand">₹{{ $product->selling_price }}</span></ins>
+                                                <ins><span class="old-price font-md ml-15">₹{{ $product->mrp }}</span></ins>
+                                                <span class="save-price  font-md color3 ml-15">{{ number_format($product->getDiscount(), 0) }}% Off</span>
+                                            </div>
+                                        </div>
+                                        <div class="bt-1 border-color-1 mt-15 mb-15"></div>
+                                        <div class="short-desc mb-30">
+                                            <p>Description: {{ $product->short_description }}</p>
+                                        </div>                                        
+                                        <div class="row">
+                                            <div class="col form-group attr-detail attr-color mb-15">
+                                                <label class="mr-5">Color</label>
+                                                <select class="form-control color-filter">
+                                                    <option value="">--Choose Color--</option>
+                                                    @forelse($product->colors as $key => $value)
+                                                        <option value="{{ $value->name }}">{{ ucfirst($value->name) }}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                            <div class="col form-group attr-detail attr-size">
+                                                <label class="mr-5">Size</label>
+                                                <select class="form-control size-filter">
+                                                    <option value="">--Choose Size--</option>
+                                                    @forelse($product->sizes as $key => $value)
+                                                        <option value="{{ $value->name }}">{{ ucfirst($value->name) }}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="bt-1 border-color-1 mt-30 mb-30"></div>
+                                        <div class="row">
+                                            <div class="col-12"><h5 class="primary-color">Prescription (If required)</h5></div>
+                                            <label class="fw-bold">RE</label>
+                                            <div class="col-3"><input type="text" class="form-control" maxlength="6" placeholder="SPH" name="re_sph" /></div>
+                                            <div class="col-3"><input type="text" class="form-control" maxlength="6" placeholder="CYL" name="re_cyl" /></div>
+                                            <div class="col-3"><input type="text" class="form-control" maxlength="6" placeholder="AXIS" name="re_axis" /></div>
+                                            <div class="col-3"><input type="text" class="form-control" maxlength="6" placeholder="ADD" name="re_add" /></div>
+                                            <label class="fw-bold">LE</label>
+                                            <div class="col-3"><input type="text" class="form-control" maxlength="6" placeholder="SPH" name="le_sph"/></div>
+                                            <div class="col-3"><input type="text" class="form-control" maxlength="6" placeholder="CYL" name="le_cyl" /></div>
+                                            <div class="col-3"><input type="text" class="form-control" maxlength="6" placeholder="AXIS" name="le_axis" /></div>
+                                            <div class="col-3"><input type="text" class="form-control" maxlength="6" placeholder="ADD" name="le_add" /></div>
+                                        </div>
+                                        <div class="row mt-3 mb-3">
+                                            <div class="col-12"><p class="primary-color text-center">OR</9></div>
+                                            <label>Attach Prescription</label>
+                                            <div class="col"><input type="file" class="form-control" name="prescription" /></div>
+                                        </div>
+                                        <br />
+                                        <div class="detail-extralink">
+                                            <div class="detail-qty border radius">
+                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                                <span class="qty-val">1</span>
+                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                            </div>
+                                            <div class="product-extra-link2">
+                                                <button type="submit" class="button button-add-to-cart">Add to cart</button>
+                                                <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                                <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Detail Info -->
+                                </div>                            
                             </div>
-                        </div>
+                        </form>
                         <div class="tab-style3">
                             <ul class="nav nav-tabs text-uppercase">
                                 <li class="nav-item">

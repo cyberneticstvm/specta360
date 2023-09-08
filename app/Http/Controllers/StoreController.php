@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductColor;
+use App\Models\ProductMaterial;
 use App\Models\ProductSize;
+use App\Models\ProductStyle;
 use App\Models\ProductTag;
 use App\Models\User;
 use GuzzleHttp\Handler\Proxy;
@@ -52,6 +54,10 @@ class StoreController extends Controller
         $tags = ProductTag::where('product_id', $product->id)->pluck('name')->implode(', ');
         $colors = ProductColor::where('product_id', $product->id)->pluck('name');
         $sizes = ProductSize::where('product_id', $product->id)->pluck('name');
-        return response()->json(['product' => $product, 'tags' => $tags, 'colors' => $colors, 'sizes' => $sizes]);
+        $styles = ProductStyle::where('product_id', $product->id)->pluck('name');
+        $materials = ProductMaterial::where('product_id', $product->id)->pluck('name');
+        return response()->json(['product' => $product, 'tags' => $tags, 'colors' => $colors, 'sizes' => $sizes, 'styles' => $styles, 'materials' => $materials]);
     }
+
+    
 }

@@ -4,3 +4,9 @@
 .xl{
     font-size: x-large !important;
 }
+.form-control-sm{
+    height: 30px !important;
+    border-radius: 0% !important;
+    font-size: 10px !important;
+    color: #088178 !important;
+}

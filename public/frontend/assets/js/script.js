@@ -20,21 +20,26 @@ $(function(){
             success:function(data){
                 $(".mainImg").attr('src', data.product.image);
                 $(".thumbImg>img").attr('src', data.product.image);
+                $(".pdctUrl").attr('href', '/product/'+data.product.slug+'/'+data.product.id);
                 $(".pdctName").html(data.product.name);
                 $(".pdctBrand").html(data.product.brand.name);
                 $(".text-brand").html('₹'+data.product.selling_price);
                 $(".old-price").html('₹'+data.product.mrp);                
                 $(".save-price").html();
-                $(".shortDesc").html(data.product.short_description);
+                $(".shortDesc").html('Description: '+data.product.short_description);
                 $(".pdctSKU").html('SKU: '+data.product.pcode);
-                $(".in-stock").html(data.product.qty+' Items In Stock');
-                $(".pdctTags").html('Tgas: '+data.tags);
+                $(".in-stock").html('Availability: '+data.product.qty+' Items In Stock');
+                $(".pdctTags").html('Tags: '+data.tags);
+                $(".pdctStyle").html('Style: '+data.styles);
+                $(".pdctMaterial").html('Material: '+data.materials);
+                $(".color-filter").html("<option value=''>--Choose Color--</option>");
+                $(".size-filter").html("<option value=''>--Choose Size--</option>");
                 $.each(data.colors, function(key, value){
-                    $(".color-filter").append("<li><a href='#' data-color="+value+"><span class='product-color-"+value+"'></span></a></li>");
+                    $(".color-filter").append("<option value='"+value+"'>"+value+"</option>");
                 });
                 $.each(data.sizes, function(key, value){
-                    $(".size-filter").append("<li><a href='#'>"+value+"</a></li>");
-                })
+                    $(".size-filter").append("<option value='"+value+"'>"+value+"</option>");
+                });
             },
             error:function(err){
                 console.log(err);
