@@ -40,6 +40,11 @@ $(function(){
                 $.each(data.sizes, function(key, value){
                     $(".size-filter").append("<option value='"+value+"'>"+value+"</option>");
                 });
+                if(data.product.prescription == 1){
+                    $(".pdctPresc").removeClass('d-none');
+                }else{
+                    $(".pdctPresc").addClass('d-none');
+                }
             },
             error:function(err){
                 console.log(err);

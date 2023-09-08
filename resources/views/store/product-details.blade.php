@@ -99,6 +99,7 @@
                                             </div>
                                         </div>
                                         <div class="bt-1 border-color-1 mt-30 mb-30"></div>
+                                        @if($product->prescription == 1)
                                         <div class="row">
                                             <div class="col-12"><h5 class="primary-color">Prescription (If required)</h5></div>
                                             <label class="fw-bold">RE</label>
@@ -118,6 +119,7 @@
                                             <div class="col"><input type="file" class="form-control" name="prescription" /></div>
                                         </div>
                                         <br />
+                                        @endif
                                         <div class="detail-extralink">
                                             <div class="detail-qty border radius">
                                                 <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>

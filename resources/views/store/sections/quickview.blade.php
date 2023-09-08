@@ -69,25 +69,27 @@
                                     </div>
                                 </div>
                                 <div class="bt-1 border-color-1 mt-30 mb-30"></div>
-                                <div class="row">
-                                    <div class="col-12"><h5 class="primary-color">Prescription (If required)</h5></div>
-                                    <label class="fw-bold">RE</label>
-                                    <div class="col-3"><input type="text" class="form-control form-control-sm" maxlength="6" placeholder="SPH" name="re_sph" /></div>
-                                    <div class="col-3"><input type="text" class="form-control form-control-sm" maxlength="6" placeholder="CYL" name="re_cyl" /></div>
-                                    <div class="col-3"><input type="text" class="form-control form-control-sm" maxlength="6" placeholder="AXIS" name="re_axis" /></div>
-                                    <div class="col-3"><input type="text" class="form-control form-control-sm" maxlength="6" placeholder="ADD" name="re_add" /></div>
-                                    <label class="fw-bold">LE</label>
-                                    <div class="col-3"><input type="text" class="form-control form-control-sm" maxlength="6" placeholder="SPH" name="le_sph"/></div>
-                                    <div class="col-3"><input type="text" class="form-control form-control-sm" maxlength="6" placeholder="CYL" name="le_cyl" /></div>
-                                    <div class="col-3"><input type="text" class="form-control form-control-sm" maxlength="6" placeholder="AXIS" name="le_axis" /></div>
-                                    <div class="col-3"><input type="text" class="form-control form-control-sm" maxlength="6" placeholder="ADD" name="le_add" /></div>
+                                <div class="pdctPresc d-none">
+                                    <div class="row">
+                                        <div class="col-12"><h5 class="primary-color">Prescription (If required)</h5></div>
+                                        <label class="fw-bold">RE</label>
+                                        <div class="col-3"><input type="text" class="form-control form-control-sm" maxlength="6" placeholder="SPH" name="re_sph" /></div>
+                                        <div class="col-3"><input type="text" class="form-control form-control-sm" maxlength="6" placeholder="CYL" name="re_cyl" /></div>
+                                        <div class="col-3"><input type="text" class="form-control form-control-sm" maxlength="6" placeholder="AXIS" name="re_axis" /></div>
+                                        <div class="col-3"><input type="text" class="form-control form-control-sm" maxlength="6" placeholder="ADD" name="re_add" /></div>
+                                        <label class="fw-bold">LE</label>
+                                        <div class="col-3"><input type="text" class="form-control form-control-sm" maxlength="6" placeholder="SPH" name="le_sph"/></div>
+                                        <div class="col-3"><input type="text" class="form-control form-control-sm" maxlength="6" placeholder="CYL" name="le_cyl" /></div>
+                                        <div class="col-3"><input type="text" class="form-control form-control-sm" maxlength="6" placeholder="AXIS" name="le_axis" /></div>
+                                        <div class="col-3"><input type="text" class="form-control form-control-sm" maxlength="6" placeholder="ADD" name="le_add" /></div>
+                                    </div>
+                                    <div class="row mt-3 mb-3">
+                                        <div class="col-12"><p class="primary-color text-center">OR</9></div>
+                                        <label>Attach Prescription</label>
+                                        <div class="col"><input type="file" class="form-control form-control-sm" name="prescription" /></div>
+                                    </div>
+                                    <br />
                                 </div>
-                                <div class="row mt-3 mb-3">
-                                    <div class="col-12"><p class="primary-color text-center">OR</9></div>
-                                    <label>Attach Prescription</label>
-                                    <div class="col"><input type="file" class="form-control form-control-sm" name="prescription" /></div>
-                                </div>
-                                <br />
                                 <div class="detail-extralink">
                                     <div class="detail-qty border radius">
                                         <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
