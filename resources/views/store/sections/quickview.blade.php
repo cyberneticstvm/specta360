@@ -4,7 +4,7 @@
         <div class="modal-content">              
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>       
             <div class="modal-body">                
-                <form method="post" action="" enctype="multipart/form-data">
+                <form method="post" id="frmAddToCart" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="product_id" id="product_id" value="" />
                     <div class="row">

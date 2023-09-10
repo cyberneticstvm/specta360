@@ -63,9 +63,7 @@ function addToCart(){
         type: 'POST',
         dataType: 'json',
         url: '/cart/product/add/'+pid,
-        data:{
-            'qty': 2
-        },
+        data: $('#frmAddToCart').serialize(),
         success: function(res){
             $(".btn-close").click();
             const toast = Swal.mixin({
