@@ -77,6 +77,7 @@ $(function(){
             processData:false,
             success: function(res){
                 $(".btn-close").click();
+                $(".qty-val").text('1');
                 $('#frmAddToCart').trigger("reset");
                 getCartItems();
                 if($.isEmptyObject(res.error)){
@@ -98,7 +99,6 @@ $(function(){
             complete: function(){
                 $(".btn-submit").attr("disabled", false);
                 $(".btn-submit").html("Add to Cart");
-                $(".qty-val").text('1');
             }
         });
     });
