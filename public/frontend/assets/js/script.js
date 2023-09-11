@@ -27,7 +27,7 @@ $(function(){
                 $(".pdctUrl").attr('href', '/product/'+data.product.slug+'/'+data.product.id);
                 $(".pdctName").html(data.product.name);
                 $(".pdctBrand").html(data.product.brand.name);
-                $(".text-brand").html('₹'+data.product.selling_price);
+                $(".selling-price").html('₹'+data.product.selling_price);
                 $(".old-price").html('₹'+data.product.mrp);                
                 $(".save-price").html();
                 $(".shortDesc").html('Description: '+data.product.short_description);
