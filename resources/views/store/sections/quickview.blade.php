@@ -63,11 +63,11 @@
                                 <div class="row">
                                     <div class="col form-group attr-detail attr-color mb-15">
                                         <label class="mr-5">Color</label>
-                                        <select class="form-control form-control-sm color-filter"><option value="">--Choose Color--</option></select>
+                                        <select class="form-control form-control-sm color-filter" name="color"><option value="">--Choose Color--</option></select>
                                     </div>
                                     <div class="col form-group attr-detail attr-size">
                                         <label class="mr-5">Size</label>
-                                        <select class="form-control form-control-sm size-filter"><option value="">--Choose Size--</option></select>
+                                        <select class="form-control form-control-sm size-filter" name="size"><option value="">--Choose Size--</option></select>
                                     </div>
                                 </div>
                                 <div class="bt-1 border-color-1 mt-30 mb-30"></div>
@@ -99,7 +99,7 @@
                                         <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                     </div>
                                     <div class="product-extra-link2">
-                                        <button type="button" onclick="addToCart()" class="button button-add-to-cart">Add to cart</button>
+                                        <button type="submit" class="button btn-submit button-add-to-cart">Add to Cart</button>
                                         <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                         <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                     </div>

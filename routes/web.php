@@ -40,7 +40,11 @@ Route::middleware(['web'])->controller(StoreController::class)->group(function()
 });
 
 Route::middleware(['web'])->controller(CartController::class)->group(function(){
-    Route::post('/cart/product/add/{id}', 'add')->name('cart.add');
+    Route::post('/cart/product/add', 'add')->name('cart.add');
+    Route::get('/cart/product/get', 'get')->name('cart.get');
+    Route::get('/cart/product/remove/{id}', 'remove')->name('cart.remove');
+    Route::get('/cart/view', 'view')->name('cart.view');
+    Route::get('/cart/checkout', 'checkout')->name('cart.checkout');
 });
 
 /*Route::get('/store/dashboard', function () {

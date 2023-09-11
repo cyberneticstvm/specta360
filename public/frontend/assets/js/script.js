@@ -1,5 +1,8 @@
 $(function(){
     "use strict"
+
+    getCartItems();
+
     $('form').submit(function(){
         $(".btn-submit").attr("disabled", true);
         $(".btn-submit").html("<span class='spinner-grow spinner-grow-sm' role='status' aria-hidden='true'></span>");
@@ -50,43 +53,96 @@ $(function(){
             error:function(err){
                 console.log(err);
             }
+        });
+    });
+
+    const toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+
+    $(document).on("submit", "#frmAddToCart", function(e){
+        e.preventDefault();
+        var data = new FormData(this);
+        data.append('qty', parseInt($(this).find(".qty-val").text()));
+        $.ajax({
+            type: 'POST',
+            url: '/cart/product/add',
+            data: data,
+            dataType: 'json',
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(res){
+                $(".btn-close").click();
+                $('#frmAddToCart').trigger("reset");
+                getCartItems();
+                if($.isEmptyObject(res.error)){
+                    toast.fire({
+                        icon: 'success',
+                        title: res.success,
+                        color: 'green'
+                    })
+                }
+            },
+            error: function(err){
+                var msg = JSON.parse(err.responseText);
+                toast.fire({
+                    icon: 'error',
+                    title: msg.message,
+                    color: 'red'
+                })
+            },
+            complete: function(){
+                $(".btn-submit").attr("disabled", false);
+                $(".btn-submit").html("Add to Cart");
+                $(".qty-val").text('1');
+            }
+        });
+    });
+
+    $(document).on('click', '.removeCartItem', function(){
+        var id = $(this).attr('id');
+        $.ajax({
+            type: 'GET',
+            url: '/cart/product/remove/'+id,
+            dataType: 'json',
+            success: function(res){
+                getCartItems();
+                if($.isEmptyObject(res.error)){
+                    toast.fire({
+                        icon: 'success',
+                        title: res.success,
+                        color: 'green'
+                    })
+                }
+            }
         })
-    })
+    });
 });
+
+function getCartItems(){
+    $.ajax({
+        type: 'GET',
+        url: '/cart/product/get',
+        dataType: 'json',
+        success: function(res){
+            $(".mini-cart-icon .pro-count").text(res.cart_qty);
+            $(".shopping-cart-total span").text('₹'+res.cart_total);
+            var cart = "<ul>";
+            $.each(res.cart, function(key, item){
+                cart += `<li><div class="row"><div class="shopping-cart-img col-3"><a href="/product/${item.slug}/${item.id}"><img alt="${item.name}" src="${item.options.image}" /></a></div><div class="shopping-cart-title col-6"><h6><a href="/product/${item.slug}/${item.id}">${item.name}</a></h6><h6 class="text-end"><span>${item.qty} × </span>${item.price}</h6></div><div class="col-2"><a href="javascript:void(0)" id="${item.rowId}" class="removeCartItem"><i class="fi-rs-cross-small"></i></a></div></div></li>`;
+            });
+            cart += "</ul>";            
+            $(".miniCart").html(cart);
+        }
+    })
+}
+
 setTimeout(function () {
     $(".alert").hide('slow');
 }, 5000);
 
-function addToCart(){
-    var pid = $("#product_id").val();
-    $.ajax({
-        type: 'POST',
-        dataType: 'json',
-        url: '/cart/product/add/'+pid,
-        data: $('#frmAddToCart').serialize(),
-        success: function(res){
-            $(".btn-close").click();
-            const toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                icon: 'success',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            if($.isEmptyObject(res.error)){
-                toast.fire({
-                    icon: 'success',
-                    title: res.success
-                })
-            }else{
-                toast.fire({
-                    icon: 'error',
-                    title: res.error
-                })
-            }
-        },
-        error: function(err){
-            console.log(err);
-        }
-    });
-}
+
