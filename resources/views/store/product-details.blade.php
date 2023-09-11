@@ -15,7 +15,9 @@
             <div class="row">
                 <div class="col-lg-9">
                     <div class="product-detail accordion-detail">                        
-                        <form method="post" action="" enctype="multipart/form-data">
+                        <form method="post" id="frmAddToCart" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="product_id" id="product_id" value="{{ $product->id }}" />
                             <div class="row mb-50">
                                 <div class="col-md-6 col-sm-12 col-xs-12">
                                     <div class="detail-gallery">
@@ -47,6 +49,8 @@
                                             <li class=">SKU: <span class="fw-bold">{{ $product->pcode }}</span></li>
                                             <li class="">Tags: <span class="fw-bold">{{ $product->tags->pluck('name')->implode(', ') }}</span></li>
                                             <li class="">Availability: <span class="fw-bold">{{ $product->qty }} items in stock</span></li>
+                                            <li class="">Material: <span class="fw-bold">{{ $product->materials->pluck('name')->implode(', ') }} items in stock</span></li>
+                                            <li class="">Style: <span class="fw-bold">{{ $product->styles->pluck('name')->implode(', ') }} items in stock</span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -79,7 +83,7 @@
                                         <div class="row">
                                             <div class="col form-group attr-detail attr-color mb-15">
                                                 <label class="mr-5">Color</label>
-                                                <select class="form-control color-filter">
+                                                <select class="form-control color-filter" name="color">
                                                     <option value="">--Choose Color--</option>
                                                     @forelse($product->colors as $key => $value)
                                                         <option value="{{ $value->name }}">{{ ucfirst($value->name) }}</option>
@@ -89,7 +93,7 @@
                                             </div>
                                             <div class="col form-group attr-detail attr-size">
                                                 <label class="mr-5">Size</label>
-                                                <select class="form-control size-filter">
+                                                <select class="form-control size-filter" name="size">
                                                     <option value="">--Choose Size--</option>
                                                     @forelse($product->sizes as $key => $value)
                                                         <option value="{{ $value->name }}">{{ ucfirst($value->name) }}</option>
@@ -127,7 +131,7 @@
                                                 <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                             </div>
                                             <div class="product-extra-link2">
-                                                <button type="submit" class="button button-add-to-cart">Add to cart</button>
+                                                <button type="submit" class="button btn-submit button-add-to-cart">Add to Cart</button>
                                                 <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                                 <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                             </div>
