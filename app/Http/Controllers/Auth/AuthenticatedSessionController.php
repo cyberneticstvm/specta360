@@ -39,7 +39,7 @@ class AuthenticatedSessionController extends Controller
             'message' => 'User logged in successfully!',
             'alert-type' => 'success',
         );
-        return redirect()->intended($url)->with($notification);
+        return redirect()->intended($url)->withSuccess("User logged in successfully!");
     }
 
     /**

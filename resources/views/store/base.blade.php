@@ -75,6 +75,12 @@
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 <div class="header-action-icon-2">
+                                    <a href="{{ route('show.compare.items') }}">
+                                        <i class="fi-rs-shuffle xl"></i>
+                                        <span class="pro-count blue comCount"></span>
+                                    </a>
+                                </div>
+                                <div class="header-action-icon-2">
                                     <a href="javascript:void(0)">
                                         <img class="svgInject" alt="Specta360" src="{{ asset('/frontend/assets/imgs/theme/icons/icon-heart.svg') }}">
                                         <span class="pro-count blue wlCount"></span>
@@ -83,7 +89,7 @@
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="shop-cart.html">
                                         <img alt="Spect1360" src="{{ asset('/frontend/assets/imgs/theme/icons/icon-cart.svg') }}">
-                                        <span class="pro-count blue"></span>
+                                        <span class="pro-count blue cartCount"></span>
                                     </a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                         <div class="miniCart"></div>
@@ -266,15 +272,21 @@
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
+                                <a href="{{ route('show.compare.items') }}">
+                                    <img alt="Evara" src="{{ asset('/frontend/assets/imgs/theme/icons/icon-compare.svg') }}">
+                                    <span class="pro-count white comCount"></span>
+                                </a>
+                            </div>
+                            <div class="header-action-icon-2">
                                 <a href="shop-wishlist.html">
                                     <img alt="Evara" src="{{ asset('/frontend/assets/imgs/theme/icons/icon-heart.svg') }}">
-                                    <span class="pro-count white">4</span>
+                                    <span class="pro-count white wlCount"></span>
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="shop-cart.html">
                                     <img alt="Evara" src="{{ asset('/frontend/assets/imgs/theme/icons/icon-cart.svg') }}">
-                                    <span class="pro-count white">2</span>
+                                    <span class="pro-count white cartCount"></span>
                                 </a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                     <ul>
@@ -331,7 +343,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="index.html"><img src="{{ asset('/frontend/assets/imgs/theme/logo.svg') }}" alt="logo"></a>
+                    <a href="/"><img src="{{ asset('/frontend/assets/imgs/theme/logo.svg') }}" alt="logo"></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -572,7 +584,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('/frontend/assets/js/script.js') }}"></script>
-    @include("message")
+    @include("store.message")
 </body>
 
 </html>

@@ -3,6 +3,7 @@
 use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Compare;
 use App\Models\Product;
 use App\Models\ProductTag;
 use App\Models\Slider;
@@ -65,6 +66,10 @@ function getActiveProductsByTag($tags){
 
 function getWishListedItems(){
     return Wishlist::where('user_id', Auth::id())->latest()->get();
+}
+
+function getCompareListedItems(){
+    return Compare::where('user_id', Auth::id())->latest()->get();
 }
 
 ?>

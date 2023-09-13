@@ -39,9 +39,16 @@ class CompareController extends Controller
         return view('store.product-compare', compact('data'));
     }
 
+    public function comCount(){
+        $comcount = Compare::where('user_id', Auth::id())->count();
+        return response()->json(array(
+            'comcount' => $comcount,
+        ));
+    }
+
     public function destroy(string $id)
     {
         Compare::where('id', $id)->where('user_id', Auth::id())->delete();
-        return response()->json(['success' => 'Product successfully deleted from your compare list!']);
+        return redirect()->back()->withSuccess("Item successfully removed from your comparison list!");
     }
 }

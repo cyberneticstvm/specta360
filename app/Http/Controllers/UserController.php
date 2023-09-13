@@ -26,11 +26,11 @@ class UserController extends Controller
         $user->phone = $request->phone;
         $user->username = ($request->username) ? $request->username : $user->getOriginal('username');
         $user->save();
-        $notification = array(
+        /*$notification = array(
             'message' => 'Account details has been updated successfully!',
             'alert-type' => 'success',
-        );
-        return redirect()->back()->with($notification);
+        );*/
+        return redirect()->back()->withSuccess("Account details has been updated successfully!");
     }
 
     public function profilePhotoUpdate(Request $request){
@@ -46,11 +46,11 @@ class UserController extends Controller
             $path = Storage::disk('s3')->url($path);           
             User::whereId($user->id)->update(['photo' => $path]);
         endif;
-        $notification = array(
+        /*$notification = array(
             'message' => 'Profile image has been updated successfully!',
             'alert-type' => 'success',
-        );
-        return redirect()->back()->with($notification);
+        );*/
+        return redirect()->back()->withSuccess("Profile image has been updated successfully!");
     }
 
     public function profileSettingsUpdate(Request $request){
@@ -62,11 +62,11 @@ class UserController extends Controller
         /*if(!Hash::check($request->old_password, Auth::user()->password)):
             return false;
         endif;*/
-        $notification = array(
+        /*$notification = array(
             'message' => 'Profile password has been updated successfully!',
             'alert-type' => 'success',
-        );
-        return redirect()->back()->with($notification);
+        );*/
+        return redirect()->back()->withSuccess("Profile password has been updated successfully!");
     }
 
     public function userLogout(Request $request){

@@ -6,7 +6,6 @@
             <div class="row">
                 <div class="col-lg-10 m-auto">
                     <div class="row">
-                        <div class="col-md-12">@include("message1")</div>
                         <div class="col-md-3">
                             <div class="dashboard-menu">
                                 <ul class="nav flex-column" role="tablist">

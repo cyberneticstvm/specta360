@@ -173,6 +173,7 @@ Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(Ba
 
 
 Route::get('/wishlist/items/get', [WishlistController::class, 'show'])->name('get.from.wishlist');
+Route::get('/compare/items/get', [CompareController::class, 'comCount'])->name('get.from.compare');
 Route::middleware(['web', 'auth', 'role:user'])->group(function(){
 
     //Wishlist
@@ -184,6 +185,8 @@ Route::middleware(['web', 'auth', 'role:user'])->group(function(){
     //Compare
     Route::controller(CompareController::class)->group(function(){
         Route::post('/compare/item/add', 'store')->name('add.to.compare');
+        Route::get('/compare/items', 'show')->name('show.compare.items');
+        Route::get('/compare/item/remove/{id}', 'destroy')->name('remove.compare.item');
     });
     
 });
