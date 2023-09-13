@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="clearfix product-price-cover">
                                     <div class="product-price primary-color float-left">
-                                        <ins><span class="text-brand"></span></ins>
+                                        <ins><span class="text-brand selling-price"></span></ins>
                                         <ins><span class="old-price font-md ml-15"></span></ins>
                                         <span class="save-price font-md color3 ml-15"></span>
                                     </div>

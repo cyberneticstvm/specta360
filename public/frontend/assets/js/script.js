@@ -30,7 +30,7 @@ $(function(){
                 $(".pdctUrl").attr('href', '/product/'+data.product.slug+'/'+data.product.id);
                 $(".pdctName").html(data.product.name);
                 $(".pdctBrand").html(data.product.brand.name);
-                $(".text-brand").html('₹'+data.product.selling_price);
+                $(".selling-price").html('₹'+data.product.selling_price);
                 $(".old-price").html('₹'+data.product.mrp);                
                 $(".save-price").html();
                 $(".shortDesc").html('Description: '+data.product.short_description);
@@ -147,6 +147,7 @@ $(function(){
             processData:false,
             success: function(res){
                 $(".btn-close").click();
+                $(".qty-val").text('1');
                 $('#frmAddToCart').trigger("reset");
                 getCartItems();
                 if($.isEmptyObject(res.error)){
@@ -168,7 +169,6 @@ $(function(){
             complete: function(){
                 $(".btn-submit").attr("disabled", false);
                 $(".btn-submit").html("Add to Cart");
-                $(".qty-val").text('1');
             }
         });
     });
