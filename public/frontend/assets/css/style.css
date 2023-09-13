@@ -10,3 +10,6 @@
     font-size: 10px !important;
     color: #088178 !important;
 }
+.rupee::before{
+    content: '₹';
+}

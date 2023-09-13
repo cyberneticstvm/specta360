@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Specta360 - An Ultimate Specs Store</title>
+    <title>{{ $title }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
@@ -21,6 +21,7 @@
 </head>
 
 <body>
+    <div class="currencySymbol d-none">{{ settings()->currency_symbol }}</div>
     @include("store.sections.quickview")
     <header class="header-area header-style-4 header-height-2">
         <div class="header-top header-top-ptb-1 d-none d-lg-block">

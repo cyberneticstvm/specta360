@@ -91,23 +91,15 @@
             </ul>
             <hr>
             <ul class="menu-aside">
-                <li class="menu-item has-submenu">
+                <li class="menu-item has-submenu {{ (in_array(request()->segment(2), ['admin-settings'])) ? 'active' : '' }}">
                     <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
-                        <span class="text">Settings</span>
+                        <span class="text">Admin Settings</span>
                     </a>
                     <div class="submenu">
-                        <a href="page-settings-1.html">Setting sample 1</a>
-                        <a href="page-settings-2.html">Setting sample 2</a>
+                        <a href="/admin/admin-settings">Admin Settings</a>
                     </div>
                 </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="page-blank.html"> <i class="icon material-icons md-local_offer"></i>
-                        <span class="text"> Starter page </span>
-                    </a>
-                </li>
             </ul>
-            <br>
-            <br>
         </nav>
     </aside>
     <main class="main-wrap">
@@ -128,15 +120,6 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="requestfullscreen nav-link btn-icon"><i class="material-icons md-cast"></i></a>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage" aria-expanded="false"><i class="material-icons md-public"></i></a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
-                            <a class="dropdown-item text-brand" href="#"><img src="{{ asset('/backend/assets/imgs/theme/flag-us.png') }}" alt="English">English</a>
-                            <a class="dropdown-item" href="#"><img src="{{ asset('/backend/assets/imgs/theme/flag-fr.png') }}" alt="Français">Français</a>
-                            <a class="dropdown-item" href="#"><img src="{{ asset('/backend/assets/imgs/theme/flag-jp.png') }}" alt="Français">日本語</a>
-                            <a class="dropdown-item" href="#"><img src="{{ asset('/backend/assets/imgs/theme/flag-cn.png') }}" alt="Français">中国人</a>
-                        </div>
                     </li>
                     <li class="dropdown nav-item">
                         <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount" aria-expanded="false"> <img class="img-xs rounded-circle" src="{{ (!empty(Auth::user()->photo)) ? url(Auth::user()->photo) : asset('/backend/assets/imgs/people/avatar1.jpg') }}" alt="User"></a>

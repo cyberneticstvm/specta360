@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdminSetting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -78,6 +79,32 @@ class AdminController extends Controller
         endif;*/
         $notification = array(
             'message' => 'Admin profile password has been updated successfully!',
+            'alert-type' => 'success',
+        );
+        return redirect()->back()->with($notification);
+    }
+
+    public function adminSettings(){
+        $settings = AdminSetting::first();
+        return view('admin.admin-settings', compact('settings'));
+    }
+
+    public function adminSettingsUpdate(Request $request){
+        $this->validate($request, [
+            'company_name' => 'required',
+            'meta_title' => 'required',
+            'country_name' => 'required',
+            'country_code' => 'required',
+            'flag' => 'required',
+            'tax_name' => 'required',
+            'tax_percentage' => 'required',
+            'currency' => 'required',
+            'currency_symbol' => 'required',
+        ]);
+        $input = $request->all();
+        AdminSetting::updateOrCreate(['id' => 1], $input);
+        $notification = array(
+            'message' => 'Settings has been updated successfully!',
             'alert-type' => 'success',
         );
         return redirect()->back()->with($notification);

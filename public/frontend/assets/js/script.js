@@ -31,8 +31,8 @@ $(function(){
                 $(".pdctUrl").attr('href', '/product/'+data.product.slug+'/'+data.product.id);
                 $(".pdctName").html(data.product.name);
                 $(".pdctBrand").html(data.product.brand.name);
-                $(".selling-price").html('₹'+data.product.selling_price);
-                $(".old-price").html('₹'+data.product.mrp);                
+                $(".selling-price").html(data.currency+data.product.selling_price);
+                $(".old-price").html(data.currency+data.product.mrp);                
                 $(".save-price").html();
                 $(".shortDesc").html('Description: '+data.product.short_description);
                 $(".pdctSKU").html('SKU: '+data.product.pcode);

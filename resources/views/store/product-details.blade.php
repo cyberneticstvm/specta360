@@ -71,8 +71,8 @@
                                         </div>
                                         <div class="clearfix product-price-cover">
                                             <div class="product-price primary-color float-left">
-                                                <ins><span class="text-brand selling-price">₹{{ $product->selling_price }}</span></ins>
-                                                <ins><span class="old-price font-md ml-15">₹{{ $product->mrp }}</span></ins>
+                                                <ins><span class="text-brand selling-price">{{ settings()->currency_symbol.$product->selling_price }}</span></ins>
+                                                <ins><span class="old-price font-md ml-15">{{ settings()->currency_symbol.$product->mrp }}</span></ins>
                                                 <span class="save-price  font-md color3 ml-15">{{ number_format($product->getDiscount(), 0) }}% Off</span>
                                             </div>
                                         </div>
@@ -346,8 +346,8 @@
                                                     </span>
                                                 </div>
                                                 <div class="product-price">
-                                                    <span>₹{{ $item->selling_price }}</span>
-                                                    <span class="old-price">₹{{ $item->mrp }}</span>
+                                                    <span>{{ settings()->currency_symbol.$item->selling_price }}</span>
+                                                    <span class="old-price">{{ settings()->currency_symbol.$item->mrp }}</span>
                                                 </div>
                                             </div>
                                         </div>

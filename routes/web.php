@@ -73,6 +73,8 @@ Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(Ad
     Route::put('profile/photo/update', 'profilePhotoUpdate')->name('admin.profile.photo.update');
     Route::get('profile/settings', 'profileSettings')->name('admin.profile.settings');
     Route::put('profile/settings', 'profileSettingsUpdate')->name('admin.profile.settings.update');
+    Route::get('admin-settings', 'adminSettings')->name('admin.admin.settings');
+    Route::put('admin-settings', 'adminSettingsUpdate')->name('admin.admin.settings.update');
     Route::get('logout', 'adminLogout')->name('admin.logout');
 
     Route::get('vendors', 'vendors')->name('admin.vendors');
@@ -174,6 +176,7 @@ Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(Ba
 
 Route::get('/wishlist/items/get', [WishlistController::class, 'show'])->name('get.from.wishlist');
 Route::get('/compare/items/get', [CompareController::class, 'comCount'])->name('get.from.compare');
+Route::get('/compare/items', [CompareController::class, 'show'])->name('show.compare.items');
 Route::middleware(['web', 'auth', 'role:user'])->group(function(){
 
     //Wishlist
@@ -184,8 +187,7 @@ Route::middleware(['web', 'auth', 'role:user'])->group(function(){
 
     //Compare
     Route::controller(CompareController::class)->group(function(){
-        Route::post('/compare/item/add', 'store')->name('add.to.compare');
-        Route::get('/compare/items', 'show')->name('show.compare.items');
+        Route::post('/compare/item/add', 'store')->name('add.to.compare');        
         Route::get('/compare/item/remove/{id}', 'destroy')->name('remove.compare.item');
     });
     

@@ -16,37 +16,44 @@ use DB;
 class StoreController extends Controller
 {
     public function index(){
-        return view('store.index');
+        $title = settings()->meta_title;
+        return view('store.index', compact('title'));
     }
 
     public function productDetails($slug, $id){
         $product = Product::findOrFail($id);
-        return view('store.product-details', compact('product'));
+        $title = settings()->company_name.' | '.$product->name;
+        return view('store.product-details', compact('product', 'title'));
     }
 
     public function productsByCategory($slug, $id){
+        $title = "";
         $products = Product::where('category_id', $id)->latest()->paginate(12);
-        return view('store.product-by-category', compact('products'));
+        return view('store.product-by-category', compact('products', 'title'));
     }
 
     public function productsBySubcategory($slug, $id){
+        $title = "";
         $products = Product::where('subcategory_id', $id)->latest()->paginate(12);
-        return view('store.product-by-subcategory', compact('products'));
+        return view('store.product-by-subcategory', compact('products', 'title'));
     }
 
     public function productsByBrand($slug, $id){
+        $title = "";
         $products = Product::where('brand_id', $id)->latest()->paginate(12);
-        return view('store.product-by-brand', compact('products'));
+        return view('store.product-by-brand', compact('products', 'title'));
     }
 
     public function productsByVendor($slug, $id){
+        $title = "";
         $products = Product::where('vendor_id', $id)->latest()->paginate(12);
-        return view('store.product-by-vendor', compact('products'));
+        return view('store.product-by-vendor', compact('products', 'title'));
     }
 
     public function allVendors(){
+        $title = "";
         $vendors = User::where('status', 'active')->where('role', 'vendor')->latest()->paginate(10);
-        return view('store.vendors', compact('vendors'));
+        return view('store.vendors', compact('vendors', 'title'));
     }
 
     public function productDetailsForQuickview($id){
@@ -56,7 +63,8 @@ class StoreController extends Controller
         $sizes = ProductSize::where('product_id', $product->id)->pluck('name');
         $styles = ProductStyle::where('product_id', $product->id)->pluck('name');
         $materials = ProductMaterial::where('product_id', $product->id)->pluck('name');
-        return response()->json(['product' => $product, 'tags' => $tags, 'colors' => $colors, 'sizes' => $sizes, 'styles' => $styles, 'materials' => $materials]);
+        $currency = settings()->currency_symbol;
+        return response()->json(['product' => $product, 'tags' => $tags, 'colors' => $colors, 'sizes' => $sizes, 'styles' => $styles, 'materials' => $materials, 'currency' => $currency]);
     }
 
     

@@ -344,6 +344,7 @@
     --------------------- */
     var sliderrange = $('#slider-range');
     var amountprice = $('#amount');
+    var currency = $(".currencySymbol").text();
     $(function() {
         sliderrange.slider({
             range: true,
@@ -351,11 +352,11 @@
             max: parseInt(amountprice.data('max')),
             values: [0, parseInt(amountprice.data('max'))],
             slide: function(event, ui) {
-                amountprice.val("₹" + ui.values[0] + " - ₹" + ui.values[1]);
+                amountprice.val(currency + ui.values[0] + " - "+ currency + ui.values[1]);
             }
         });
-        amountprice.val("₹" + sliderrange.slider("values", 0) +
-            " - ₹" + sliderrange.slider("values", 1));
+        amountprice.val(currency + sliderrange.slider("values", 0) +
+            " - "+ currency + sliderrange.slider("values", 1));
     });
 
     /*-------------------------------

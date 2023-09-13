@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\AdminSetting;
 use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Category;
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
+
+function settings(){
+    return AdminSetting::first();
+}
 
 function uploadImage($new_image, $width, $height, $old_image, $path){
     if(Storage::disk('s3')->exists($path.substr($old_image, strrpos($old_image, '/')+1))):

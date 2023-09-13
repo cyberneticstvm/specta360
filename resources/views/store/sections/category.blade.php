@@ -57,8 +57,8 @@
                                             </span>
                                         </div>
                                         <div class="product-price">
-                                            <span>₹{{ $item->selling_price }} </span>
-                                            <span class="old-price">₹{{ $item->mrp }}</span>
+                                            <span>{{ settings()->currency_symbol.$item->selling_price }} </span>
+                                            <span class="old-price">{{ settings()->currency_symbol.$item->mrp }}</span>
                                         </div>
                                         <div class="product-action-1 show">
                                             <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
@@ -105,8 +105,8 @@
                                             </span>
                                         </div>
                                         <div class="product-price">
-                                            <span>₹{{ $item->selling_price }} </span>
-                                            <span class="old-price">₹{{ $item->mrp }}</span>
+                                            <span>{{ settings()->currency_symbol.$item->selling_price }} </span>
+                                            <span class="old-price">{{ settings()->currency_symbol.$item->mrp }}</span>
                                         </div>
                                         <div class="product-action-1 show">
                                             <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
@@ -153,8 +153,8 @@
                                             </span>
                                         </div>
                                         <div class="product-price">
-                                            <span>₹{{ $item->selling_price }} </span>
-                                            <span class="old-price">₹{{ $item->mrp }}</span>
+                                            <span>{{ settings()->currency_symbol.$item->selling_price }} </span>
+                                            <span class="old-price">{{ settings()->currency_symbol.$item->mrp }}</span>
                                         </div>
                                         <div class="product-action-1 show">
                                             <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
@@ -201,8 +201,8 @@
                                             </span>
                                         </div>
                                         <div class="product-price">
-                                            <span>₹{{ $item->selling_price }} </span>
-                                            <span class="old-price">₹{{ $item->mrp }}</span>
+                                            <span>{{ settings()->currency_symbol.$item->selling_price }} </span>
+                                            <span class="old-price">{{ settings()->currency_symbol.$item->mrp }}</span>
                                         </div>
                                         <div class="product-action-1 show">
                                             <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
@@ -249,8 +249,8 @@
                                             </span>
                                         </div>
                                         <div class="product-price">
-                                            <span>₹{{ $item->selling_price }} </span>
-                                            <span class="old-price">₹{{ $item->mrp }}</span>
+                                            <span>{{ settings()->currency_symbol.$item->selling_price }} </span>
+                                            <span class="old-price">{{ settings()->currency_symbol.$item->mrp }}</span>
                                         </div>
                                         <div class="product-action-1 show">
                                             <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
