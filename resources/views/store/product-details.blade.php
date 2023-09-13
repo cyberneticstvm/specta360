@@ -132,8 +132,8 @@
                                             </div>
                                             <div class="product-extra-link2">
                                                 <button type="submit" class="button btn-submit button-add-to-cart">Add to Cart</button>
-                                                <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                                <a aria-label="Add To Wishlist" class="action-btn hover-up" href="javasript:void(0)"><i class="fi-rs-heart wishList" data-id="{{ $product->id }}"></i></a>
+                                                <a aria-label="Compare" class="action-btn hover-up" href="javasript:void(0)"><i class="fi-rs-shuffle compare" data-id="{{ $product->id }}"></i></a>
                                             </div>
                                         </div>
                                     </div>

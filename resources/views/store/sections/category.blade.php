@@ -39,8 +39,8 @@
                                         </div>
                                         <div class="product-action-1">
                                             <a aria-label="Quick view" class="action-btn hover-up quickView" data-bs-toggle="modal" data-bs-target="#quickViewModal" id="{{ $item->id }}"><i class="fi-rs-eye"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="javascript:void(0);"><i class="fi-rs-heart wishList" data-id="{{ $item->id }}"></i></a>
+                                            <a aria-label="Compare" class="action-btn hover-up" href="javascript:void(0);"><i class="fi-rs-shuffle compare" data-id="{{ $item->id }}"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="hot">Featured</span>
@@ -135,8 +135,8 @@
                                         </div>
                                         <div class="product-action-1">
                                             <a aria-label="Quick view" class="action-btn hover-up quickView" data-bs-toggle="modal" data-bs-target="#quickViewModal" id="{{ $item->id }}"><i class="fi-rs-eye"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="javasript:void(0)"><i class="fi-rs-heart wishList" data-id="{{ $item->id }}"></i></a>
+                                            <a aria-label="Compare" class="action-btn hover-up" href="javasript:void(0)"><i class="fi-rs-shuffle compare" data-id="{{ $item->id }}"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="hot">New</span>

@@ -15,6 +15,10 @@ class Product extends Model
         return ($this->status == 1) ? "<span class='badge bg-success'>Active</span>" : "<span class='badge bg-danger'>Inactive/Cancelled</span>";
     }
 
+    public function stockStatus(){
+        return ($this->qty > 0) ? "<span class='badge bg-success'>In Stock</span>" : "<span class='badge bg-danger'>Out of Stock</span>";
+    }
+
     public function vendor(){
         return $this->belongsTo(User::class, 'vendor_id', 'id');
     }

@@ -13,7 +13,9 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CompareController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
@@ -167,6 +169,23 @@ Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(Ba
     Route::get('banner/edit/{id}', 'edit')->name('admin.banner.edit');
     Route::put('banner/edit/{id}', 'update')->name('admin.banner.update');
     Route::get('banner/cancel/{id}', 'destroy')->name('admin.banner.cancel');
+});
+
+
+Route::get('/wishlist/items/get', [WishlistController::class, 'show'])->name('get.from.wishlist');
+Route::middleware(['web', 'auth', 'role:user'])->group(function(){
+
+    //Wishlist
+    Route::controller(WishlistController::class)->group(function(){
+        Route::post('/wishlist/add', [WishlistController::class, 'store'])->name('add.to.wishlist');
+        Route::get('/wishlist/item/remove/{id}', 'destroy')->name('remove.from.wishlist');
+    }); 
+
+    //Compare
+    Route::controller(CompareController::class)->group(function(){
+        Route::post('/compare/item/add', 'store')->name('add.to.compare');
+    });
+    
 });
 
 

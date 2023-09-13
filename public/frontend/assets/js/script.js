@@ -2,6 +2,7 @@ $(function(){
     "use strict"
 
     getCartItems();
+    getWishlistCount();
 
     $('form').submit(function(){
         $(".btn-submit").attr("disabled", true);
@@ -22,6 +23,8 @@ $(function(){
             dataType:'JSON',
             success:function(data){
                 $("#product_id").val(id);
+                $(".wishList").attr('data-id', id);
+                $(".compare").attr('data-id', id);
                 $(".mainImg").attr('src', data.product.image);
                 $(".thumbImg>img").attr('src', data.product.image);
                 $(".pdctUrl").attr('href', '/product/'+data.product.slug+'/'+data.product.id);
@@ -61,6 +64,73 @@ $(function(){
         position: 'top-end',
         showConfirmButton: false,
         timer: 3000
+    });
+
+    $(document).on("click", ".wishList", function(e){
+        var id = $(this).attr('data-id');
+        $.ajax({
+            type:'POST',
+            url:'/wishlist/add',
+            data: {'product_id': id},
+            dataType:'JSON',
+            success: function(res){
+                if($.isEmptyObject(res.error)){
+                    getWishlistCount();
+                    toast.fire({
+                        icon: 'success',
+                        title: res.success,
+                        color: 'green'
+                    })
+                }else{
+                    toast.fire({
+                        icon: 'error',
+                        title: res.error,
+                        color: 'red'
+                    });
+                }
+            },
+            error: function(res){
+                var msg = JSON.parse(res.responseText);
+                toast.fire({
+                    icon: 'error',
+                    title: msg.message,
+                    color: 'red'
+                })
+            }
+        });
+    });
+
+    $(document).on("click", ".compare", function(e){
+        var id = $(this).attr('data-id');
+        $.ajax({
+            type:'POST',
+            url:'/compare/item/add',
+            data: {'product_id': id},
+            dataType:'JSON',
+            success: function(res){
+                if($.isEmptyObject(res.error)){
+                    toast.fire({
+                        icon: 'success',
+                        title: res.success,
+                        color: 'green'
+                    })
+                }else{
+                    toast.fire({
+                        icon: 'error',
+                        title: res.error,
+                        color: 'red'
+                    });
+                }
+            },
+            error: function(res){
+                var msg = JSON.parse(res.responseText);
+                toast.fire({
+                    icon: 'error',
+                    title: msg.message,
+                    color: 'red'
+                })
+            }
+        });
     });
 
     $(document).on("submit", "#frmAddToCart", function(e){
@@ -121,6 +191,26 @@ $(function(){
             }
         })
     });
+
+    $(document).on('click', '.rmWishList', function(){
+        var id = $(this).data('id');
+        $.ajax({
+            type: 'GET',
+            url: '/wishlist/item/remove/'+id,
+            dataType: 'json',
+            success: function(res){
+                $("#"+id).remove();
+                getWishlistCount();
+                if($.isEmptyObject(res.error)){
+                    toast.fire({
+                        icon: 'success',
+                        title: res.success,
+                        color: 'green'
+                    })
+                }
+            }
+        })
+    });
 });
 
 function getCartItems(){
@@ -137,6 +227,17 @@ function getCartItems(){
             });
             cart += "</ul>";            
             $(".miniCart").html(cart);
+        }
+    })
+}
+
+function getWishlistCount(){
+    $.ajax({
+        type: 'GET',
+        url: '/wishlist/items/get',
+        dataType: 'json',
+        success: function(res){
+            $(".wlCount").text(res.wlcount);
         }
     })
 }

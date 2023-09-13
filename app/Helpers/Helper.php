@@ -8,6 +8,8 @@ use App\Models\ProductTag;
 use App\Models\Slider;
 use App\Models\Subcategory;
 use App\Models\User;
+use App\Models\Wishlist;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -60,4 +62,9 @@ function getActiveBanners(){
 function getActiveProductsByTag($tags){
     return ProductTag::whereIn('name', $tags)->orderByDesc('id')->get();
 }
+
+function getWishListedItems(){
+    return Wishlist::where('user_id', Auth::id())->latest()->get();
+}
+
 ?>

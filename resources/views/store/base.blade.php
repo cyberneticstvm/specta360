@@ -75,15 +75,15 @@
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 <div class="header-action-icon-2">
-                                    <a href="shop-wishlist.html">
-                                        <img class="svgInject" alt="Evara" src="{{ asset('/frontend/assets/imgs/theme/icons/icon-heart.svg') }}">
-                                        <span class="pro-count blue">4</span>
+                                    <a href="javascript:void(0)">
+                                        <img class="svgInject" alt="Specta360" src="{{ asset('/frontend/assets/imgs/theme/icons/icon-heart.svg') }}">
+                                        <span class="pro-count blue wlCount"></span>
                                     </a>
                                 </div>
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="shop-cart.html">
                                         <img alt="Spect1360" src="{{ asset('/frontend/assets/imgs/theme/icons/icon-cart.svg') }}">
-                                        <span class="pro-count blue">2</span>
+                                        <span class="pro-count blue"></span>
                                     </a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                         <div class="miniCart"></div>

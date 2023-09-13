@@ -7,7 +7,7 @@
                 <div class="col-lg-10 m-auto">
                     <div class="row">
                         <div class="col-md-12">@include("message1")</div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="dashboard-menu">
                                 <ul class="nav flex-column" role="tablist">
                                     <li class="nav-item">
@@ -37,7 +37,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             <div class="tab-content dashboard-content">
                                 <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                                     <div class="card">
@@ -49,16 +49,42 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="tab-pane fade" id="wishlist" role="tabpanel" aria-labelledby="dashboard-tab">
                                     <div class="card">
                                         <div class="card-header">
                                             <h5 class="mb-0">Wishlisted Items</h5>
                                         </div>
                                         <div class="card-body">
-                                            <p>Hi</p>
+                                            <table class="table shopping-summery text-center">
+                                            <thead>
+                                                <tr class="main-heading">
+                                                    <th scope="col" colspan="2">Product</th>
+                                                    <th scope="col">Price</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col">Remove</th>
+                                                </tr>
+                                            </thead><tbody>
+                                            @forelse(getWishListedItems() as $key => $item)
+                                            <tr id="{{ $item->id }}">
+                                                <td class="image product-thumbnail"><img src="{{ url($item->product->image) }}" alt="{{ $item->product->name }}"></td>
+                                                <td class="product-des product-name">
+                                                    <h5 class="product-name"><a href="/product/{{$item->product->slug}}/{{$item->product_id}}">{{ $item->product->name }}</a></h5>
+                                                </td>
+                                                <td class="price" data-title="Price"><span>₹{{ $item->product->selling_price }} </span></td>
+                                                <td class="text-center" data-title="Stock">
+                                                    <span class="color3 font-weight-bold">{!! $item->product->stockStatus() !!}</span>
+                                                </td>
+                                                <td class="action" data-title="Remove"><a href="javascript:void(0)"><i class="fi-rs-trash rmWishList" data-id="{{ $item->id }}"></i></a></td>
+                                            </tr>
+                                            @empty
+                                            <tr><td colspan="5" class="text-center"><h5 class="text-danger">No items found in your Wishlist!</h5></tr>
+                                            @endforelse
+                                            </tbody></table>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                                     <div class="card">
                                         <div class="card-header">
