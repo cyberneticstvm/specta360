@@ -2,6 +2,7 @@ $(function(){
     "use strict"
 
     getCartItems();
+    getMainCartItems();
     getWishlistCount();
     getComparelistCount()
 
@@ -136,13 +137,15 @@ $(function(){
     });
 
     $(document).on('click', '.removeCartItem', function(){
-        var id = $(this).attr('id');
+        var dis = $(this);
+        var id = dis.data('id');
         $.ajax({
             type: 'GET',
             url: '/cart/product/remove/'+id,
             dataType: 'json',
             success: function(res){
                 getCartItems();
+                getMainCartItems();
                 if($.isEmptyObject(res.error)){
                     success(res);
                 }else{
@@ -175,6 +178,45 @@ $(function(){
             }
         })
     });
+
+    $(document).on("click", ".qty-up", function(){
+        var dis = $(this);
+        var id = dis.data('id');
+        $.ajax({
+            type: 'POST',
+            url: '/cart/product/update/increment',
+            data: {'id': id},
+            dataType: 'json',
+            success: function(res){
+                getCartItems();
+                getMainCartItems();
+                success(res)
+            },
+            error: function(err){
+                failed(err)
+            }
+        })
+    });
+
+    $(document).on("click", ".qty-down", function(){
+        var dis = $(this);
+        var id = dis.data('id');
+        $.ajax({
+            type: 'POST',
+            url: '/cart/product/update/decrement',
+            data: {'id': id},
+            dataType: 'json',
+            success: function(res){
+                getCartItems();
+                getMainCartItems();
+                success(res);
+            },
+            error: function(err){
+                failed(err)
+            }
+        })
+    });
+
 });
 
 function getCartItems(){
@@ -187,10 +229,48 @@ function getCartItems(){
             $(".shopping-cart-total span").text('₹'+res.cart_total);
             var cart = "<ul>";
             $.each(res.cart, function(key, item){
-                cart += `<li><div class="row"><div class="shopping-cart-img col-3"><a href="/product/${item.slug}/${item.id}"><img alt="${item.name}" src="${item.options.image}" /></a></div><div class="shopping-cart-title col-6"><h6><a href="/product/${item.slug}/${item.id}">${item.name}</a></h6><h6 class="text-end"><span>${item.qty} × </span>${item.price}</h6></div><div class="col-2"><a href="javascript:void(0)" id="${item.rowId}" class="removeCartItem"><i class="fi-rs-cross-small"></i></a></div></div></li>`;
+                cart += `<li><div class="row"><div class="shopping-cart-img col-3"><a href="/product/${item.slug}/${item.id}"><img alt="${item.name}" src="${item.options.image}" /></a></div><div class="shopping-cart-title col-6"><h6><a href="/product/${item.slug}/${item.id}">${item.name}</a></h6><h6 class="text-end"><span>${item.qty} × </span>${item.price}</h6></div><div class="col-2"><a href="javascript:void(0)" data-id="${item.rowId}" data-type='mini' class="removeCartItem"><i class="fi-rs-cross-small"></i></a></div></div></li>`;
             });
             cart += "</ul>";            
             $(".miniCart").html(cart);
+        }
+    })
+}
+
+function getMainCartItems(){
+    $.ajax({
+        type: 'GET',
+        url: '/cart/product/get',
+        dataType: 'json',
+        success: function(res){
+            var cart = "";
+            $.each(res.cart, function(key, item){
+                cart += `<tr>
+                    <td class="image product-thumbnail"><img src="${item.options.image}" alt="${item.name}"></td>
+                    <td class="product-des product-name">
+                        <h5 class="product-name"><a href="/product/${item.slug}/${item.id}">${item.name}</a></h5>
+                        <p class="font-xs">Color: ${item.options.color}, Size: ${item.options.size}</p>
+                    </td>
+                    <td class="price" data-title="Price"><span>${item.options.currency+item.price}</span></td>
+                    <td class="text-center" data-title="Stock">
+                        <div class="detail-qty border radius  m-auto">
+                            <a href="javascript:void(0)" class="qty-down" data-id="${item.rowId}"><i class="fi-rs-angle-small-down"></i></a>
+                            <span class="qty-val">${item.qty}</span>
+                            <a href="javascript:void(0)" class="qty-up" data-id="${item.rowId}"><i class="fi-rs-angle-small-up"></i></a>
+                        </div>
+                    </td>
+                    <td class="text-right" data-title="Cart">
+                        <span>${item.options.currency+item.subtotal}</span>
+                    </td>
+                    <td class="action" data-title="Remove"><a href="javascript:void(0)" class="text-muted removeCartItem" data-id="${item.rowId}"><i class="fi-rs-trash"></i></a></td>
+                </tr>`;
+            });   
+            cart += `<tr>
+                <td colspan="6" class="text-end">
+                    <a href="#" class="text-muted"> <i class="fi-rs-cross-small"></i> Clear Cart</a>
+                </td>
+            </tr>`        
+            $(".mainCart").html(cart);
         }
     })
 }

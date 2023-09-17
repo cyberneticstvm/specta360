@@ -12,6 +12,7 @@ use App\Models\User;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use DB;
+use Cart;
 
 class StoreController extends Controller
 {
@@ -66,6 +67,4 @@ class StoreController extends Controller
         $currency = settings()->currency_symbol;
         return response()->json(['product' => $product, 'tags' => $tags, 'colors' => $colors, 'sizes' => $sizes, 'styles' => $styles, 'materials' => $materials, 'currency' => $currency]);
     }
-
-    
 }

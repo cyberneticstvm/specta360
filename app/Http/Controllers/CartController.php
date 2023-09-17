@@ -31,7 +31,7 @@ class CartController extends Controller
                 'qty' => $request->qty,
                 'price' => $product->selling_price,
                 'weight' => 1,
-                'options' => ['image' => $product->image, 'slug'=> $product->slug, 'size' => $request->size, 'color' => $request->color, 'prescription' => $prescription, 're_sph' => $request->re_sph, 're_cyl' => $request->re_cyl, 're_axis' => $request->re_axis, 're_add' => $request->re_add, 'le_sph' => $request->le_sph, 'le_cyl' => $request->le_cyl, 'le_axis' => $request->le_axis, 'le_add' => $request->le_add]
+                'options' => ['image' => $product->image, 'slug'=> $product->slug, 'size' => $request->size, 'color' => $request->color, 'prescription' => $prescription, 're_sph' => $request->re_sph, 're_cyl' => $request->re_cyl, 're_axis' => $request->re_axis, 're_add' => $request->re_add, 'le_sph' => $request->le_sph, 'le_cyl' => $request->le_cyl, 'le_axis' => $request->le_axis, 'le_add' => $request->le_add, 'currency' => settings()->currency_symbol]
             ]);
         }catch(Exception $e){
             return response()->json(['error' => $e->getMessage()]);
@@ -58,7 +58,24 @@ class CartController extends Controller
     }
 
     public function view(){
-        
+        $cart = Cart::content(); $cart_qty = Cart::count(); $cart_total = Cart::total();
+        return view('store.cart', compact('cart', 'cart_qty', 'cart_total'));
+    }
+
+    public function updateIncrement(Request $request){
+        $cart = Cart::get($request->id);
+        Cart::update($request->id, $cart->qty + 1);
+        return response()->json(array(
+            'success' => 'Cart Qty updated successfully!',
+        ));
+    }
+
+    public function updateDecrement(Request $request){
+        $cart = Cart::get($request->id);
+        Cart::update($request->id, $cart->qty - 1);
+        return response()->json(array(
+            'success' => 'Cart Qty updated successfully!',
+        ));
     }
 
     public function checkout(){

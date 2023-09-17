@@ -88,7 +88,7 @@
                                     </a>
                                 </div>
                                 <div class="header-action-icon-2">
-                                    <a class="mini-cart-icon" href="shop-cart.html">
+                                    <a class="mini-cart-icon" href="{{ route('cart.view') }}">
                                         <img alt="Spect1360" src="{{ asset('/frontend/assets/imgs/theme/icons/icon-cart.svg') }}">
                                         <span class="pro-count blue cartCount"></span>
                                     </a>
@@ -99,8 +99,8 @@
                                                 <h4>Total <span></span></h4>
                                             </div>
                                             <div class="shopping-cart-button">
-                                                <a href="shop-cart.html" class="outline">View cart</a>
-                                                <a href="shop-checkout.html">Checkout</a>
+                                                <a href="{{ route('cart.view') }}" class="outline">View cart</a>
+                                                <a href="{{ route('cart.checkout') }}">Checkout</a>
                                             </div>
                                         </div>
                                     </div>

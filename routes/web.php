@@ -45,6 +45,8 @@ Route::middleware(['web'])->controller(CartController::class)->group(function(){
     Route::post('/cart/product/add', 'add')->name('cart.add');
     Route::get('/cart/product/get', 'get')->name('cart.get');
     Route::get('/cart/product/remove/{id}', 'remove')->name('cart.remove');
+    Route::post('/cart/product/update/increment', 'updateIncrement')->name('cart.update.increment');
+    Route::post('/cart/product/update/decrement', 'updateDecrement')->name('cart.update.decrement');
     Route::get('/cart/view', 'view')->name('cart.view');
     Route::get('/cart/checkout', 'checkout')->name('cart.checkout');
 });
