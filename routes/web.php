@@ -51,6 +51,9 @@ Route::middleware(['web'])->controller(CartController::class)->group(function(){
     Route::post('/cart/product/update/increment', 'updateIncrement')->name('cart.update.increment');
     Route::post('/cart/product/update/decrement', 'updateDecrement')->name('cart.update.decrement');
     Route::get('/cart/view', 'view')->name('cart.view');
+    Route::post('/cart/apply/coupon', 'applyCoupon')->name('cart.apply.coupon');
+    Route::get('/cart/coupon/remove', 'removeCoupon')->name('cart.remove.coupon');
+    Route::get('/get/cart/total', 'cartTotal')->name('cart.total');
     Route::get('/cart/checkout', 'checkout')->name('cart.checkout');
 });
 

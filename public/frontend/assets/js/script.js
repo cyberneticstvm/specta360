@@ -4,7 +4,8 @@ $(function(){
     getCartItems();
     getMainCartItems();
     getWishlistCount();
-    getComparelistCount()
+    getComparelistCount();
+    getCartTotal();
 
     $('form').submit(function(){
         $(".btn-submit").attr("disabled", true);
@@ -136,6 +137,36 @@ $(function(){
         });
     });
 
+    $(document).on("submit", "#frmApplyCoupon", function(e){
+        e.preventDefault();
+        var form = document.getElementById('frmApplyCoupon');
+        var formData = new FormData(form);
+        $.ajax({
+            type: 'POST',
+            url: '/cart/apply/coupon',
+            data: formData,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            success: function(res){               
+                if($.isEmptyObject(res.error)){                    
+                    $('#frmApplyCoupon').trigger("reset");
+                    getCartTotal();
+                    success(res);
+                }else{
+                    error(res);
+                }
+            },
+            error: function(res){
+                failed(res);
+            },
+            complete: function(){
+                $(".btn-coupon-apply").attr("disabled", false);
+                $(".btn-coupon-apply").html("<i class='fi-rs-label mr-10'></i>Apply");
+            }
+        });
+    });
+
     $(document).on('click', '.removeCartItem', function(){
         var dis = $(this);
         var id = dis.data('id');
@@ -146,6 +177,7 @@ $(function(){
             success: function(res){
                 getCartItems();
                 getMainCartItems();
+                getCartTotal();
                 if($.isEmptyObject(res.error)){
                     success(res);
                 }else{
@@ -190,6 +222,7 @@ $(function(){
             success: function(res){
                 getCartItems();
                 getMainCartItems();
+                getCartTotal();
                 success(res)
             },
             error: function(err){
@@ -209,6 +242,7 @@ $(function(){
             success: function(res){
                 getCartItems();
                 getMainCartItems();
+                getCartTotal();
                 success(res);
             },
             error: function(err){
@@ -216,6 +250,18 @@ $(function(){
             }
         })
     });
+
+    $(document).on("click", ".remCoupon", function(){
+        $.ajax({
+            type: 'GET',
+            url: '/cart/coupon/remove',
+            dataType: 'json',
+            success: function(res){
+                getCartTotal();
+                success(res);
+            }
+        });
+    })
 
 });
 
@@ -234,7 +280,7 @@ function getCartItems(){
             cart += "</ul>";            
             $(".miniCart").html(cart);
         }
-    })
+    });
 }
 
 function getMainCartItems(){
@@ -264,15 +310,11 @@ function getMainCartItems(){
                     </td>
                     <td class="action" data-title="Remove"><a href="javascript:void(0)" class="text-muted removeCartItem" data-id="${item.rowId}"><i class="fi-rs-trash"></i></a></td>
                 </tr>`;
-            });   
-            cart += `<tr>
-                <td colspan="6" class="text-end">
-                    <a href="#" class="text-muted"> <i class="fi-rs-cross-small"></i> Clear Cart</a>
-                </td>
-            </tr>`        
+            });
             $(".mainCart").html(cart);
+            getCartTotal();
         }
-    })
+    });
 }
 
 function getWishlistCount(){
@@ -283,7 +325,7 @@ function getWishlistCount(){
         success: function(res){
             $(".wlCount").text(res.wlcount);
         }
-    })
+    });
 }
 
 function getComparelistCount(){
@@ -294,7 +336,33 @@ function getComparelistCount(){
         success: function(res){
             $(".comCount").text(res.comcount);
         }
-    })
+    });
+}
+
+function getCartTotal(){
+    $.ajax({
+        type: 'GET',
+        url: '/get/cart/total',
+        dataType: 'json',
+        success: function(res){
+            $(".cartSubTot").html(res.currency+parseFloat(res.subtotal).toFixed(2));
+            $(".cartTot").html(res.currency+parseFloat(res.total).toFixed(2));
+            if(res.coupon_name){
+                $(".couponName").html("Coupon Name: "+res.coupon_name+" (<a href='javascript:void(0)' class='remCoupon'>Remove Coupon</a>)");
+            }else{
+                $(".couponName").html("");
+            }
+            if(res.disc_amount){
+                $(".couponAmount").html(res.currency+parseFloat(res.disc_amount).toFixed(2));
+            }else{
+                $(".couponAmount").html("");
+            }             
+                        
+        },
+        error: function(err){
+            failed(err);
+        }
+    });
 }
 
 setTimeout(function () {
