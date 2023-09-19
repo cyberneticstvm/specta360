@@ -88,6 +88,14 @@
                         <a href="{{ route('admin.banner') }}">All Banners</a>
                     </div>
                 </li>
+                <li class="menu-item has-submenu {{ (in_array(request()->segment(2), ['coupon', 'coupons'])) ? 'active' : '' }}">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-add_box"></i>
+                        <span class="text">Coupons</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="{{ route('admin.coupon') }}">All Coupons</a>
+                    </div>
+                </li>
             </ul>
             <hr>
             <ul class="menu-aside">

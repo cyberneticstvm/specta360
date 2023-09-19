@@ -8,9 +8,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubcategoryController;
+use App\Http\Controllers\Backend\VendorCouponController;
 use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CompareController;
@@ -36,8 +38,8 @@ Route::middleware(['web'])->controller(StoreController::class)->group(function()
     Route::get('/category/{slug}/{id}', 'productsByCategory')->name('product.category');
     Route::get('/subcategory/{slug}/{id}', 'productsBySubcategory')->name('product.subcategory');
     Route::get('/brand/{slug}/{id}', 'productsByBrand')->name('product.brand');
-    Route::get('/vendor/{slug}/{id}', 'productsByVendor')->name('product.vendor');
-    Route::get('/vendor/all', 'allVendors')->name('vendor.all');
+    Route::get('/seller/{slug}/{id}', 'productsByVendor')->name('product.vendor');
+    Route::get('/seller/all', 'allVendors')->name('vendor.all');
     Route::get('/productqv/details/{id}', 'productDetailsForQuickview')->name('product.details.quick.view');
 });
 
@@ -173,6 +175,26 @@ Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(Ba
     Route::get('banner/edit/{id}', 'edit')->name('admin.banner.edit');
     Route::put('banner/edit/{id}', 'update')->name('admin.banner.update');
     Route::get('banner/cancel/{id}', 'destroy')->name('admin.banner.cancel');
+});
+
+//Admin Coupon
+Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(CouponController::class)->group(function(){
+    Route::get('coupon', 'index')->name('admin.coupon');
+    Route::get('coupon/create', 'create')->name('admin.coupon.create');
+    Route::post('coupon/create', 'store')->name('admin.coupon.save');
+    Route::get('coupon/edit/{id}', 'edit')->name('admin.coupon.edit');
+    Route::put('coupon/edit/{id}', 'update')->name('admin.coupon.update');
+    Route::get('coupon/cancel/{id}', 'destroy')->name('admin.coupon.cancel');
+});
+
+//Vendor Coupon
+Route::middleware(['web', 'auth', 'role:vendor'])->prefix('vendor')->controller(VendorCouponController::class)->group(function(){
+    Route::get('coupon', 'index')->name('vendor.coupon');
+    Route::get('coupon/create', 'create')->name('vendor.coupon.create');
+    Route::post('coupon/create', 'store')->name('vendor.coupon.save');
+    Route::get('coupon/edit/{id}', 'edit')->name('vendor.coupon.edit');
+    Route::put('coupon/edit/{id}', 'update')->name('vendor.coupon.update');
+    Route::get('coupon/cancel/{id}', 'destroy')->name('vendor.coupon.cancel');
 });
 
 

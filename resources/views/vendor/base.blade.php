@@ -41,11 +41,19 @@
                 </li>
                 @if(Auth::user()->status == 'active')
                 <li class="menu-item has-submenu {{ (in_array(request()->segment(2), ['product'])) ? 'active' : '' }}">
-                    <a class="menu-link" href="page-products-list.html"> <i class="icon material-icons md-shopping_bag"></i>
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-shopping_bag"></i>
                         <span class="text">Products</span>
                     </a>
                     <div class="submenu">
                         <a href="{{ route('vendor.product') }}">All Products</a>
+                    </div>
+                </li>
+                <li class="menu-item has-submenu {{ (in_array(request()->segment(2), ['coupon', 'coupons'])) ? 'active' : '' }}">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-shopping_bag"></i>
+                        <span class="text">Coupons</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="{{ route('vendor.coupon') }}">All Coupons</a>
                     </div>
                 </li>
                 @endif
