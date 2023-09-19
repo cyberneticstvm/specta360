@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\VendorCouponController;
@@ -195,6 +196,17 @@ Route::middleware(['web', 'auth', 'role:vendor'])->prefix('vendor')->controller(
     Route::get('coupon/edit/{id}', 'edit')->name('vendor.coupon.edit');
     Route::put('coupon/edit/{id}', 'update')->name('vendor.coupon.update');
     Route::get('coupon/cancel/{id}', 'destroy')->name('vendor.coupon.cancel');
+});
+
+//Shipping Area
+Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(ShippingAreaController::class)->group(function(){
+    Route::get('shiparea', 'index')->name('admin.shiparea');
+    Route::get('shiparea/create', 'create')->name('admin.shiparea.create');
+    Route::post('shiparea/create', 'store')->name('admin.shiparea.save');
+    Route::get('shiparea/undone/{id}', 'show')->name('admin.shiparea.undone');
+    Route::get('shiparea/edit/{id}', 'edit')->name('admin.shiparea.edit');
+    Route::put('shiparea/edit/{id}', 'update')->name('admin.shiparea.update');
+    Route::get('shiparea/cancel/{id}', 'destroy')->name('admin.shiparea.cancel');
 });
 
 

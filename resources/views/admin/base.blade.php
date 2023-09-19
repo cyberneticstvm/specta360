@@ -96,6 +96,14 @@
                         <a href="{{ route('admin.coupon') }}">All Coupons</a>
                     </div>
                 </li>
+                <li class="menu-item has-submenu {{ (in_array(request()->segment(2), ['shiparea'])) ? 'active' : '' }}">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-add_box"></i>
+                        <span class="text">Shipping Area</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="{{ route('admin.shiparea') }}">All Shipping Area</a>
+                    </div>
+                </li>
             </ul>
             <hr>
             <ul class="menu-aside">
