@@ -179,7 +179,7 @@ $(function(){
         })
     });
 
-    $(document).on("click", ".qty-up", function(){
+    $(document).on("click", ".qUp", function(){
         var dis = $(this);
         var id = dis.data('id');
         $.ajax({
@@ -198,7 +198,7 @@ $(function(){
         })
     });
 
-    $(document).on("click", ".qty-down", function(){
+    $(document).on("click", ".qDown", function(){
         var dis = $(this);
         var id = dis.data('id');
         $.ajax({
@@ -254,9 +254,9 @@ function getMainCartItems(){
                     <td class="price" data-title="Price"><span>${item.options.currency+item.price}</span></td>
                     <td class="text-center" data-title="Stock">
                         <div class="detail-qty border radius  m-auto">
-                            <a href="javascript:void(0)" class="qty-down" data-id="${item.rowId}"><i class="fi-rs-angle-small-down"></i></a>
+                            <a href="javascript:void(0)" class="qty-down qDown" data-id="${item.rowId}"><i class="fi-rs-angle-small-down"></i></a>
                             <span class="qty-val">${item.qty}</span>
-                            <a href="javascript:void(0)" class="qty-up" data-id="${item.rowId}"><i class="fi-rs-angle-small-up"></i></a>
+                            <a href="javascript:void(0)" class="qty-up qUp" data-id="${item.rowId}"><i class="fi-rs-angle-small-up"></i></a>
                         </div>
                     </td>
                     <td class="text-right" data-title="Cart">
