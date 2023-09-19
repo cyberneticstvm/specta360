@@ -25,6 +25,7 @@ $(function(){
             dataType:'JSON',
             success:function(data){
                 $("#product_id").val(id);
+                $(".qty-val").text('1');
                 $(".wishList").attr('data-id', id);
                 $(".compare").attr('data-id', id);
                 $(".mainImg").attr('src', data.product.image);
@@ -116,11 +117,10 @@ $(function(){
             cache: false,
             processData:false,
             success: function(res){
-                $(".btn-close").click();
-                $(".qty-val").text('1');
-                $('#frmAddToCart').trigger("reset");
+                $(".btn-close").click();                
                 getCartItems();
-                if($.isEmptyObject(res.error)){
+                if($.isEmptyObject(res.error)){                    
+                    $('#frmAddToCart').trigger("reset");
                     success(res);
                 }else{
                     error(res);
