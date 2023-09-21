@@ -45,13 +45,13 @@ class StoreController extends Controller
         return view('store.product-by-brand', compact('products', 'title'));
     }
 
-    public function productsByVendor($slug, $id){
+    public function productsBySeller($slug, $id){
         $title = "";
         $products = Product::where('vendor_id', $id)->latest()->paginate(12);
         return view('store.product-by-vendor', compact('products', 'title'));
     }
 
-    public function allVendors(){
+    public function allSellers(){
         $title = "";
         $vendors = User::where('status', 'active')->where('role', 'vendor')->latest()->paginate(10);
         return view('store.vendors', compact('vendors', 'title'));

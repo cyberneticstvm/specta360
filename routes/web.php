@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AjaxController;
 use App\Http\Controllers\Backend\BannerController;
@@ -39,8 +40,8 @@ Route::middleware(['web'])->controller(StoreController::class)->group(function()
     Route::get('/category/{slug}/{id}', 'productsByCategory')->name('product.category');
     Route::get('/subcategory/{slug}/{id}', 'productsBySubcategory')->name('product.subcategory');
     Route::get('/brand/{slug}/{id}', 'productsByBrand')->name('product.brand');
-    Route::get('/seller/{slug}/{id}', 'productsByVendor')->name('product.vendor');
-    Route::get('/seller/all', 'allVendors')->name('vendor.all');
+    Route::get('/seller/{slug}/{id}', 'productsBySeller')->name('product.seller');
+    Route::get('/seller/all', 'allSellers')->name('seller.all');
     Route::get('/productqv/details/{id}', 'productDetailsForQuickview')->name('product.details.quick.view');
 });
 
@@ -105,9 +106,12 @@ Route::middleware(['web', 'auth', 'verified', 'role:user'])->controller(UserCont
     Route::get('dashboard', 'userDashboard')->name('user.dashboard');
     Route::put('dashboard/profile', 'profileUpdate')->name('user.profile.update');
     Route::put('dashboard/settings', 'profileSettingsUpdate')->name('user.profile.settings.update');
-
     Route::get('logout', 'userLogout')->name('user.logout');
 });
+
+/*Route::middleware(['web', 'auth', 'verified', 'role:user'])->controller(CartController::class)->group(function(){
+    
+});*/
 
 //Brands
 Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(BrandController::class)->group(function(){
@@ -216,6 +220,7 @@ Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->controller(Sh
 Route::get('/wishlist/items/get', [WishlistController::class, 'show'])->name('get.from.wishlist');
 Route::get('/compare/items/get', [CompareController::class, 'comCount'])->name('get.from.compare');
 Route::get('/compare/items', [CompareController::class, 'show'])->name('show.compare.items');
+
 Route::middleware(['web', 'auth', 'role:user'])->group(function(){
 
     //Wishlist
@@ -229,6 +234,18 @@ Route::middleware(['web', 'auth', 'role:user'])->group(function(){
         Route::post('/compare/item/add', 'store')->name('add.to.compare');        
         Route::get('/compare/item/remove/{id}', 'destroy')->name('remove.compare.item');
     });
+
+    //Checkout
+    Route::controller(CartController::class)->group(function(){
+        Route::post('/cart/place/order', 'placeOrder')->name('cart.place.order');        
+    });
+
+    //Address
+    Route::controller(AddressController::class)->group(function(){
+        Route::get('/user/address/{id}', 'getAddress')->name('address.get');          
+        Route::post('/user/address/save', 'saveAddress')->name('address.save');          
+        Route::get('/user/address/delete/{id}', 'deleteAddress')->name('address.delete');          
+    });
     
 });
 
@@ -236,4 +253,5 @@ Route::middleware(['web', 'auth', 'role:user'])->group(function(){
 //Ajax
 Route::middleware(['web', 'auth'])->controller(AjaxController::class)->group(function(){
     Route::get('ajax/category/{id}', 'getSubcategory')->name('category.subcategory');
+    Route::get('/ajax/state/{id}', 'getCities')->name('cities.get');
 });

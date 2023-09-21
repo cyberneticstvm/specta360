@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Cart;
 use Exception;
-use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -37,6 +37,7 @@ class CartController extends Controller
                 'taxRate' => 0,
                 'options' => ['vendor' => $product->vendor_id, 'image' => $product->image, 'slug'=> $product->slug, 'size' => $request->size, 'color' => $request->color, 'prescription' => $prescription, 're_sph' => $request->re_sph, 're_cyl' => $request->re_cyl, 're_axis' => $request->re_axis, 're_add' => $request->re_add, 'le_sph' => $request->le_sph, 'le_cyl' => $request->le_cyl, 'le_axis' => $request->le_axis, 'le_add' => $request->le_add, 'currency' => settings()->currency_symbol]
             ]);
+            if(Session::has('coupon')) Session::forget('coupon');
         }catch(Exception $e){
             return response()->json(['error' => $e->getMessage()]);
         }        
@@ -121,7 +122,7 @@ class CartController extends Controller
     function calculate($cname){
         $cart = Cart::content(); $coupon = collect(); $tot = 0; $disc = 0;
         foreach($cart as $key => $item):
-            $coupon = Coupon::where('name', $cname)->whereDate('end', '>=', Carbon::today())->where('vendor_id', $item->options->vendor)->orWhere('vendor_id', 0)->first();
+            $coupon = Coupon::where('name', $cname)->whereDate('end', '>=', Carbon::today())->whereIn('vendor_id', [$item->options->vendor, 0])->where('status', 1)->first();
             if(!empty($coupon)):
                 $tot += $item->price; $disc = $coupon->discount_percentage;
             endif;
@@ -165,8 +166,22 @@ class CartController extends Controller
     }
 
     public function checkout(){
-        
+        if(Auth::check()):
+            if(Cart::total() > 0):
+                $cart = Cart::content();
+                $qty = Cart::count();
+                $total = Cart::total();
+                return view('store.checkout', compact('cart', 'qty', 'total'));
+            else:
+                return redirect()->back()->withError("Your cart is empty!");
+            endif;
+        else:
+            return redirect()->route('login')->withError("User should be logged in to perform the checkout!");
+        endif;
     }
 
+    public function placeOrder(Request $request){
+
+    }
     
 }

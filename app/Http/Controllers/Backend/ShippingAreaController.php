@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
 use App\Models\ShippingArea;
+use App\Models\State;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +26,9 @@ class ShippingAreaController extends Controller
      */
     public function create()
     {
-        return view('admin.shiparea.create');
+        $states = State::pluck('name', 'id');
+        $cities = City::pluck('name', 'id');
+        return view('admin.shiparea.create', compact('cities', 'states'));
     }
 
     /**
@@ -35,10 +39,14 @@ class ShippingAreaController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'pincode' => 'required|numeric|digits:6|unique:shipping_areas,pincode',
+            'city_id' => 'required',
+            'state_id' => 'required',
         ]);
         ShippingArea::insert([
             'name' => $request->name,
             'pincode' => $request->pincode,
+            'city_id' => $request->city_id,
+            'state_id' => $request->state_id,
             'created_by' => Auth::id(),
             'updated_by' => Auth::id(),
             'created_at' => Carbon::now(),
@@ -69,8 +77,10 @@ class ShippingAreaController extends Controller
      */
     public function edit(string $id)
     {
+        $states = State::pluck('name', 'id');
+        $cities = City::pluck('name', 'id');
         $area = ShippingArea::findOrFail(decrypt($id));
-        return view('admin.shiparea.edit', compact('area'));
+        return view('admin.shiparea.edit', compact('area', 'cities', 'states'));
     }
 
     /**
@@ -81,10 +91,14 @@ class ShippingAreaController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'pincode' => 'required|numeric|digits:6|unique:shipping_areas,pincode,'.$id,
+            'city_id' => 'required',
+            'state_id' => 'required',
         ]);
         ShippingArea::findOrFail($id)->update([
             'name' => $request->name,
             'pincode' => $request->pincode,
+            'city_id' => $request->city_id,
+            'state_id' => $request->state_id,
             'updated_by' => Auth::id(),
             'updated_at' => Carbon::now(),
         ]);

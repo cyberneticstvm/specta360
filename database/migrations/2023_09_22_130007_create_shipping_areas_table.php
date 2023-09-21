@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('pincode')->unique(); 
+            $table->unsignedBigInteger('city_id')->default(0); 
+            $table->unsignedBigInteger('state_id')->default(0); 
             $table->unsignedBigInteger('created_by');           
             $table->unsignedBigInteger('updated_by');           
             $table->timestamps();

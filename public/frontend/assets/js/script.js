@@ -18,6 +18,8 @@ $(function(){
         }
     });
 
+    $('.select2').select2();
+
     $(document).on("click", ".quickView", function(e){
         var id = $(this).attr('id');
         $.ajax({
@@ -261,7 +263,81 @@ $(function(){
                 success(res);
             }
         });
-    })
+    });
+
+    $(document).on("click", ".addAddr", function(){
+        var aid = $(this).data('addrid');
+        $("#address_id").val(aid);
+        if(aid > 0){
+            $.ajax({
+                type: 'GET',
+                url: '/user/address/'+aid,
+                dataType: 'json',
+                success: function(res){
+                    $("#frmAddress").find(".hname").val(res.address.house_name);
+                    $("#frmAddress").find(".area").val(res.address.area);
+                    $("#frmAddress").find(".state").val(res.address.state_id);
+                    $("#frmAddress").find(".city").val(res.address.city_id);
+                    $("#frmAddress").find(".lmark").val(res.address.landmark);
+                    $("#frmAddress").find(".pcode").val(res.address.pincode);
+                    $("#frmAddress").find(".mob").val(res.address.mobile);
+                    $("#frmAddress").find(".stype").val(res.address.type);
+                    $(".select2").select2();
+                }
+            });
+        }else{
+            $('#frmAddress').trigger("reset");
+            $('.state, .city').select2();
+        }
+        $("#addressModal").modal("show");        
+    });
+
+    $(document).on("change", ".state", function(){
+        var sid = $(this).val();
+        $.ajax({
+            url: "/ajax/state/"+sid,
+            type: 'GET',
+            dataType: 'json',
+        }).then(function(res){
+            var xdata = $.map(res, function(obj){
+                obj.text = obj.name || obj.id;  
+                return obj;
+            });
+            $('.city').select2().empty();            
+            $('.city').select2({data:xdata});            
+        });
+    });
+
+    $("#frmAddress").submit(function(e){
+        e.preventDefault();
+        var data = new FormData(this);
+        $.ajax({
+            type: 'POST',
+            url: '/user/address/save',
+            data: data,
+            dataType: 'json',
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(res){
+                $(".btn-close").click();                
+                if($.isEmptyObject(res.error)){                    
+                    $('#frmAddress').trigger("reset");
+                    window.location.reload();
+                    success(res);
+                }else{
+                    error(res);
+                }
+            },
+            error: function(res){
+                failed(res);
+            },
+            complete: function(){
+                $(".btn-submit").attr("disabled", false);
+                $(".btn-submit").html("Update Address");
+            }
+        });
+    });
 
 });
 
@@ -275,7 +351,7 @@ function getCartItems(){
             $(".shopping-cart-total span").text('₹'+res.cart_total);
             var cart = "<ul>";
             $.each(res.cart, function(key, item){
-                cart += `<li><div class="row"><div class="shopping-cart-img col-3"><a href="/product/${item.slug}/${item.id}"><img alt="${item.name}" src="${item.options.image}" /></a></div><div class="shopping-cart-title col-6"><h6><a href="/product/${item.slug}/${item.id}">${item.name}</a></h6><h6 class="text-end"><span>${item.qty} × </span>${item.price}</h6></div><div class="col-2"><a href="javascript:void(0)" data-id="${item.rowId}" data-type='mini' class="removeCartItem"><i class="fi-rs-cross-small"></i></a></div></div></li>`;
+                cart += `<li><div class="row"><div class="shopping-cart-img col-3"><a href="/product/${item.slug}/${item.id}"><img alt="${item.name}" src="${item.options.image}" /></a></div><div class="shopping-cart-title col-6"><h6><a href="/product/${item.slug}/${item.id}">${item.name}</a></h6><h6 class="text-end"><span>${item.qty} × </span>${item.price}</h6></div><div class="col-2"><a href="javascript:void(0)" data-id="${item.rowId}" data-type='mini' class="removeCartItem"><i class="fi-rs-trash"></i></a></div></div></li>`;
             });
             cart += "</ul>";            
             $(".miniCart").html(cart);
@@ -289,30 +365,35 @@ function getMainCartItems(){
         url: '/cart/product/get',
         dataType: 'json',
         success: function(res){
-            var cart = "";
-            $.each(res.cart, function(key, item){
-                cart += `<tr>
-                    <td class="image product-thumbnail"><img src="${item.options.image}" alt="${item.name}"></td>
-                    <td class="product-des product-name">
-                        <h5 class="product-name"><a href="/product/${item.slug}/${item.id}">${item.name}</a></h5>
-                        <p class="font-xs">Color: ${item.options.color}, Size: ${item.options.size}</p>
-                    </td>
-                    <td class="price" data-title="Price"><span>${item.options.currency+item.price}</span></td>
-                    <td class="text-center" data-title="Stock">
-                        <div class="detail-qty border radius  m-auto">
-                            <a href="javascript:void(0)" class="qty-down qDown" data-id="${item.rowId}"><i class="fi-rs-angle-small-down"></i></a>
-                            <span class="qty-val">${item.qty}</span>
-                            <a href="javascript:void(0)" class="qty-up qUp" data-id="${item.rowId}"><i class="fi-rs-angle-small-up"></i></a>
-                        </div>
-                    </td>
-                    <td class="text-right" data-title="Cart">
-                        <span>${item.options.currency+item.subtotal}</span>
-                    </td>
-                    <td class="action" data-title="Remove"><a href="javascript:void(0)" class="text-muted removeCartItem" data-id="${item.rowId}"><i class="fi-rs-trash"></i></a></td>
-                </tr>`;
-            });
-            $(".mainCart").html(cart);
-            getCartTotal();
+            if(Object.keys(res.cart).length > 0){
+                var cart = "";
+                $.each(res.cart, function(key, item){
+                    cart += `<tr>
+                        <td class="image product-thumbnail"><img src="${item.options.image}" alt="${item.name}"></td>
+                        <td class="product-des product-name">
+                            <h5 class="product-name"><a href="/product/${item.slug}/${item.id}">${item.name}</a></h5>
+                            <p class="font-xs">Color: ${item.options.color}, Size: ${item.options.size}</p>
+                        </td>
+                        <td class="price" data-title="Price"><span>${item.options.currency+item.price}</span></td>
+                        <td class="text-center" data-title="Stock">
+                            <div class="detail-qty border radius  m-auto">
+                                <a href="javascript:void(0)" class="qty-down qDown" data-id="${item.rowId}"><i class="fi-rs-angle-small-down"></i></a>
+                                <span class="qty-val">${item.qty}</span>
+                                <a href="javascript:void(0)" class="qty-up qUp" data-id="${item.rowId}"><i class="fi-rs-angle-small-up"></i></a>
+                            </div>
+                        </td>
+                        <td class="text-right" data-title="Cart">
+                            <span>${item.options.currency+item.subtotal}</span>
+                        </td>
+                        <td class="action" data-title="Remove"><a href="javascript:void(0)" class="text-muted removeCartItem" data-id="${item.rowId}"><i class="fi-rs-trash"></i></a></td>
+                    </tr>`;
+                });
+                $(".mainCart").html(cart);
+                getCartTotal();
+            }else{
+                $(".couponArea, .cartTotalArea").hide();
+                $(".cartArea").html("<h5 class='text-danger'>Cart is Empty!</h5>");
+            }            
         }
     });
 }

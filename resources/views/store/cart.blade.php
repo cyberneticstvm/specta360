@@ -13,7 +13,8 @@
 <section class="mt-50 mb-50">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            @if($cart->count() > 0)
+            <div class="col-12 cartArea">
                 <div class="table-responsive">
                     <table class="table shopping-summery text-center clean">
                         <thead>
@@ -31,7 +32,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-12">
+            <div class="col-lg-6 col-md-12 couponArea">
                 <div class="mb-30 mt-50">
                     <div class="heading_s1 mb-3">
                         <h4>Apply Coupon</h4>
@@ -58,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-12">
+            <div class="col-lg-6 col-md-12 cartTotalArea">
                 <div class="border p-md-4 p-30 border-radius cart-totals">
                     <div class="heading_s1 mb-3">
                         <h4>Cart Totals</h4>
@@ -85,9 +86,14 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="text-end"><a href="#" class="btn "> <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut</a></div>
+                    <div class="text-end"><a href="{{ route('cart.checkout') }}" class="btn"> <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut</a></div>
                 </div>
             </div>
+            @else
+            <div class="col-12 emptyCartArea">
+                <h5 class="text-danger">Cart is Empty!</h5>
+            </div>
+            @endif
         </div>
     </div>
 </section>

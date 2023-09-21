@@ -13,3 +13,9 @@
 .rupee::before{
     content: '₹';
 }
+.select2-container{
+    display: inline !important;
+}
+.select2-search__field{
+    display: none !important;
+}

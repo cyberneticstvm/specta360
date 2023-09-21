@@ -16,21 +16,39 @@
                         <form method="post" action="{{ route('admin.shiparea.save') }}">
                             @csrf
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <div class="mb-3">
                                         <label class="form-label">Place Name</label>
-                                        {{ html()->text($name = 'name', $value = old('name'))->class('form-control')->placeholder('Category Name') }}
+                                        {{ html()->text($name = 'name', $value = old('name'))->class('form-control')->placeholder('Place Name') }}
                                         @error('name')
                                         <small class="text-danger">{{ $errors->first('name') }}</small>
                                         @enderror
                                     </div> <!-- form-group// -->
                                 </div>
-                                <div class="col-3">
+                                <div class="col-2">
                                     <div class="mb-3">
                                         <label class="form-label">Pincode</label>
                                         {{ html()->text($name = 'pincode', $value = old('pincode'))->class('form-control')->maxlength(6)->placeholder('Pincode') }}
                                         @error('pincode')
                                         <small class="text-danger">{{ $errors->first('pincode') }}</small>
+                                        @enderror
+                                    </div> <!-- form-group// -->
+                                </div>
+                                <div class="col-3">
+                                    <div class="mb-3">
+                                        <label class="form-label">State</label>
+                                        {{ html()->select($name = 'state_id', $states, old('state_id'))->class('form-control')->placeholder('Select') }}
+                                        @error('state_id')
+                                        <small class="text-danger">{{ $errors->first('state_id') }}</small>
+                                        @enderror
+                                    </div> <!-- form-group// -->
+                                </div>
+                                <div class="col-3">
+                                    <div class="mb-3">
+                                        <label class="form-label">City</label>
+                                            {{ html()->select($name = 'city_id', $cities, old('city_id'))->class('form-control')->placeholder('Select') }}
+                                        @error('city_id')
+                                        <small class="text-danger">{{ $errors->first('city_id') }}</small>
                                         @enderror
                                     </div> <!-- form-group// -->
                                 </div>

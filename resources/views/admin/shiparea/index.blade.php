@@ -14,12 +14,14 @@
         <div class="col-lg-12">
             <div class="card card-body mb-4 table-responsive">
                 <table id="dataTable" class="table table-responsive table-sm table-striped">
-                    <thead><tr><th width="10%">SL No</th><th width="40%">Place Name</th><th width="20%">Pincode</th><th width="10%">Status</th><th width="10%" class="text-center">Edit</th><th width="10%" class="text-center">Cancel</th></tr></thead><tbody>
+                    <thead><tr><th width="10%">SL No</th><th width="20%">Place Name</th><th width="10%">Pincode</th><th width="15%">City</th><th width="15%">State</th><th width="10%">Status</th><th width="10%" class="text-center">Edit</th><th width="10%" class="text-center">Cancel</th></tr></thead><tbody>
                     @forelse($areas as $key => $item)
                         <tr>
                             <td>{{ $key+1 }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->pincode }}</td>
+                            <td>{{ $item->city->name }}</td>
+                            <td>{{ $item->state->name }}</td>
                             <td>{!! $item->status() !!}</td>
                             @if($item->deleted_at)
                                 <td>

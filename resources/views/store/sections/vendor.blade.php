@@ -21,7 +21,7 @@
                 <p class="text-grey-3 wow fadeIn animated">See our top selling vendors and explore their products!</p>
             </div>
             <div class="col-md-6 text-md-end mt-30">
-                <a class="btn btn-outline btn-lg btn-brand-outline font-weight-bold text-brand text-hover-white border-radius-5 btn-shadow-brand hover-up" href="{{ route('vendor.all') }}">All Sellers</a>
+                <a class="btn btn-outline btn-lg btn-brand-outline font-weight-bold text-brand text-hover-white border-radius-5 btn-shadow-brand hover-up" href="{{ route('seller.all') }}">All Sellers</a>
             </div>
         </div>
         <div class="position-relative">
@@ -32,7 +32,7 @@
                         <img src="{{ ($item->photo) ? url($item->photo) : asset('frontend/assets/imgs/page/avatar-1.jpg') }}" alt="" class="border-radius-10 mb-30 hover-up">
                         <h4 class="fw-500 mb-0">{{ $item->name }}</h4>
                         <p class="fw-400 text-brand mb-10">{{ $item->products->count() }} Products</p>
-                        <div class="text-center"><a class="btn btn-primary" href="{{ route('product.vendor', [$item->name ,$item->id]) }}">Visit Store</a></div>
+                        <div class="text-center"><a class="btn btn-primary" href="{{ route('product.seller', [$item->name ,$item->id]) }}">Visit Store</a></div>
                     </div>
                 </div>
                 <!--col-->

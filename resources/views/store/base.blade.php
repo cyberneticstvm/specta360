@@ -558,6 +558,88 @@
             </div>
         </div>
     </div>
+
+    <!-- Address Model -->
+    <div class="modal fade custom-modal" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">              
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>       
+                <div class="modal-body">
+                    <div class="deal-top">
+                        <h5 class="text-brand text-center">Add / Update Address</h5>
+                    </div>
+                    <br/>
+                    <form id="frmAddress" method="post">
+                        @csrf
+                        <input type="hidden" id="address_id" name="id" value="" />
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label>House No / Name <span class="required">*</span></label>
+                                {{ html()->text($name='house_name', $value=old('house_name'))->class('form-control hname')->placeholder('House No / Name')->required() }}
+                                @error('house_name')
+                                <small class="text-danger">{{ $errors->first('house_name') }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Area / Locality<span class="required">*</span></label>
+                                {{ html()->text($name='area', $value=old('area'))->class('form-control area')->placeholder('Area / Locality')->required() }}
+                                @error('area')
+                                <small class="text-danger">{{ $errors->first('area') }}</small>
+                                @enderror
+                            </div>                            
+                            <div class="form-group col-6">
+                                <label>State<span class="required">*</span></label>
+                                {{ html()->select($name='state_id', $states, $value=old('state_id'))->class('form-control select2 state')->placeholder('Select')->required() }}
+                                @error('state_id')
+                                <small class="text-danger">{{ $errors->first('state_id') }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-6">
+                                <label>City<span class="required">*</span></label>
+                                {{ html()->select($name='city_id', $cities, $value=old('city_id'))->class('form-control select2 city')->placeholder('Select')->required() }}
+                                @error('city_id')
+                                <small class="text-danger">{{ $errors->first('city_id') }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-12">
+                                <label>Landmark<span class="required">*</span></label>
+                                {{ html()->text($name='landmark', $value=old('landmark'))->class('form-control lmark')->placeholder('Landmark')->required() }}
+                                @error('landmark')
+                                <small class="text-danger">{{ $errors->first('landmark') }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Pincode<span class="required">*</span></label>
+                                {{ html()->text($name='pincode', $value=old('pincode'))->class('form-control pcode')->placeholder('Pincode')->maxlength(6)->required() }}
+                                @error('pincode')
+                                <small class="text-danger">{{ $errors->first('pincode') }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Mobile Number<span class="required">*</span></label>
+                                {{ html()->text($name='mobile', $value=old('mobile'))->class('form-control mob')->placeholder('Mobile Number')->maxlength(10)->required() }}
+                                @error('mobile')
+                                <small class="text-danger">{{ $errors->first('mobile') }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Address Type<span class="required">*</span></label>
+                                {{ html()->select($name='type', array('shipping' => 'Shipping', 'billing' => 'Billing'), $value=old('type'))->class('form-control stype')->placeholder('Select')->required() }}
+                                @error('type')
+                                <small class="text-danger">{{ $errors->first('type') }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-end"><button class="btn btn-primary btn-submit">Update Address</button></div>
+                        </div>
+                    </form>
+                </div>        
+            </div>
+        </div>
+    </div>
+    <!-- End Address Model -->
+
     <!-- Vendor JS-->
     <script src="{{ asset('/frontend/assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
     <script src="{{ asset('/frontend/assets/js/vendor/jquery-3.6.0.min.js') }}"></script>

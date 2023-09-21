@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
+use App\Models\City;
+use App\Models\State;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,14 +14,17 @@ use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
     public function userDashboard(){
-        return view('dashboard');
+        $addresses = Address::where('user_id', Auth::id())->get();
+        $cities = City::pluck('name', 'id');
+        $states = State::pluck('name', 'id');
+        return view('dashboard', compact('addresses', 'cities', 'states'));
     }
 
     public function profileUpdate(Request $request){
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email:rfc,dns,filter',
-            'phone' => 'required|numeric|digits:10',
+            'phone' => 'required|numeric|digits:10|unique:users,phone,'.Auth::id(),
         ]);
         $user = User::findOrFail(Auth::user()->id);
         $user->name = $request->name;

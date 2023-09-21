@@ -21,12 +21,12 @@
                                             <small class="text-danger">{{ $errors->first('name') }}</small>
                                             @enderror
                                         </div>
-                                        <!--<div class="form-group">
+                                        <div class="form-group">
                                             <input id="phone" type="text" value="{{ old('phone') }}" name="phone" maxlength="10" placeholder="Phone Number">
                                             @error('phone')
                                             <small class="text-danger">{{ $errors->first('phone') }}</small>
                                             @enderror
-                                        </div>-->
+                                        </div>
                                         <div class="form-group">
                                             <input id="email" type="email" value="{{ old('email') }}" name="email" placeholder="Your Email">
                                             @error('email')
@@ -48,8 +48,8 @@
                                         <div class="login_footer form-group">
                                             <div class="chek-form">
                                                 <div class="custome-checkbox">
-                                                    <input class="form-check-input" type="checkbox" name="terms" id="terms" value="">
-                                                    <label class="form-check-label" for="exampleCheckbox1"><span>I agree to terms & Policy.</span></label>
+                                                    <input class="form-check-input" type="checkbox" name="terms" id="terms" value="1">
+                                                    <label class="form-check-label" for="terms"><span>I agree to terms & Policy.</span></label>
                                                     @error('terms')
                                                     <small class="text-danger">{{ $errors->first('terms') }}</small>
                                                     @enderror

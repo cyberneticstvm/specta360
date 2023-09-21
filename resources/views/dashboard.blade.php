@@ -156,31 +156,26 @@
                                 </div>
                                 <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
                                     <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="card mb-3 mb-lg-0">
-                                                <div class="card-header">
-                                                    <h5 class="mb-0">Billing Address</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <address>3522 Interstate<br> 75 Business Spur,<br> Sault Ste. <br>Marie, MI 49783</address>
-                                                    <p>New York</p>
-                                                    <a href="#" class="btn-small">Edit</a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @forelse($addresses as $key => $addr)
                                         <div class="col-lg-6">
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <h5 class="mb-0">Shipping Address</h5>
+                                                    <h5 class="mb-0">{{ ucfirst($addr->type) }} Address</h5>
                                                 </div>
                                                 <div class="card-body">
-                                                    <address>4299 Express Lane<br>
-                                                        Sarasota, <br>FL 34249 USA <br>Phone: 1.941.227.4444</address>
-                                                    <p>Sarasota</p>
-                                                    <a href="#" class="btn-small">Edit</a>
+                                                    <address>{{ $addr->house_name }}, {{ $addr->area }}<br>
+                                                        {{ $addr->city->name }}, {{ $addr->state->name }}<br>Pincode: {{ $addr->pincode }} <br>Phone: {{ $addr->mobile }}</address>
+                                                    <p>Landmark: {{ $addr->landmark }}</p>
+                                                    <p class="text-end"><a href="javascript:void(0)" class="btn-small addAddr" data-addrid="{{ $addr->id }}">Edit</a> | <a href="{{ route('address.delete', encrypt($addr->id)) }}" class="btn-small">Delete</a></p>
                                                 </div>
                                             </div>
                                         </div>
+                                        @empty
+                                            <h5 class="text-danger">No addresses found!</h5>
+                                        @endforelse
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col text-center"><a href="javascript:void(0)" class="addAddr" data-addrid="0">Add New Address</a></div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="account-detail" role="tabpanel" aria-labelledby="account-detail-tab">
