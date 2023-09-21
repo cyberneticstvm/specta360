@@ -560,6 +560,7 @@
     </div>
 
     <!-- Address Model -->
+    @auth
     <div class="modal fade custom-modal" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">              
@@ -638,6 +639,7 @@
             </div>
         </div>
     </div>
+    @endauth
     <!-- End Address Model -->
 
     <!-- Vendor JS-->
