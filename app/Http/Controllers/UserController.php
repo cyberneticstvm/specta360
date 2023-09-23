@@ -15,9 +15,7 @@ class UserController extends Controller
 {
     public function userDashboard(){
         $addresses = Address::where('user_id', Auth::id())->get();
-        $cities = City::pluck('name', 'id');
-        $states = State::pluck('name', 'id');
-        return view('dashboard', compact('addresses', 'cities', 'states'));
+        return view('dashboard', compact('addresses'));
     }
 
     public function profileUpdate(Request $request){
@@ -77,8 +75,9 @@ class UserController extends Controller
 
     public function userLogout(Request $request){
         Auth::guard('web')->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        /*$request->session()->invalidate();
+        $request->session()->regenerateToken();*/
+        Auth::logout();
         return redirect('/login')->with("success", "User logged out successfully!");
     }
 }

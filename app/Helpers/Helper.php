@@ -4,10 +4,12 @@ use App\Models\AdminSetting;
 use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\City;
 use App\Models\Compare;
 use App\Models\Product;
 use App\Models\ProductTag;
 use App\Models\Slider;
+use App\Models\State;
 use App\Models\Subcategory;
 use App\Models\User;
 use App\Models\Wishlist;
@@ -75,6 +77,14 @@ function getWishListedItems(){
 
 function getCompareListedItems(){
     return Compare::where('user_id', Auth::id())->latest()->get();
+}
+
+function states(){
+    return State::all();
+}
+
+function cities(){
+    return City::all();
 }
 
 ?>

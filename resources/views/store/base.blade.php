@@ -590,14 +590,14 @@
                             </div>                            
                             <div class="form-group col-6">
                                 <label>State<span class="required">*</span></label>
-                                {{ html()->select($name='state_id', $states, $value=old('state_id'))->class('form-control select2 state')->placeholder('Select')->required() }}
+                                {{ html()->select($name='state_id', states()->pluck('name', 'id'), $value=old('state_id'))->class('form-control select2 state')->placeholder('Select')->required() }}
                                 @error('state_id')
                                 <small class="text-danger">{{ $errors->first('state_id') }}</small>
                                 @enderror
                             </div>
                             <div class="form-group col-6">
                                 <label>City<span class="required">*</span></label>
-                                {{ html()->select($name='city_id', $cities, $value=old('city_id'))->class('form-control select2 city')->placeholder('Select')->required() }}
+                                {{ html()->select($name='city_id', cities(), $value=old('city_id'))->class('form-control select2 city')->placeholder('Select')->required() }}
                                 @error('city_id')
                                 <small class="text-danger">{{ $errors->first('city_id') }}</small>
                                 @enderror

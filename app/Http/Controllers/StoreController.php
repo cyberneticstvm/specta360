@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\ProductMaterial;
 use App\Models\ProductSize;
 use App\Models\ProductStyle;
 use App\Models\ProductTag;
+use App\Models\State;
 use App\Models\User;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
