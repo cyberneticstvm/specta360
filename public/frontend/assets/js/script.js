@@ -18,7 +18,7 @@ $(function(){
         }
     });
 
-    $('.select2').select2();
+    //$('.select2').select2();
 
     $(document).on("click", ".quickView", function(e){
         var id = $(this).attr('id');

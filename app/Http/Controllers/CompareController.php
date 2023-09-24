@@ -36,7 +36,7 @@ class CompareController extends Controller
     public function show()
     {
         $data = Compare::where('user_id', Auth::id())->get();
-        return view('store.product-compare', compact('data'));
+        return view('store.pages.product-compare', compact('data'));
     }
 
     public function comCount(){

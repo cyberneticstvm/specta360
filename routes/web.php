@@ -43,6 +43,13 @@ Route::middleware(['web'])->controller(StoreController::class)->group(function()
     Route::get('/seller/{slug}/{id}', 'productsBySeller')->name('product.seller');
     Route::get('/seller/all', 'allSellers')->name('seller.all');
     Route::get('/productqv/details/{id}', 'productDetailsForQuickview')->name('product.details.quick.view');
+    Route::get('/products/all', 'allProducts')->name('products.all');
+    Route::get('/products/women', 'allWomenProducts')->name('products.women.all');
+    Route::get('/products/men', 'allMenProducts')->name('products.men.all');
+    Route::get('/products/kids', 'allKidsProducts')->name('products.kids.all');
+    Route::get('/products/new-arrivals', 'allNewProducts')->name('products.new.all');
+
+    Route::get('/contact', 'contact')->name('contact');
 });
 
 Route::middleware(['web'])->controller(CartController::class)->group(function(){

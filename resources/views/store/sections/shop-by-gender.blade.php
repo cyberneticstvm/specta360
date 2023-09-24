@@ -45,10 +45,10 @@
                                             </a>
                                         </div>
                                         <div class="product-action-1">
-                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal" id="{{ $item->id }}">
                                             <i class="fi-rs-eye"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="javascript:void(0);"><i class="fi-rs-heart wishList" data-id="{{ $item->id }}"></i></a>
+                                            <a aria-label="Compare" class="action-btn hover-up" href="javascript:void(0);"><i class="fi-rs-shuffle compare" data-id="{{ $item->id }}"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="hot">Women</span>
@@ -69,7 +69,7 @@
                                             <span class="old-price">₹{{ $item->product->mrp }}</span>
                                         </div>
                                         <div class="product-action-1 show">
-                                            <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="javascript:void(0);"><i class="fi-rs-heart wishList" data-id="{{ $item->id }}"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -94,10 +94,10 @@
                                             </a>
                                         </div>
                                         <div class="product-action-1">
-                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal" id="{{ $item->id }}">
                                             <i class="fi-rs-eye"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="javascript:void(0);"><i class="fi-rs-heart wishList" data-id="{{ $item->id }}"></i></a>
+                                            <a aria-label="Compare" class="action-btn hover-up" href="javascript:void(0);"><i class="fi-rs-shuffle compare" data-id="{{ $item->id }}"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="hot">Men</span>
@@ -118,7 +118,7 @@
                                             <span class="old-price">₹{{ $item->product->mrp }}</span>
                                         </div>
                                         <div class="product-action-1 show">
-                                            <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="javascript:void(0);"><i class="fi-rs-heart wishList" data-id="{{ $item->id }}"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -142,10 +142,10 @@
                                             </a>
                                         </div>
                                         <div class="product-action-1">
-                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal" id="{{ $item->id }}">
                                             <i class="fi-rs-eye"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="javascript:void(0);"><i class="fi-rs-heart wishList" data-id="{{ $item->id }}"></i></a>
+                                            <a aria-label="Compare" class="action-btn hover-up" href="javascript:void(0);"><i class="fi-rs-shuffle compare" data-id="{{ $item->id }}"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="hot">Kids</span>
@@ -166,7 +166,7 @@
                                             <span class="old-price">₹{{ $item->product->mrp }}</span>
                                         </div>
                                         <div class="product-action-1 show">
-                                            <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="javascript:void(0);"><i class="fi-rs-heart wishList" data-id="{{ $item->id }}"></i></a>
                                         </div>
                                     </div>
                                 </div>

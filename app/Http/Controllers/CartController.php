@@ -69,7 +69,7 @@ class CartController extends Controller
 
     public function view(){
         $cart = Cart::content(); $cart_qty = Cart::count(); $cart_total = Cart::total();
-        return view('store.cart', compact('cart', 'cart_qty', 'cart_total'));
+        return view('store.pages.cart', compact('cart', 'cart_qty', 'cart_total'));
     }
 
     public function updateIncrement(Request $request){
@@ -171,7 +171,7 @@ class CartController extends Controller
                 $cart = Cart::content();
                 $qty = Cart::count();
                 $total = Cart::total();
-                return view('store.checkout', compact('cart', 'qty', 'total'));
+                return view('store.pages.checkout', compact('cart', 'qty', 'total'));
             else:
                 return redirect()->back()->withError("Your cart is empty!");
             endif;
