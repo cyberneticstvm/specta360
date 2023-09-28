@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderConfirmationEmail;
 use App\Models\Coupon;
 use App\Models\Product;
 use Carbon\Carbon;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Cart;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
@@ -181,7 +183,13 @@ class CartController extends Controller
     }
 
     public function placeOrder(Request $request){
-
+        $data = [
+            'order_no' => '12311432423432',
+            'amount' => 250.00,
+            'name' => $request->user()->name,
+        ];
+        Mail::to($request->user()->email)->send(new OrderConfirmationEmail($data));
+        return redirect()->route('store.index')->withSuccess("Order has been placed successfully!");
     }
     
 }

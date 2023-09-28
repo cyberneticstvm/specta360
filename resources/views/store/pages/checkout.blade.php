@@ -103,7 +103,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="text-center"><a href="#" class="btn btn-fill-out btn-block mt-30">Place Order</a></div>
+                        <div class="text-center"><button type="submit" href="#" class="btn btn-fill-out btn-block mt-30">Place Order</button></div>
                     </div>
                 </form>
             </div>
