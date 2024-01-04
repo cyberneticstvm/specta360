@@ -28,7 +28,7 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="/"><img src="{{ asset('/frontend/assets/imgs/theme/logo.svg') }}" alt="logo"></a>
+                        <a href="/"><img src="{{ asset('/frontend/assets/imgs/theme/logo-specta-dark.png') }}" alt="logo"></a>
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
@@ -36,7 +36,7 @@
                                 <select class="select-active">
                                     <option>All Categories</option>
                                     @forelse(getActiveCategories() as $key1 => $cat1)
-                                        <option>{{ $cat1->name }} - ({{ $cat1->products->count() }})</option>
+                                    <option>{{ $cat1->name }} - ({{ $cat1->products->count() }})</option>
                                     @empty
                                     @endforelse
                                 </select>
@@ -123,7 +123,7 @@
                                                             <ul>
                                                                 <li><span class="submenu-title">{{ $cat->name }}</span></li>
                                                                 @forelse($cat->subCategory->take(10) as $key1 => $sub)
-                                                                    <li><a class="dropdown-item nav-link nav_item" href="{{ route('product.subcategory', [$sub->slug, $sub->id]) }}">{{ $sub->name }} - ({{ $sub->products->count() }})</a></li>
+                                                                <li><a class="dropdown-item nav-link nav_item" href="{{ route('product.subcategory', [$sub->slug, $sub->id]) }}">{{ $sub->name }} - ({{ $sub->products->count() }})</a></li>
                                                                 @empty
                                                                 @endforelse
                                                             </ul>
@@ -338,7 +338,7 @@
                         <div class="categori-dropdown-wrap categori-dropdown-active-small">
                             <ul>
                                 @forelse(getActiveCategories() as $key => $cat)
-                                    <li><a href="/"><img class="rounded img-fluid me-1" src="{{ $cat->image }}" width="15%" alt="{{ $cat->name }}" />{{ $cat->name }}</a></li>
+                                <li><a href="/"><img class="rounded img-fluid me-1" src="{{ $cat->image }}" width="15%" alt="{{ $cat->name }}" />{{ $cat->name }}</a></li>
                                 @empty
                                 @endforelse
                             </ul>
@@ -381,7 +381,7 @@
                 </div>
                 <div class="mobile-header-info-wrap mobile-header-border">
                     <div class="single-mobile-header-info mt-30">
-                        <a  href="page-contact.html"> Our location </a>
+                        <a href="page-contact.html"> Our location </a>
                     </div>
                     <div class="single-mobile-header-info">
                         <a href="page-login-register.html">Log In / Sign Up </a>
@@ -533,13 +533,13 @@
     @auth
     <div class="modal fade custom-modal" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">              
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>       
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-body">
                     <div class="deal-top">
                         <h5 class="text-brand text-center">Add / Update Address</h5>
                     </div>
-                    <br/>
+                    <br />
                     <form id="frmAddress" method="post">
                         @csrf
                         <input type="hidden" id="address_id" name="id" value="" />
@@ -557,7 +557,7 @@
                                 @error('area')
                                 <small class="text-danger">{{ $errors->first('area') }}</small>
                                 @enderror
-                            </div>                            
+                            </div>
                             <div class="form-group col-6">
                                 <label>State<span class="required">*</span></label>
                                 {{ html()->select($name='state_id', states()->pluck('name', 'id'), $value=old('state_id'))->class('form-control select2 state')->placeholder('Select')->required() }}
@@ -605,7 +605,7 @@
                             <div class="col text-end"><button class="btn btn-primary btn-submit">Update Address</button></div>
                         </div>
                     </form>
-                </div>        
+                </div>
             </div>
         </div>
     </div>
