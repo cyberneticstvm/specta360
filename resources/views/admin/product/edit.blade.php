@@ -124,8 +124,8 @@
                                     <div class="mb-3">
                                         <label class="form-label">Product Code / SKU</label>
                                         {{ html()->text($name = 'pcode', $value = $product->pcode)->class('form-control')->maxlength(15)->placeholder('Product Code')->disabled() }}
-                                        @error('qty')
-                                        <small class="text-danger">{{ $errors->first('qty') }}</small>
+                                        @error('pcode')
+                                        <small class="text-danger">{{ $errors->first('pcode') }}</small>
                                         @enderror
                                     </div> <!-- form-group// -->
                                 </div>
@@ -146,7 +146,7 @@
                                         <small class="text-danger">{{ $errors->first('mrp') }}</small>
                                         @enderror
                                     </div> <!-- form-group// -->
-                                </div>                                
+                                </div>
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label class="form-label">Selling Price</label>
@@ -205,25 +205,25 @@
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label class="form-label">Product Images</label>&nbsp;<small class="text-muted">(Max file size should be 500KB each and 1100w x 1100h)
-                                        {{ html()->file($name = 'images[]', $value = NULL)->class('form-control multi_img')->multiple() }}
-                                        @error('images')
-                                        <small class="text-danger">{{ $errors->first('images') }}</small>
-                                        @enderror
+                                            {{ html()->file($name = 'images[]', $value = NULL)->class('form-control multi_img')->multiple() }}
+                                            @error('images')
+                                            <small class="text-danger">{{ $errors->first('images') }}</small>
+                                            @enderror
                                     </div> <!-- form-group// -->
                                     <div class="row">
                                         @forelse($product->images as $key => $item)
-                                            <div class="col-3 imgs text-center">
-                                                <img src="{{ url($item->name) }}" />
-                                                <a class="mt-3 dlt" href="{{ route('admin.product.image.remove', encrypt($item->id)) }}">Remove</a>
-                                            </div>
+                                        <div class="col-3 imgs text-center">
+                                            <img src="{{ url($item->name) }}" />
+                                            <a class="mt-3 dlt" href="{{ route('admin.product.image.remove', encrypt($item->id)) }}">Remove</a>
+                                        </div>
                                         @empty
                                         @endforelse
                                     </div>
                                     <div id="multi_img" class="text-center"></div>
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
-                        <div class="mb-4 text-center">                                
+                        <div class="mb-4 text-center">
                             <button type="button" onclick="history.back()" class="btn btn-warning">Cancel</button>
                             <button type="submit" onClick="javascript: return confirm('Are you sure want to update this Product?')" class="btn btn-submit btn-primary">Update</button>
                         </div> <!-- form-group// -->
@@ -235,11 +235,11 @@
                                 <small class="text-danger">{{ $errors->first('long_description') }}</small>
                                 @enderror
                             </div>--> <!-- form-group// -->
-                        </div>
                     </div>
-                </form>
             </div>
+            </form>
         </div>
+    </div>
     </div>
 </section> <!-- content-main end// -->
 @endsection
